@@ -12,12 +12,6 @@ var (
 	GroupsColumns = []*schema.Column{
 		{Name: "id", Type: field.TypeInt, Increment: true},
 		{Name: "name", Type: field.TypeString},
-		{Name: "description", Type: field.TypeString},
-		{Name: "url", Type: field.TypeString},
-		{Name: "thumbnail", Type: field.TypeString},
-		{Name: "views", Type: field.TypeInt},
-		{Name: "subscribers", Type: field.TypeInt},
-		{Name: "created_at", Type: field.TypeTime},
 	}
 	// GroupsTable holds the schema information for the "groups" table.
 	GroupsTable = &schema.Table{
@@ -29,7 +23,6 @@ var (
 	UsersColumns = []*schema.Column{
 		{Name: "id", Type: field.TypeInt, Increment: true},
 		{Name: "name", Type: field.TypeString},
-		{Name: "uuid", Type: field.TypeUUID},
 		{Name: "password", Type: field.TypeString},
 	}
 	// UsersTable holds the schema information for the "users" table.
@@ -41,11 +34,8 @@ var (
 	// VideosColumns holds the columns for the "videos" table.
 	VideosColumns = []*schema.Column{
 		{Name: "id", Type: field.TypeInt, Increment: true},
-		{Name: "uuid", Type: field.TypeUUID},
 		{Name: "title", Type: field.TypeString},
-		{Name: "description", Type: field.TypeString},
 		{Name: "videotype", Type: field.TypeEnum, Enums: []string{"live", "video", "playlist"}},
-		{Name: "created_at", Type: field.TypeTime},
 		{Name: "group_videos", Type: field.TypeInt, Nullable: true},
 	}
 	// VideosTable holds the schema information for the "videos" table.
@@ -56,7 +46,7 @@ var (
 		ForeignKeys: []*schema.ForeignKey{
 			{
 				Symbol:     "videos_groups_videos",
-				Columns:    []*schema.Column{VideosColumns[6]},
+				Columns:    []*schema.Column{VideosColumns[3]},
 				RefColumns: []*schema.Column{GroupsColumns[0]},
 				OnDelete:   schema.SetNull,
 			},

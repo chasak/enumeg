@@ -6,7 +6,6 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"time"
 
 	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/dialect/sql/sqlgraph"
@@ -15,7 +14,6 @@ import (
 	"example.com/enumeg/ent/predicate"
 	"example.com/enumeg/ent/user"
 	"example.com/enumeg/ent/video"
-	"github.com/google/uuid"
 )
 
 // VideoUpdate is the builder for updating Video entities.
@@ -31,49 +29,15 @@ func (vu *VideoUpdate) Where(ps ...predicate.Video) *VideoUpdate {
 	return vu
 }
 
-// SetUUID sets the "uuid" field.
-func (vu *VideoUpdate) SetUUID(u uuid.UUID) *VideoUpdate {
-	vu.mutation.SetUUID(u)
-	return vu
-}
-
-// SetNillableUUID sets the "uuid" field if the given value is not nil.
-func (vu *VideoUpdate) SetNillableUUID(u *uuid.UUID) *VideoUpdate {
-	if u != nil {
-		vu.SetUUID(*u)
-	}
-	return vu
-}
-
 // SetTitle sets the "title" field.
 func (vu *VideoUpdate) SetTitle(s string) *VideoUpdate {
 	vu.mutation.SetTitle(s)
 	return vu
 }
 
-// SetDescription sets the "description" field.
-func (vu *VideoUpdate) SetDescription(s string) *VideoUpdate {
-	vu.mutation.SetDescription(s)
-	return vu
-}
-
 // SetVideotype sets the "videotype" field.
 func (vu *VideoUpdate) SetVideotype(v video.Videotype) *VideoUpdate {
 	vu.mutation.SetVideotype(v)
-	return vu
-}
-
-// SetCreatedAt sets the "created_at" field.
-func (vu *VideoUpdate) SetCreatedAt(t time.Time) *VideoUpdate {
-	vu.mutation.SetCreatedAt(t)
-	return vu
-}
-
-// SetNillableCreatedAt sets the "created_at" field if the given value is not nil.
-func (vu *VideoUpdate) SetNillableCreatedAt(t *time.Time) *VideoUpdate {
-	if t != nil {
-		vu.SetCreatedAt(*t)
-	}
 	return vu
 }
 
@@ -339,13 +303,6 @@ func (vu *VideoUpdate) sqlSave(ctx context.Context) (n int, err error) {
 			}
 		}
 	}
-	if value, ok := vu.mutation.UUID(); ok {
-		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
-			Type:   field.TypeUUID,
-			Value:  value,
-			Column: video.FieldUUID,
-		})
-	}
 	if value, ok := vu.mutation.Title(); ok {
 		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
 			Type:   field.TypeString,
@@ -353,25 +310,11 @@ func (vu *VideoUpdate) sqlSave(ctx context.Context) (n int, err error) {
 			Column: video.FieldTitle,
 		})
 	}
-	if value, ok := vu.mutation.Description(); ok {
-		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
-			Type:   field.TypeString,
-			Value:  value,
-			Column: video.FieldDescription,
-		})
-	}
 	if value, ok := vu.mutation.Videotype(); ok {
 		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
 			Type:   field.TypeEnum,
 			Value:  value,
 			Column: video.FieldVideotype,
-		})
-	}
-	if value, ok := vu.mutation.CreatedAt(); ok {
-		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
-			Type:   field.TypeTime,
-			Value:  value,
-			Column: video.FieldCreatedAt,
 		})
 	}
 	if vu.mutation.GroupCleared() {
@@ -644,49 +587,15 @@ type VideoUpdateOne struct {
 	mutation *VideoMutation
 }
 
-// SetUUID sets the "uuid" field.
-func (vuo *VideoUpdateOne) SetUUID(u uuid.UUID) *VideoUpdateOne {
-	vuo.mutation.SetUUID(u)
-	return vuo
-}
-
-// SetNillableUUID sets the "uuid" field if the given value is not nil.
-func (vuo *VideoUpdateOne) SetNillableUUID(u *uuid.UUID) *VideoUpdateOne {
-	if u != nil {
-		vuo.SetUUID(*u)
-	}
-	return vuo
-}
-
 // SetTitle sets the "title" field.
 func (vuo *VideoUpdateOne) SetTitle(s string) *VideoUpdateOne {
 	vuo.mutation.SetTitle(s)
 	return vuo
 }
 
-// SetDescription sets the "description" field.
-func (vuo *VideoUpdateOne) SetDescription(s string) *VideoUpdateOne {
-	vuo.mutation.SetDescription(s)
-	return vuo
-}
-
 // SetVideotype sets the "videotype" field.
 func (vuo *VideoUpdateOne) SetVideotype(v video.Videotype) *VideoUpdateOne {
 	vuo.mutation.SetVideotype(v)
-	return vuo
-}
-
-// SetCreatedAt sets the "created_at" field.
-func (vuo *VideoUpdateOne) SetCreatedAt(t time.Time) *VideoUpdateOne {
-	vuo.mutation.SetCreatedAt(t)
-	return vuo
-}
-
-// SetNillableCreatedAt sets the "created_at" field if the given value is not nil.
-func (vuo *VideoUpdateOne) SetNillableCreatedAt(t *time.Time) *VideoUpdateOne {
-	if t != nil {
-		vuo.SetCreatedAt(*t)
-	}
 	return vuo
 }
 
@@ -976,13 +885,6 @@ func (vuo *VideoUpdateOne) sqlSave(ctx context.Context) (_node *Video, err error
 			}
 		}
 	}
-	if value, ok := vuo.mutation.UUID(); ok {
-		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
-			Type:   field.TypeUUID,
-			Value:  value,
-			Column: video.FieldUUID,
-		})
-	}
 	if value, ok := vuo.mutation.Title(); ok {
 		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
 			Type:   field.TypeString,
@@ -990,25 +892,11 @@ func (vuo *VideoUpdateOne) sqlSave(ctx context.Context) (_node *Video, err error
 			Column: video.FieldTitle,
 		})
 	}
-	if value, ok := vuo.mutation.Description(); ok {
-		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
-			Type:   field.TypeString,
-			Value:  value,
-			Column: video.FieldDescription,
-		})
-	}
 	if value, ok := vuo.mutation.Videotype(); ok {
 		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
 			Type:   field.TypeEnum,
 			Value:  value,
 			Column: video.FieldVideotype,
-		})
-	}
-	if value, ok := vuo.mutation.CreatedAt(); ok {
-		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
-			Type:   field.TypeTime,
-			Value:  value,
-			Column: video.FieldCreatedAt,
 		})
 	}
 	if vuo.mutation.GroupCleared() {

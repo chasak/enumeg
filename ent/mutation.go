@@ -7,13 +7,11 @@ import (
 	"errors"
 	"fmt"
 	"sync"
-	"time"
 
 	"example.com/enumeg/ent/group"
 	"example.com/enumeg/ent/predicate"
 	"example.com/enumeg/ent/user"
 	"example.com/enumeg/ent/video"
-	"github.com/google/uuid"
 
 	"entgo.io/ent"
 )
@@ -39,14 +37,6 @@ type GroupMutation struct {
 	typ               string
 	id                *int
 	name              *string
-	description       *string
-	url               *string
-	thumbnail         *string
-	views             *int
-	addviews          *int
-	subscribers       *int
-	addsubscribers    *int
-	created_at        *time.Time
 	clearedFields     map[string]struct{}
 	admins            map[int]struct{}
 	removedadmins     map[int]struct{}
@@ -200,262 +190,6 @@ func (m *GroupMutation) OldName(ctx context.Context) (v string, err error) {
 // ResetName resets all changes to the "name" field.
 func (m *GroupMutation) ResetName() {
 	m.name = nil
-}
-
-// SetDescription sets the "description" field.
-func (m *GroupMutation) SetDescription(s string) {
-	m.description = &s
-}
-
-// Description returns the value of the "description" field in the mutation.
-func (m *GroupMutation) Description() (r string, exists bool) {
-	v := m.description
-	if v == nil {
-		return
-	}
-	return *v, true
-}
-
-// OldDescription returns the old "description" field's value of the Group entity.
-// If the Group object wasn't provided to the builder, the object is fetched from the database.
-// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
-func (m *GroupMutation) OldDescription(ctx context.Context) (v string, err error) {
-	if !m.op.Is(OpUpdateOne) {
-		return v, errors.New("OldDescription is only allowed on UpdateOne operations")
-	}
-	if m.id == nil || m.oldValue == nil {
-		return v, errors.New("OldDescription requires an ID field in the mutation")
-	}
-	oldValue, err := m.oldValue(ctx)
-	if err != nil {
-		return v, fmt.Errorf("querying old value for OldDescription: %w", err)
-	}
-	return oldValue.Description, nil
-}
-
-// ResetDescription resets all changes to the "description" field.
-func (m *GroupMutation) ResetDescription() {
-	m.description = nil
-}
-
-// SetURL sets the "url" field.
-func (m *GroupMutation) SetURL(s string) {
-	m.url = &s
-}
-
-// URL returns the value of the "url" field in the mutation.
-func (m *GroupMutation) URL() (r string, exists bool) {
-	v := m.url
-	if v == nil {
-		return
-	}
-	return *v, true
-}
-
-// OldURL returns the old "url" field's value of the Group entity.
-// If the Group object wasn't provided to the builder, the object is fetched from the database.
-// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
-func (m *GroupMutation) OldURL(ctx context.Context) (v string, err error) {
-	if !m.op.Is(OpUpdateOne) {
-		return v, errors.New("OldURL is only allowed on UpdateOne operations")
-	}
-	if m.id == nil || m.oldValue == nil {
-		return v, errors.New("OldURL requires an ID field in the mutation")
-	}
-	oldValue, err := m.oldValue(ctx)
-	if err != nil {
-		return v, fmt.Errorf("querying old value for OldURL: %w", err)
-	}
-	return oldValue.URL, nil
-}
-
-// ResetURL resets all changes to the "url" field.
-func (m *GroupMutation) ResetURL() {
-	m.url = nil
-}
-
-// SetThumbnail sets the "thumbnail" field.
-func (m *GroupMutation) SetThumbnail(s string) {
-	m.thumbnail = &s
-}
-
-// Thumbnail returns the value of the "thumbnail" field in the mutation.
-func (m *GroupMutation) Thumbnail() (r string, exists bool) {
-	v := m.thumbnail
-	if v == nil {
-		return
-	}
-	return *v, true
-}
-
-// OldThumbnail returns the old "thumbnail" field's value of the Group entity.
-// If the Group object wasn't provided to the builder, the object is fetched from the database.
-// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
-func (m *GroupMutation) OldThumbnail(ctx context.Context) (v string, err error) {
-	if !m.op.Is(OpUpdateOne) {
-		return v, errors.New("OldThumbnail is only allowed on UpdateOne operations")
-	}
-	if m.id == nil || m.oldValue == nil {
-		return v, errors.New("OldThumbnail requires an ID field in the mutation")
-	}
-	oldValue, err := m.oldValue(ctx)
-	if err != nil {
-		return v, fmt.Errorf("querying old value for OldThumbnail: %w", err)
-	}
-	return oldValue.Thumbnail, nil
-}
-
-// ResetThumbnail resets all changes to the "thumbnail" field.
-func (m *GroupMutation) ResetThumbnail() {
-	m.thumbnail = nil
-}
-
-// SetViews sets the "views" field.
-func (m *GroupMutation) SetViews(i int) {
-	m.views = &i
-	m.addviews = nil
-}
-
-// Views returns the value of the "views" field in the mutation.
-func (m *GroupMutation) Views() (r int, exists bool) {
-	v := m.views
-	if v == nil {
-		return
-	}
-	return *v, true
-}
-
-// OldViews returns the old "views" field's value of the Group entity.
-// If the Group object wasn't provided to the builder, the object is fetched from the database.
-// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
-func (m *GroupMutation) OldViews(ctx context.Context) (v int, err error) {
-	if !m.op.Is(OpUpdateOne) {
-		return v, errors.New("OldViews is only allowed on UpdateOne operations")
-	}
-	if m.id == nil || m.oldValue == nil {
-		return v, errors.New("OldViews requires an ID field in the mutation")
-	}
-	oldValue, err := m.oldValue(ctx)
-	if err != nil {
-		return v, fmt.Errorf("querying old value for OldViews: %w", err)
-	}
-	return oldValue.Views, nil
-}
-
-// AddViews adds i to the "views" field.
-func (m *GroupMutation) AddViews(i int) {
-	if m.addviews != nil {
-		*m.addviews += i
-	} else {
-		m.addviews = &i
-	}
-}
-
-// AddedViews returns the value that was added to the "views" field in this mutation.
-func (m *GroupMutation) AddedViews() (r int, exists bool) {
-	v := m.addviews
-	if v == nil {
-		return
-	}
-	return *v, true
-}
-
-// ResetViews resets all changes to the "views" field.
-func (m *GroupMutation) ResetViews() {
-	m.views = nil
-	m.addviews = nil
-}
-
-// SetSubscribers sets the "subscribers" field.
-func (m *GroupMutation) SetSubscribers(i int) {
-	m.subscribers = &i
-	m.addsubscribers = nil
-}
-
-// Subscribers returns the value of the "subscribers" field in the mutation.
-func (m *GroupMutation) Subscribers() (r int, exists bool) {
-	v := m.subscribers
-	if v == nil {
-		return
-	}
-	return *v, true
-}
-
-// OldSubscribers returns the old "subscribers" field's value of the Group entity.
-// If the Group object wasn't provided to the builder, the object is fetched from the database.
-// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
-func (m *GroupMutation) OldSubscribers(ctx context.Context) (v int, err error) {
-	if !m.op.Is(OpUpdateOne) {
-		return v, errors.New("OldSubscribers is only allowed on UpdateOne operations")
-	}
-	if m.id == nil || m.oldValue == nil {
-		return v, errors.New("OldSubscribers requires an ID field in the mutation")
-	}
-	oldValue, err := m.oldValue(ctx)
-	if err != nil {
-		return v, fmt.Errorf("querying old value for OldSubscribers: %w", err)
-	}
-	return oldValue.Subscribers, nil
-}
-
-// AddSubscribers adds i to the "subscribers" field.
-func (m *GroupMutation) AddSubscribers(i int) {
-	if m.addsubscribers != nil {
-		*m.addsubscribers += i
-	} else {
-		m.addsubscribers = &i
-	}
-}
-
-// AddedSubscribers returns the value that was added to the "subscribers" field in this mutation.
-func (m *GroupMutation) AddedSubscribers() (r int, exists bool) {
-	v := m.addsubscribers
-	if v == nil {
-		return
-	}
-	return *v, true
-}
-
-// ResetSubscribers resets all changes to the "subscribers" field.
-func (m *GroupMutation) ResetSubscribers() {
-	m.subscribers = nil
-	m.addsubscribers = nil
-}
-
-// SetCreatedAt sets the "created_at" field.
-func (m *GroupMutation) SetCreatedAt(t time.Time) {
-	m.created_at = &t
-}
-
-// CreatedAt returns the value of the "created_at" field in the mutation.
-func (m *GroupMutation) CreatedAt() (r time.Time, exists bool) {
-	v := m.created_at
-	if v == nil {
-		return
-	}
-	return *v, true
-}
-
-// OldCreatedAt returns the old "created_at" field's value of the Group entity.
-// If the Group object wasn't provided to the builder, the object is fetched from the database.
-// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
-func (m *GroupMutation) OldCreatedAt(ctx context.Context) (v time.Time, err error) {
-	if !m.op.Is(OpUpdateOne) {
-		return v, errors.New("OldCreatedAt is only allowed on UpdateOne operations")
-	}
-	if m.id == nil || m.oldValue == nil {
-		return v, errors.New("OldCreatedAt requires an ID field in the mutation")
-	}
-	oldValue, err := m.oldValue(ctx)
-	if err != nil {
-		return v, fmt.Errorf("querying old value for OldCreatedAt: %w", err)
-	}
-	return oldValue.CreatedAt, nil
-}
-
-// ResetCreatedAt resets all changes to the "created_at" field.
-func (m *GroupMutation) ResetCreatedAt() {
-	m.created_at = nil
 }
 
 // AddAdminIDs adds the "admins" edge to the User entity by ids.
@@ -747,27 +481,9 @@ func (m *GroupMutation) Type() string {
 // order to get all numeric fields that were incremented/decremented, call
 // AddedFields().
 func (m *GroupMutation) Fields() []string {
-	fields := make([]string, 0, 7)
+	fields := make([]string, 0, 1)
 	if m.name != nil {
 		fields = append(fields, group.FieldName)
-	}
-	if m.description != nil {
-		fields = append(fields, group.FieldDescription)
-	}
-	if m.url != nil {
-		fields = append(fields, group.FieldURL)
-	}
-	if m.thumbnail != nil {
-		fields = append(fields, group.FieldThumbnail)
-	}
-	if m.views != nil {
-		fields = append(fields, group.FieldViews)
-	}
-	if m.subscribers != nil {
-		fields = append(fields, group.FieldSubscribers)
-	}
-	if m.created_at != nil {
-		fields = append(fields, group.FieldCreatedAt)
 	}
 	return fields
 }
@@ -779,18 +495,6 @@ func (m *GroupMutation) Field(name string) (ent.Value, bool) {
 	switch name {
 	case group.FieldName:
 		return m.Name()
-	case group.FieldDescription:
-		return m.Description()
-	case group.FieldURL:
-		return m.URL()
-	case group.FieldThumbnail:
-		return m.Thumbnail()
-	case group.FieldViews:
-		return m.Views()
-	case group.FieldSubscribers:
-		return m.Subscribers()
-	case group.FieldCreatedAt:
-		return m.CreatedAt()
 	}
 	return nil, false
 }
@@ -802,18 +506,6 @@ func (m *GroupMutation) OldField(ctx context.Context, name string) (ent.Value, e
 	switch name {
 	case group.FieldName:
 		return m.OldName(ctx)
-	case group.FieldDescription:
-		return m.OldDescription(ctx)
-	case group.FieldURL:
-		return m.OldURL(ctx)
-	case group.FieldThumbnail:
-		return m.OldThumbnail(ctx)
-	case group.FieldViews:
-		return m.OldViews(ctx)
-	case group.FieldSubscribers:
-		return m.OldSubscribers(ctx)
-	case group.FieldCreatedAt:
-		return m.OldCreatedAt(ctx)
 	}
 	return nil, fmt.Errorf("unknown Group field %s", name)
 }
@@ -830,48 +522,6 @@ func (m *GroupMutation) SetField(name string, value ent.Value) error {
 		}
 		m.SetName(v)
 		return nil
-	case group.FieldDescription:
-		v, ok := value.(string)
-		if !ok {
-			return fmt.Errorf("unexpected type %T for field %s", value, name)
-		}
-		m.SetDescription(v)
-		return nil
-	case group.FieldURL:
-		v, ok := value.(string)
-		if !ok {
-			return fmt.Errorf("unexpected type %T for field %s", value, name)
-		}
-		m.SetURL(v)
-		return nil
-	case group.FieldThumbnail:
-		v, ok := value.(string)
-		if !ok {
-			return fmt.Errorf("unexpected type %T for field %s", value, name)
-		}
-		m.SetThumbnail(v)
-		return nil
-	case group.FieldViews:
-		v, ok := value.(int)
-		if !ok {
-			return fmt.Errorf("unexpected type %T for field %s", value, name)
-		}
-		m.SetViews(v)
-		return nil
-	case group.FieldSubscribers:
-		v, ok := value.(int)
-		if !ok {
-			return fmt.Errorf("unexpected type %T for field %s", value, name)
-		}
-		m.SetSubscribers(v)
-		return nil
-	case group.FieldCreatedAt:
-		v, ok := value.(time.Time)
-		if !ok {
-			return fmt.Errorf("unexpected type %T for field %s", value, name)
-		}
-		m.SetCreatedAt(v)
-		return nil
 	}
 	return fmt.Errorf("unknown Group field %s", name)
 }
@@ -879,26 +529,13 @@ func (m *GroupMutation) SetField(name string, value ent.Value) error {
 // AddedFields returns all numeric fields that were incremented/decremented during
 // this mutation.
 func (m *GroupMutation) AddedFields() []string {
-	var fields []string
-	if m.addviews != nil {
-		fields = append(fields, group.FieldViews)
-	}
-	if m.addsubscribers != nil {
-		fields = append(fields, group.FieldSubscribers)
-	}
-	return fields
+	return nil
 }
 
 // AddedField returns the numeric value that was incremented/decremented on a field
 // with the given name. The second boolean return value indicates that this field
 // was not set, or was not defined in the schema.
 func (m *GroupMutation) AddedField(name string) (ent.Value, bool) {
-	switch name {
-	case group.FieldViews:
-		return m.AddedViews()
-	case group.FieldSubscribers:
-		return m.AddedSubscribers()
-	}
 	return nil, false
 }
 
@@ -907,20 +544,6 @@ func (m *GroupMutation) AddedField(name string) (ent.Value, bool) {
 // type.
 func (m *GroupMutation) AddField(name string, value ent.Value) error {
 	switch name {
-	case group.FieldViews:
-		v, ok := value.(int)
-		if !ok {
-			return fmt.Errorf("unexpected type %T for field %s", value, name)
-		}
-		m.AddViews(v)
-		return nil
-	case group.FieldSubscribers:
-		v, ok := value.(int)
-		if !ok {
-			return fmt.Errorf("unexpected type %T for field %s", value, name)
-		}
-		m.AddSubscribers(v)
-		return nil
 	}
 	return fmt.Errorf("unknown Group numeric field %s", name)
 }
@@ -950,24 +573,6 @@ func (m *GroupMutation) ResetField(name string) error {
 	switch name {
 	case group.FieldName:
 		m.ResetName()
-		return nil
-	case group.FieldDescription:
-		m.ResetDescription()
-		return nil
-	case group.FieldURL:
-		m.ResetURL()
-		return nil
-	case group.FieldThumbnail:
-		m.ResetThumbnail()
-		return nil
-	case group.FieldViews:
-		m.ResetViews()
-		return nil
-	case group.FieldSubscribers:
-		m.ResetSubscribers()
-		return nil
-	case group.FieldCreatedAt:
-		m.ResetCreatedAt()
 		return nil
 	}
 	return fmt.Errorf("unknown Group field %s", name)
@@ -1168,7 +773,6 @@ type UserMutation struct {
 	typ                      string
 	id                       *int
 	name                     *string
-	uuid                     *uuid.UUID
 	password                 *string
 	clearedFields            map[string]struct{}
 	joined_groups            map[int]struct{}
@@ -1332,42 +936,6 @@ func (m *UserMutation) OldName(ctx context.Context) (v string, err error) {
 // ResetName resets all changes to the "name" field.
 func (m *UserMutation) ResetName() {
 	m.name = nil
-}
-
-// SetUUID sets the "uuid" field.
-func (m *UserMutation) SetUUID(u uuid.UUID) {
-	m.uuid = &u
-}
-
-// UUID returns the value of the "uuid" field in the mutation.
-func (m *UserMutation) UUID() (r uuid.UUID, exists bool) {
-	v := m.uuid
-	if v == nil {
-		return
-	}
-	return *v, true
-}
-
-// OldUUID returns the old "uuid" field's value of the User entity.
-// If the User object wasn't provided to the builder, the object is fetched from the database.
-// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
-func (m *UserMutation) OldUUID(ctx context.Context) (v uuid.UUID, err error) {
-	if !m.op.Is(OpUpdateOne) {
-		return v, errors.New("OldUUID is only allowed on UpdateOne operations")
-	}
-	if m.id == nil || m.oldValue == nil {
-		return v, errors.New("OldUUID requires an ID field in the mutation")
-	}
-	oldValue, err := m.oldValue(ctx)
-	if err != nil {
-		return v, fmt.Errorf("querying old value for OldUUID: %w", err)
-	}
-	return oldValue.UUID, nil
-}
-
-// ResetUUID resets all changes to the "uuid" field.
-func (m *UserMutation) ResetUUID() {
-	m.uuid = nil
 }
 
 // SetPassword sets the "password" field.
@@ -1857,12 +1425,9 @@ func (m *UserMutation) Type() string {
 // order to get all numeric fields that were incremented/decremented, call
 // AddedFields().
 func (m *UserMutation) Fields() []string {
-	fields := make([]string, 0, 3)
+	fields := make([]string, 0, 2)
 	if m.name != nil {
 		fields = append(fields, user.FieldName)
-	}
-	if m.uuid != nil {
-		fields = append(fields, user.FieldUUID)
 	}
 	if m.password != nil {
 		fields = append(fields, user.FieldPassword)
@@ -1877,8 +1442,6 @@ func (m *UserMutation) Field(name string) (ent.Value, bool) {
 	switch name {
 	case user.FieldName:
 		return m.Name()
-	case user.FieldUUID:
-		return m.UUID()
 	case user.FieldPassword:
 		return m.Password()
 	}
@@ -1892,8 +1455,6 @@ func (m *UserMutation) OldField(ctx context.Context, name string) (ent.Value, er
 	switch name {
 	case user.FieldName:
 		return m.OldName(ctx)
-	case user.FieldUUID:
-		return m.OldUUID(ctx)
 	case user.FieldPassword:
 		return m.OldPassword(ctx)
 	}
@@ -1911,13 +1472,6 @@ func (m *UserMutation) SetField(name string, value ent.Value) error {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
 		m.SetName(v)
-		return nil
-	case user.FieldUUID:
-		v, ok := value.(uuid.UUID)
-		if !ok {
-			return fmt.Errorf("unexpected type %T for field %s", value, name)
-		}
-		m.SetUUID(v)
 		return nil
 	case user.FieldPassword:
 		v, ok := value.(string)
@@ -1977,9 +1531,6 @@ func (m *UserMutation) ResetField(name string) error {
 	switch name {
 	case user.FieldName:
 		m.ResetName()
-		return nil
-	case user.FieldUUID:
-		m.ResetUUID()
 		return nil
 	case user.FieldPassword:
 		m.ResetPassword()
@@ -2260,11 +1811,8 @@ type VideoMutation struct {
 	op                Op
 	typ               string
 	id                *int
-	uuid              *uuid.UUID
 	title             *string
-	description       *string
 	videotype         *video.Videotype
-	created_at        *time.Time
 	clearedFields     map[string]struct{}
 	group             *int
 	clearedgroup      bool
@@ -2383,42 +1931,6 @@ func (m *VideoMutation) IDs(ctx context.Context) ([]int, error) {
 	}
 }
 
-// SetUUID sets the "uuid" field.
-func (m *VideoMutation) SetUUID(u uuid.UUID) {
-	m.uuid = &u
-}
-
-// UUID returns the value of the "uuid" field in the mutation.
-func (m *VideoMutation) UUID() (r uuid.UUID, exists bool) {
-	v := m.uuid
-	if v == nil {
-		return
-	}
-	return *v, true
-}
-
-// OldUUID returns the old "uuid" field's value of the Video entity.
-// If the Video object wasn't provided to the builder, the object is fetched from the database.
-// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
-func (m *VideoMutation) OldUUID(ctx context.Context) (v uuid.UUID, err error) {
-	if !m.op.Is(OpUpdateOne) {
-		return v, errors.New("OldUUID is only allowed on UpdateOne operations")
-	}
-	if m.id == nil || m.oldValue == nil {
-		return v, errors.New("OldUUID requires an ID field in the mutation")
-	}
-	oldValue, err := m.oldValue(ctx)
-	if err != nil {
-		return v, fmt.Errorf("querying old value for OldUUID: %w", err)
-	}
-	return oldValue.UUID, nil
-}
-
-// ResetUUID resets all changes to the "uuid" field.
-func (m *VideoMutation) ResetUUID() {
-	m.uuid = nil
-}
-
 // SetTitle sets the "title" field.
 func (m *VideoMutation) SetTitle(s string) {
 	m.title = &s
@@ -2455,42 +1967,6 @@ func (m *VideoMutation) ResetTitle() {
 	m.title = nil
 }
 
-// SetDescription sets the "description" field.
-func (m *VideoMutation) SetDescription(s string) {
-	m.description = &s
-}
-
-// Description returns the value of the "description" field in the mutation.
-func (m *VideoMutation) Description() (r string, exists bool) {
-	v := m.description
-	if v == nil {
-		return
-	}
-	return *v, true
-}
-
-// OldDescription returns the old "description" field's value of the Video entity.
-// If the Video object wasn't provided to the builder, the object is fetched from the database.
-// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
-func (m *VideoMutation) OldDescription(ctx context.Context) (v string, err error) {
-	if !m.op.Is(OpUpdateOne) {
-		return v, errors.New("OldDescription is only allowed on UpdateOne operations")
-	}
-	if m.id == nil || m.oldValue == nil {
-		return v, errors.New("OldDescription requires an ID field in the mutation")
-	}
-	oldValue, err := m.oldValue(ctx)
-	if err != nil {
-		return v, fmt.Errorf("querying old value for OldDescription: %w", err)
-	}
-	return oldValue.Description, nil
-}
-
-// ResetDescription resets all changes to the "description" field.
-func (m *VideoMutation) ResetDescription() {
-	m.description = nil
-}
-
 // SetVideotype sets the "videotype" field.
 func (m *VideoMutation) SetVideotype(v video.Videotype) {
 	m.videotype = &v
@@ -2525,42 +2001,6 @@ func (m *VideoMutation) OldVideotype(ctx context.Context) (v video.Videotype, er
 // ResetVideotype resets all changes to the "videotype" field.
 func (m *VideoMutation) ResetVideotype() {
 	m.videotype = nil
-}
-
-// SetCreatedAt sets the "created_at" field.
-func (m *VideoMutation) SetCreatedAt(t time.Time) {
-	m.created_at = &t
-}
-
-// CreatedAt returns the value of the "created_at" field in the mutation.
-func (m *VideoMutation) CreatedAt() (r time.Time, exists bool) {
-	v := m.created_at
-	if v == nil {
-		return
-	}
-	return *v, true
-}
-
-// OldCreatedAt returns the old "created_at" field's value of the Video entity.
-// If the Video object wasn't provided to the builder, the object is fetched from the database.
-// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
-func (m *VideoMutation) OldCreatedAt(ctx context.Context) (v time.Time, err error) {
-	if !m.op.Is(OpUpdateOne) {
-		return v, errors.New("OldCreatedAt is only allowed on UpdateOne operations")
-	}
-	if m.id == nil || m.oldValue == nil {
-		return v, errors.New("OldCreatedAt requires an ID field in the mutation")
-	}
-	oldValue, err := m.oldValue(ctx)
-	if err != nil {
-		return v, fmt.Errorf("querying old value for OldCreatedAt: %w", err)
-	}
-	return oldValue.CreatedAt, nil
-}
-
-// ResetCreatedAt resets all changes to the "created_at" field.
-func (m *VideoMutation) ResetCreatedAt() {
-	m.created_at = nil
 }
 
 // SetGroupID sets the "group" edge to the Group entity by id.
@@ -2837,21 +2277,12 @@ func (m *VideoMutation) Type() string {
 // order to get all numeric fields that were incremented/decremented, call
 // AddedFields().
 func (m *VideoMutation) Fields() []string {
-	fields := make([]string, 0, 5)
-	if m.uuid != nil {
-		fields = append(fields, video.FieldUUID)
-	}
+	fields := make([]string, 0, 2)
 	if m.title != nil {
 		fields = append(fields, video.FieldTitle)
 	}
-	if m.description != nil {
-		fields = append(fields, video.FieldDescription)
-	}
 	if m.videotype != nil {
 		fields = append(fields, video.FieldVideotype)
-	}
-	if m.created_at != nil {
-		fields = append(fields, video.FieldCreatedAt)
 	}
 	return fields
 }
@@ -2861,16 +2292,10 @@ func (m *VideoMutation) Fields() []string {
 // schema.
 func (m *VideoMutation) Field(name string) (ent.Value, bool) {
 	switch name {
-	case video.FieldUUID:
-		return m.UUID()
 	case video.FieldTitle:
 		return m.Title()
-	case video.FieldDescription:
-		return m.Description()
 	case video.FieldVideotype:
 		return m.Videotype()
-	case video.FieldCreatedAt:
-		return m.CreatedAt()
 	}
 	return nil, false
 }
@@ -2880,16 +2305,10 @@ func (m *VideoMutation) Field(name string) (ent.Value, bool) {
 // database failed.
 func (m *VideoMutation) OldField(ctx context.Context, name string) (ent.Value, error) {
 	switch name {
-	case video.FieldUUID:
-		return m.OldUUID(ctx)
 	case video.FieldTitle:
 		return m.OldTitle(ctx)
-	case video.FieldDescription:
-		return m.OldDescription(ctx)
 	case video.FieldVideotype:
 		return m.OldVideotype(ctx)
-	case video.FieldCreatedAt:
-		return m.OldCreatedAt(ctx)
 	}
 	return nil, fmt.Errorf("unknown Video field %s", name)
 }
@@ -2899,13 +2318,6 @@ func (m *VideoMutation) OldField(ctx context.Context, name string) (ent.Value, e
 // type.
 func (m *VideoMutation) SetField(name string, value ent.Value) error {
 	switch name {
-	case video.FieldUUID:
-		v, ok := value.(uuid.UUID)
-		if !ok {
-			return fmt.Errorf("unexpected type %T for field %s", value, name)
-		}
-		m.SetUUID(v)
-		return nil
 	case video.FieldTitle:
 		v, ok := value.(string)
 		if !ok {
@@ -2913,26 +2325,12 @@ func (m *VideoMutation) SetField(name string, value ent.Value) error {
 		}
 		m.SetTitle(v)
 		return nil
-	case video.FieldDescription:
-		v, ok := value.(string)
-		if !ok {
-			return fmt.Errorf("unexpected type %T for field %s", value, name)
-		}
-		m.SetDescription(v)
-		return nil
 	case video.FieldVideotype:
 		v, ok := value.(video.Videotype)
 		if !ok {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
 		m.SetVideotype(v)
-		return nil
-	case video.FieldCreatedAt:
-		v, ok := value.(time.Time)
-		if !ok {
-			return fmt.Errorf("unexpected type %T for field %s", value, name)
-		}
-		m.SetCreatedAt(v)
 		return nil
 	}
 	return fmt.Errorf("unknown Video field %s", name)
@@ -2983,20 +2381,11 @@ func (m *VideoMutation) ClearField(name string) error {
 // It returns an error if the field is not defined in the schema.
 func (m *VideoMutation) ResetField(name string) error {
 	switch name {
-	case video.FieldUUID:
-		m.ResetUUID()
-		return nil
 	case video.FieldTitle:
 		m.ResetTitle()
 		return nil
-	case video.FieldDescription:
-		m.ResetDescription()
-		return nil
 	case video.FieldVideotype:
 		m.ResetVideotype()
-		return nil
-	case video.FieldCreatedAt:
-		m.ResetCreatedAt()
 		return nil
 	}
 	return fmt.Errorf("unknown Video field %s", name)

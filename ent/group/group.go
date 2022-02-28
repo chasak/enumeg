@@ -2,10 +2,6 @@
 
 package group
 
-import (
-	"time"
-)
-
 const (
 	// Label holds the string label denoting the group type in the database.
 	Label = "group"
@@ -13,18 +9,6 @@ const (
 	FieldID = "id"
 	// FieldName holds the string denoting the name field in the database.
 	FieldName = "name"
-	// FieldDescription holds the string denoting the description field in the database.
-	FieldDescription = "description"
-	// FieldURL holds the string denoting the url field in the database.
-	FieldURL = "url"
-	// FieldThumbnail holds the string denoting the thumbnail field in the database.
-	FieldThumbnail = "thumbnail"
-	// FieldViews holds the string denoting the views field in the database.
-	FieldViews = "views"
-	// FieldSubscribers holds the string denoting the subscribers field in the database.
-	FieldSubscribers = "subscribers"
-	// FieldCreatedAt holds the string denoting the created_at field in the database.
-	FieldCreatedAt = "created_at"
 	// EdgeAdmins holds the string denoting the admins edge name in mutations.
 	EdgeAdmins = "admins"
 	// EdgeMembers holds the string denoting the members edge name in mutations.
@@ -70,12 +54,6 @@ const (
 var Columns = []string{
 	FieldID,
 	FieldName,
-	FieldDescription,
-	FieldURL,
-	FieldThumbnail,
-	FieldViews,
-	FieldSubscribers,
-	FieldCreatedAt,
 }
 
 var (
@@ -102,8 +80,3 @@ func ValidColumn(column string) bool {
 	}
 	return false
 }
-
-var (
-	// DefaultCreatedAt holds the default value on creation for the "created_at" field.
-	DefaultCreatedAt func() time.Time
-)

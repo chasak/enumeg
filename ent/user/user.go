@@ -2,10 +2,6 @@
 
 package user
 
-import (
-	"github.com/google/uuid"
-)
-
 const (
 	// Label holds the string label denoting the user type in the database.
 	Label = "user"
@@ -13,8 +9,6 @@ const (
 	FieldID = "id"
 	// FieldName holds the string denoting the name field in the database.
 	FieldName = "name"
-	// FieldUUID holds the string denoting the uuid field in the database.
-	FieldUUID = "uuid"
 	// FieldPassword holds the string denoting the password field in the database.
 	FieldPassword = "password"
 	// EdgeJoinedGroups holds the string denoting the joined_groups edge name in mutations.
@@ -81,7 +75,6 @@ const (
 var Columns = []string{
 	FieldID,
 	FieldName,
-	FieldUUID,
 	FieldPassword,
 }
 
@@ -121,8 +114,3 @@ func ValidColumn(column string) bool {
 	}
 	return false
 }
-
-var (
-	// DefaultUUID holds the default value on creation for the "uuid" field.
-	DefaultUUID func() uuid.UUID
-)

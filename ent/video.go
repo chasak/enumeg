@@ -5,12 +5,10 @@ package ent
 import (
 	"fmt"
 	"strings"
-	"time"
 
 	"entgo.io/ent/dialect/sql"
 	"example.com/enumeg/ent/group"
 	"example.com/enumeg/ent/video"
-	"github.com/google/uuid"
 )
 
 // Video is the model entity for the Video schema.
@@ -18,16 +16,10 @@ type Video struct {
 	config `json:"-"`
 	// ID of the ent.
 	ID int `json:"id,omitempty"`
-	// UUID holds the value of the "uuid" field.
-	UUID uuid.UUID `json:"uuid,omitempty"`
 	// Title holds the value of the "title" field.
 	Title string `json:"title,omitempty"`
-	// Description holds the value of the "description" field.
-	Description string `json:"description,omitempty"`
 	// Videotype holds the value of the "videotype" field.
 	Videotype video.Videotype `json:"videotype,omitempty"`
-	// CreatedAt holds the value of the "created_at" field.
-	CreatedAt time.Time `json:"created_at,omitempty"`
 	// Edges holds the relations/edges for other nodes in the graph.
 	// The values are being populated by the VideoQuery when eager-loading is set.
 	Edges        VideoEdges `json:"edges"`
@@ -108,12 +100,8 @@ func (*Video) scanValues(columns []string) ([]interface{}, error) {
 		switch columns[i] {
 		case video.FieldID:
 			values[i] = new(sql.NullInt64)
-		case video.FieldTitle, video.FieldDescription, video.FieldVideotype:
+		case video.FieldTitle, video.FieldVideotype:
 			values[i] = new(sql.NullString)
-		case video.FieldCreatedAt:
-			values[i] = new(sql.NullTime)
-		case video.FieldUUID:
-			values[i] = new(uuid.UUID)
 		case video.ForeignKeys[0]: // group_videos
 			values[i] = new(sql.NullInt64)
 		default:
@@ -137,35 +125,17 @@ func (v *Video) assignValues(columns []string, values []interface{}) error {
 				return fmt.Errorf("unexpected type %T for field id", value)
 			}
 			v.ID = int(value.Int64)
-		case video.FieldUUID:
-			if value, ok := values[i].(*uuid.UUID); !ok {
-				return fmt.Errorf("unexpected type %T for field uuid", values[i])
-			} else if value != nil {
-				v.UUID = *value
-			}
 		case video.FieldTitle:
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field title", values[i])
 			} else if value.Valid {
 				v.Title = value.String
 			}
-		case video.FieldDescription:
-			if value, ok := values[i].(*sql.NullString); !ok {
-				return fmt.Errorf("unexpected type %T for field description", values[i])
-			} else if value.Valid {
-				v.Description = value.String
-			}
 		case video.FieldVideotype:
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field videotype", values[i])
 			} else if value.Valid {
 				v.Videotype = video.Videotype(value.String)
-			}
-		case video.FieldCreatedAt:
-			if value, ok := values[i].(*sql.NullTime); !ok {
-				return fmt.Errorf("unexpected type %T for field created_at", values[i])
-			} else if value.Valid {
-				v.CreatedAt = value.Time
 			}
 		case video.ForeignKeys[0]:
 			if value, ok := values[i].(*sql.NullInt64); !ok {
@@ -227,16 +197,10 @@ func (v *Video) String() string {
 	var builder strings.Builder
 	builder.WriteString("Video(")
 	builder.WriteString(fmt.Sprintf("id=%v", v.ID))
-	builder.WriteString(", uuid=")
-	builder.WriteString(fmt.Sprintf("%v", v.UUID))
 	builder.WriteString(", title=")
 	builder.WriteString(v.Title)
-	builder.WriteString(", description=")
-	builder.WriteString(v.Description)
 	builder.WriteString(", videotype=")
 	builder.WriteString(fmt.Sprintf("%v", v.Videotype))
-	builder.WriteString(", created_at=")
-	builder.WriteString(v.CreatedAt.Format(time.ANSIC))
 	builder.WriteByte(')')
 	return builder.String()
 }

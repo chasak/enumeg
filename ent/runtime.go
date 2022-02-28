@@ -2,40 +2,8 @@
 
 package ent
 
-import (
-	"time"
-
-	"example.com/enumeg/ent/group"
-	"example.com/enumeg/ent/schema"
-	"example.com/enumeg/ent/user"
-	"example.com/enumeg/ent/video"
-	"github.com/google/uuid"
-)
-
 // The init function reads all schema descriptors with runtime code
 // (default values, validators, hooks and policies) and stitches it
 // to their package variables.
 func init() {
-	groupFields := schema.Group{}.Fields()
-	_ = groupFields
-	// groupDescCreatedAt is the schema descriptor for created_at field.
-	groupDescCreatedAt := groupFields[6].Descriptor()
-	// group.DefaultCreatedAt holds the default value on creation for the created_at field.
-	group.DefaultCreatedAt = groupDescCreatedAt.Default.(func() time.Time)
-	userFields := schema.User{}.Fields()
-	_ = userFields
-	// userDescUUID is the schema descriptor for uuid field.
-	userDescUUID := userFields[1].Descriptor()
-	// user.DefaultUUID holds the default value on creation for the uuid field.
-	user.DefaultUUID = userDescUUID.Default.(func() uuid.UUID)
-	videoFields := schema.Video{}.Fields()
-	_ = videoFields
-	// videoDescUUID is the schema descriptor for uuid field.
-	videoDescUUID := videoFields[0].Descriptor()
-	// video.DefaultUUID holds the default value on creation for the uuid field.
-	video.DefaultUUID = videoDescUUID.Default.(func() uuid.UUID)
-	// videoDescCreatedAt is the schema descriptor for created_at field.
-	videoDescCreatedAt := videoFields[4].Descriptor()
-	// video.DefaultCreatedAt holds the default value on creation for the created_at field.
-	video.DefaultCreatedAt = videoDescCreatedAt.Default.(func() time.Time)
 }

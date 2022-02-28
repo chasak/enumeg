@@ -9,14 +9,8 @@ func NewGroupCreate(e *ent.Group) *GroupCreate {
 		return nil
 	}
 	return &GroupCreate{
-		ID:          e.ID,
-		Name:        e.Name,
-		Description: e.Description,
-		URL:         e.URL,
-		Thumbnail:   e.Thumbnail,
-		Views:       e.Views,
-		Subscribers: e.Subscribers,
-		CreatedAt:   e.CreatedAt,
+		ID:   e.ID,
+		Name: e.Name,
 	}
 }
 
@@ -43,14 +37,8 @@ func NewGroupList(e *ent.Group) *GroupList {
 		return nil
 	}
 	return &GroupList{
-		ID:          e.ID,
-		Name:        e.Name,
-		Description: e.Description,
-		URL:         e.URL,
-		Thumbnail:   e.Thumbnail,
-		Views:       e.Views,
-		Subscribers: e.Subscribers,
-		CreatedAt:   e.CreatedAt,
+		ID:   e.ID,
+		Name: e.Name,
 	}
 }
 
@@ -77,14 +65,8 @@ func NewGroupRead(e *ent.Group) *GroupRead {
 		return nil
 	}
 	return &GroupRead{
-		ID:          e.ID,
-		Name:        e.Name,
-		Description: e.Description,
-		URL:         e.URL,
-		Thumbnail:   e.Thumbnail,
-		Views:       e.Views,
-		Subscribers: e.Subscribers,
-		CreatedAt:   e.CreatedAt,
+		ID:   e.ID,
+		Name: e.Name,
 	}
 }
 
@@ -111,14 +93,8 @@ func NewGroupUpdate(e *ent.Group) *GroupUpdate {
 		return nil
 	}
 	return &GroupUpdate{
-		ID:          e.ID,
-		Name:        e.Name,
-		Description: e.Description,
-		URL:         e.URL,
-		Thumbnail:   e.Thumbnail,
-		Views:       e.Views,
-		Subscribers: e.Subscribers,
-		CreatedAt:   e.CreatedAt,
+		ID:   e.ID,
+		Name: e.Name,
 	}
 }
 
@@ -147,7 +123,6 @@ func NewGroupAdminsList(e *ent.User) *GroupAdminsList {
 	return &GroupAdminsList{
 		ID:       e.ID,
 		Name:     e.Name,
-		UUID:     e.UUID,
 		Password: e.Password,
 	}
 }
@@ -177,7 +152,6 @@ func NewGroupMembersList(e *ent.User) *GroupMembersList {
 	return &GroupMembersList{
 		ID:       e.ID,
 		Name:     e.Name,
-		UUID:     e.UUID,
 		Password: e.Password,
 	}
 }
@@ -207,7 +181,6 @@ func NewGroupModeratorsList(e *ent.User) *GroupModeratorsList {
 	return &GroupModeratorsList{
 		ID:       e.ID,
 		Name:     e.Name,
-		UUID:     e.UUID,
 		Password: e.Password,
 	}
 }
@@ -237,7 +210,6 @@ func NewGroupStreamersList(e *ent.User) *GroupStreamersList {
 	return &GroupStreamersList{
 		ID:       e.ID,
 		Name:     e.Name,
-		UUID:     e.UUID,
 		Password: e.Password,
 	}
 }
@@ -265,12 +237,9 @@ func NewGroupVideosList(e *ent.Video) *GroupVideosList {
 		return nil
 	}
 	return &GroupVideosList{
-		ID:          e.ID,
-		UUID:        e.UUID,
-		Title:       e.Title,
-		Description: e.Description,
-		Videotype:   e.Videotype,
-		CreatedAt:   e.CreatedAt,
+		ID:        e.ID,
+		Title:     e.Title,
+		Videotype: e.Videotype,
 	}
 }
 
@@ -299,7 +268,6 @@ func NewUserCreate(e *ent.User) *UserCreate {
 	return &UserCreate{
 		ID:       e.ID,
 		Name:     e.Name,
-		UUID:     e.UUID,
 		Password: e.Password,
 	}
 }
@@ -329,7 +297,6 @@ func NewUserList(e *ent.User) *UserList {
 	return &UserList{
 		ID:       e.ID,
 		Name:     e.Name,
-		UUID:     e.UUID,
 		Password: e.Password,
 	}
 }
@@ -359,7 +326,6 @@ func NewUserRead(e *ent.User) *UserRead {
 	return &UserRead{
 		ID:       e.ID,
 		Name:     e.Name,
-		UUID:     e.UUID,
 		Password: e.Password,
 	}
 }
@@ -389,7 +355,6 @@ func NewUserUpdate(e *ent.User) *UserUpdate {
 	return &UserUpdate{
 		ID:       e.ID,
 		Name:     e.Name,
-		UUID:     e.UUID,
 		Password: e.Password,
 	}
 }
@@ -417,14 +382,8 @@ func NewUserAdminGroupsList(e *ent.Group) *UserAdminGroupsList {
 		return nil
 	}
 	return &UserAdminGroupsList{
-		ID:          e.ID,
-		Name:        e.Name,
-		Description: e.Description,
-		URL:         e.URL,
-		Thumbnail:   e.Thumbnail,
-		Views:       e.Views,
-		Subscribers: e.Subscribers,
-		CreatedAt:   e.CreatedAt,
+		ID:   e.ID,
+		Name: e.Name,
 	}
 }
 
@@ -451,14 +410,8 @@ func NewUserJoinedGroupsList(e *ent.Group) *UserJoinedGroupsList {
 		return nil
 	}
 	return &UserJoinedGroupsList{
-		ID:          e.ID,
-		Name:        e.Name,
-		Description: e.Description,
-		URL:         e.URL,
-		Thumbnail:   e.Thumbnail,
-		Views:       e.Views,
-		Subscribers: e.Subscribers,
-		CreatedAt:   e.CreatedAt,
+		ID:   e.ID,
+		Name: e.Name,
 	}
 }
 
@@ -485,12 +438,9 @@ func NewUserLikedVideosList(e *ent.Video) *UserLikedVideosList {
 		return nil
 	}
 	return &UserLikedVideosList{
-		ID:          e.ID,
-		UUID:        e.UUID,
-		Title:       e.Title,
-		Description: e.Description,
-		Videotype:   e.Videotype,
-		CreatedAt:   e.CreatedAt,
+		ID:        e.ID,
+		Title:     e.Title,
+		Videotype: e.Videotype,
 	}
 }
 
@@ -517,12 +467,9 @@ func NewUserModeratedVideosList(e *ent.Video) *UserModeratedVideosList {
 		return nil
 	}
 	return &UserModeratedVideosList{
-		ID:          e.ID,
-		UUID:        e.UUID,
-		Title:       e.Title,
-		Description: e.Description,
-		Videotype:   e.Videotype,
-		CreatedAt:   e.CreatedAt,
+		ID:        e.ID,
+		Title:     e.Title,
+		Videotype: e.Videotype,
 	}
 }
 
@@ -549,14 +496,8 @@ func NewUserModeratingGroupsList(e *ent.Group) *UserModeratingGroupsList {
 		return nil
 	}
 	return &UserModeratingGroupsList{
-		ID:          e.ID,
-		Name:        e.Name,
-		Description: e.Description,
-		URL:         e.URL,
-		Thumbnail:   e.Thumbnail,
-		Views:       e.Views,
-		Subscribers: e.Subscribers,
-		CreatedAt:   e.CreatedAt,
+		ID:   e.ID,
+		Name: e.Name,
 	}
 }
 
@@ -583,12 +524,9 @@ func NewUserStreamVideosList(e *ent.Video) *UserStreamVideosList {
 		return nil
 	}
 	return &UserStreamVideosList{
-		ID:          e.ID,
-		UUID:        e.UUID,
-		Title:       e.Title,
-		Description: e.Description,
-		Videotype:   e.Videotype,
-		CreatedAt:   e.CreatedAt,
+		ID:        e.ID,
+		Title:     e.Title,
+		Videotype: e.Videotype,
 	}
 }
 
@@ -615,14 +553,8 @@ func NewUserStreamingGroupsList(e *ent.Group) *UserStreamingGroupsList {
 		return nil
 	}
 	return &UserStreamingGroupsList{
-		ID:          e.ID,
-		Name:        e.Name,
-		Description: e.Description,
-		URL:         e.URL,
-		Thumbnail:   e.Thumbnail,
-		Views:       e.Views,
-		Subscribers: e.Subscribers,
-		CreatedAt:   e.CreatedAt,
+		ID:   e.ID,
+		Name: e.Name,
 	}
 }
 
@@ -649,12 +581,9 @@ func NewUserViewedVideosList(e *ent.Video) *UserViewedVideosList {
 		return nil
 	}
 	return &UserViewedVideosList{
-		ID:          e.ID,
-		UUID:        e.UUID,
-		Title:       e.Title,
-		Description: e.Description,
-		Videotype:   e.Videotype,
-		CreatedAt:   e.CreatedAt,
+		ID:        e.ID,
+		Title:     e.Title,
+		Videotype: e.Videotype,
 	}
 }
 
@@ -681,12 +610,9 @@ func NewVideoCreate(e *ent.Video) *VideoCreate {
 		return nil
 	}
 	return &VideoCreate{
-		ID:          e.ID,
-		UUID:        e.UUID,
-		Title:       e.Title,
-		Description: e.Description,
-		Videotype:   e.Videotype,
-		CreatedAt:   e.CreatedAt,
+		ID:        e.ID,
+		Title:     e.Title,
+		Videotype: e.Videotype,
 	}
 }
 
@@ -713,12 +639,9 @@ func NewVideoList(e *ent.Video) *VideoList {
 		return nil
 	}
 	return &VideoList{
-		ID:          e.ID,
-		UUID:        e.UUID,
-		Title:       e.Title,
-		Description: e.Description,
-		Videotype:   e.Videotype,
-		CreatedAt:   e.CreatedAt,
+		ID:        e.ID,
+		Title:     e.Title,
+		Videotype: e.Videotype,
 	}
 }
 
@@ -745,12 +668,9 @@ func NewVideoRead(e *ent.Video) *VideoRead {
 		return nil
 	}
 	return &VideoRead{
-		ID:          e.ID,
-		UUID:        e.UUID,
-		Title:       e.Title,
-		Description: e.Description,
-		Videotype:   e.Videotype,
-		CreatedAt:   e.CreatedAt,
+		ID:        e.ID,
+		Title:     e.Title,
+		Videotype: e.Videotype,
 	}
 }
 
@@ -777,12 +697,9 @@ func NewVideoUpdate(e *ent.Video) *VideoUpdate {
 		return nil
 	}
 	return &VideoUpdate{
-		ID:          e.ID,
-		UUID:        e.UUID,
-		Title:       e.Title,
-		Description: e.Description,
-		Videotype:   e.Videotype,
-		CreatedAt:   e.CreatedAt,
+		ID:        e.ID,
+		Title:     e.Title,
+		Videotype: e.Videotype,
 	}
 }
 
@@ -809,14 +726,8 @@ func NewVideoGroupRead(e *ent.Group) *VideoGroupRead {
 		return nil
 	}
 	return &VideoGroupRead{
-		ID:          e.ID,
-		Name:        e.Name,
-		Description: e.Description,
-		URL:         e.URL,
-		Thumbnail:   e.Thumbnail,
-		Views:       e.Views,
-		Subscribers: e.Subscribers,
-		CreatedAt:   e.CreatedAt,
+		ID:   e.ID,
+		Name: e.Name,
 	}
 }
 
@@ -845,7 +756,6 @@ func NewVideoLikesList(e *ent.User) *VideoLikesList {
 	return &VideoLikesList{
 		ID:       e.ID,
 		Name:     e.Name,
-		UUID:     e.UUID,
 		Password: e.Password,
 	}
 }
@@ -875,7 +785,6 @@ func NewVideoModeratersList(e *ent.User) *VideoModeratersList {
 	return &VideoModeratersList{
 		ID:       e.ID,
 		Name:     e.Name,
-		UUID:     e.UUID,
 		Password: e.Password,
 	}
 }
@@ -905,7 +814,6 @@ func NewVideoStreamersList(e *ent.User) *VideoStreamersList {
 	return &VideoStreamersList{
 		ID:       e.ID,
 		Name:     e.Name,
-		UUID:     e.UUID,
 		Password: e.Password,
 	}
 }
@@ -935,7 +843,6 @@ func NewVideoViewersList(e *ent.User) *VideoViewersList {
 	return &VideoViewersList{
 		ID:       e.ID,
 		Name:     e.Name,
-		UUID:     e.UUID,
 		Password: e.Password,
 	}
 }

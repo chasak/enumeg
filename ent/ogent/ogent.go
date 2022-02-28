@@ -33,12 +33,6 @@ func (h *OgentHandler) CreateGroup(ctx context.Context, req CreateGroupReq) (Cre
 	b := h.client.Group.Create()
 	// Add all fields.
 	b.SetName(req.Name)
-	b.SetDescription(req.Description)
-	b.SetURL(req.URL)
-	b.SetThumbnail(req.Thumbnail)
-	b.SetViews(req.Views)
-	b.SetSubscribers(req.Subscribers)
-	b.SetCreatedAt(req.CreatedAt)
 	// Add all edges.
 	b.AddAdminIDs(req.Admins...)
 	b.AddMemberIDs(req.Members...)
@@ -108,24 +102,6 @@ func (h *OgentHandler) UpdateGroup(ctx context.Context, req UpdateGroupReq, para
 	// Add all fields.
 	if v, ok := req.Name.Get(); ok {
 		b.SetName(v)
-	}
-	if v, ok := req.Description.Get(); ok {
-		b.SetDescription(v)
-	}
-	if v, ok := req.URL.Get(); ok {
-		b.SetURL(v)
-	}
-	if v, ok := req.Thumbnail.Get(); ok {
-		b.SetThumbnail(v)
-	}
-	if v, ok := req.Views.Get(); ok {
-		b.SetViews(v)
-	}
-	if v, ok := req.Subscribers.Get(); ok {
-		b.SetSubscribers(v)
-	}
-	if v, ok := req.CreatedAt.Get(); ok {
-		b.SetCreatedAt(v)
 	}
 	// Add all edges.
 	b.ClearAdmins().AddAdminIDs(req.Admins...)
@@ -399,7 +375,6 @@ func (h *OgentHandler) CreateUser(ctx context.Context, req CreateUserReq) (Creat
 	b := h.client.User.Create()
 	// Add all fields.
 	b.SetName(req.Name)
-	b.SetUUID(req.UUID)
 	b.SetPassword(req.Password)
 	// Add all edges.
 	b.AddJoinedGroupIDs(req.JoinedGroups...)
@@ -473,9 +448,6 @@ func (h *OgentHandler) UpdateUser(ctx context.Context, req UpdateUserReq, params
 	// Add all fields.
 	if v, ok := req.Name.Get(); ok {
 		b.SetName(v)
-	}
-	if v, ok := req.UUID.Get(); ok {
-		b.SetUUID(v)
 	}
 	if v, ok := req.Password.Get(); ok {
 		b.SetPassword(v)
@@ -856,11 +828,8 @@ func (h *OgentHandler) ListUserModeratedVideos(ctx context.Context, params ListU
 func (h *OgentHandler) CreateVideo(ctx context.Context, req CreateVideoReq) (CreateVideoRes, error) {
 	b := h.client.Video.Create()
 	// Add all fields.
-	b.SetUUID(req.UUID)
 	b.SetTitle(req.Title)
-	b.SetDescription(req.Description)
 	b.SetVideotype(req.Videotype)
-	b.SetCreatedAt(req.CreatedAt)
 	// Add all edges.
 	if v, ok := req.Group.Get(); ok {
 		b.SetGroupID(v)
@@ -930,20 +899,11 @@ func (h *OgentHandler) ReadVideo(ctx context.Context, params ReadVideoParams) (R
 func (h *OgentHandler) UpdateVideo(ctx context.Context, req UpdateVideoReq, params UpdateVideoParams) (UpdateVideoRes, error) {
 	b := h.client.Video.UpdateOneID(params.ID)
 	// Add all fields.
-	if v, ok := req.UUID.Get(); ok {
-		b.SetUUID(v)
-	}
 	if v, ok := req.Title.Get(); ok {
 		b.SetTitle(v)
 	}
-	if v, ok := req.Description.Get(); ok {
-		b.SetDescription(v)
-	}
 	if v, ok := req.Videotype.Get(); ok {
 		b.SetVideotype(v)
-	}
-	if v, ok := req.CreatedAt.Get(); ok {
-		b.SetCreatedAt(v)
 	}
 	// Add all edges.
 	if v, ok := req.Group.Get(); ok {

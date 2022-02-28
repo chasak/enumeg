@@ -87,42 +87,6 @@ func (s CreateGroupReq) Encode(e *jx.Writer) {
 		e.Str(s.Name)
 	}
 	{
-		e.Comma()
-
-		e.RawStr("\"description\"" + ":")
-		e.Str(s.Description)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"url\"" + ":")
-		e.Str(s.URL)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"thumbnail\"" + ":")
-		e.Str(s.Thumbnail)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"views\"" + ":")
-		e.Int(s.Views)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"subscribers\"" + ":")
-		e.Int(s.Subscribers)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"created_at\"" + ":")
-		json.EncodeDateTime(e, s.CreatedAt)
-	}
-	{
 		if s.Admins != nil {
 			e.Comma()
 		}
@@ -230,19 +194,13 @@ func (s CreateGroupReq) Encode(e *jx.Writer) {
 	e.ObjEnd()
 }
 
-var jsonFieldsNameOfCreateGroupReq = [12]string{
-	0:  "name",
-	1:  "description",
-	2:  "url",
-	3:  "thumbnail",
-	4:  "views",
-	5:  "subscribers",
-	6:  "created_at",
-	7:  "admins",
-	8:  "members",
-	9:  "videos",
-	10: "moderators",
-	11: "streamers",
+var jsonFieldsNameOfCreateGroupReq = [6]string{
+	0: "name",
+	1: "admins",
+	2: "members",
+	3: "videos",
+	4: "moderators",
+	5: "streamers",
 }
 
 // Decode decodes CreateGroupReq from json.
@@ -250,7 +208,7 @@ func (s *CreateGroupReq) Decode(d *jx.Decoder) error {
 	if s == nil {
 		return errors.New("invalid: unable to decode CreateGroupReq to nil")
 	}
-	var requiredBitSet [2]uint8
+	var requiredBitSet [1]uint8
 
 	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
 		switch string(k) {
@@ -265,78 +223,6 @@ func (s *CreateGroupReq) Decode(d *jx.Decoder) error {
 				return nil
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"name\"")
-			}
-		case "description":
-			requiredBitSet[0] |= 1 << 1
-			if err := func() error {
-				v, err := d.Str()
-				s.Description = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"description\"")
-			}
-		case "url":
-			requiredBitSet[0] |= 1 << 2
-			if err := func() error {
-				v, err := d.Str()
-				s.URL = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"url\"")
-			}
-		case "thumbnail":
-			requiredBitSet[0] |= 1 << 3
-			if err := func() error {
-				v, err := d.Str()
-				s.Thumbnail = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"thumbnail\"")
-			}
-		case "views":
-			requiredBitSet[0] |= 1 << 4
-			if err := func() error {
-				v, err := d.Int()
-				s.Views = int(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"views\"")
-			}
-		case "subscribers":
-			requiredBitSet[0] |= 1 << 5
-			if err := func() error {
-				v, err := d.Int()
-				s.Subscribers = int(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"subscribers\"")
-			}
-		case "created_at":
-			requiredBitSet[0] |= 1 << 6
-			if err := func() error {
-				v, err := json.DecodeDateTime(d)
-				s.CreatedAt = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"created_at\"")
 			}
 		case "admins":
 			if err := func() error {
@@ -442,9 +328,8 @@ func (s *CreateGroupReq) Decode(d *jx.Decoder) error {
 	}
 	// Validate required fields.
 	var failures []validate.FieldError
-	for i, mask := range [2]uint8{
-		0b01111111,
-		0b00000000,
+	for i, mask := range [1]uint8{
+		0b00000001,
 	} {
 		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
 			// Mask only required fields and check equality to mask using XOR.
@@ -492,12 +377,6 @@ func (s CreateUserReq) Encode(e *jx.Writer) {
 
 		e.RawStr("\"name\"" + ":")
 		e.Str(s.Name)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"uuid\"" + ":")
-		json.EncodeUUID(e, s.UUID)
 	}
 	{
 		e.Comma()
@@ -676,18 +555,17 @@ func (s CreateUserReq) Encode(e *jx.Writer) {
 	e.ObjEnd()
 }
 
-var jsonFieldsNameOfCreateUserReq = [11]string{
-	0:  "name",
-	1:  "uuid",
-	2:  "password",
-	3:  "joined_groups",
-	4:  "moderating_groups",
-	5:  "streaming_groups",
-	6:  "admin_groups",
-	7:  "stream_videos",
-	8:  "liked_videos",
-	9:  "viewed_videos",
-	10: "moderated_videos",
+var jsonFieldsNameOfCreateUserReq = [10]string{
+	0: "name",
+	1: "password",
+	2: "joined_groups",
+	3: "moderating_groups",
+	4: "streaming_groups",
+	5: "admin_groups",
+	6: "stream_videos",
+	7: "liked_videos",
+	8: "viewed_videos",
+	9: "moderated_videos",
 }
 
 // Decode decodes CreateUserReq from json.
@@ -711,20 +589,8 @@ func (s *CreateUserReq) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"name\"")
 			}
-		case "uuid":
-			requiredBitSet[0] |= 1 << 1
-			if err := func() error {
-				v, err := json.DecodeUUID(d)
-				s.UUID = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"uuid\"")
-			}
 		case "password":
-			requiredBitSet[0] |= 1 << 2
+			requiredBitSet[0] |= 1 << 1
 			if err := func() error {
 				v, err := d.Str()
 				s.Password = string(v)
@@ -897,7 +763,7 @@ func (s *CreateUserReq) Decode(d *jx.Decoder) error {
 	// Validate required fields.
 	var failures []validate.FieldError
 	for i, mask := range [2]uint8{
-		0b00000111,
+		0b00000011,
 		0b00000000,
 	} {
 		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
@@ -944,32 +810,14 @@ func (s CreateVideoReq) Encode(e *jx.Writer) {
 		}
 		first = false
 
-		e.RawStr("\"uuid\"" + ":")
-		json.EncodeUUID(e, s.UUID)
-	}
-	{
-		e.Comma()
-
 		e.RawStr("\"title\"" + ":")
 		e.Str(s.Title)
 	}
 	{
 		e.Comma()
 
-		e.RawStr("\"description\"" + ":")
-		e.Str(s.Description)
-	}
-	{
-		e.Comma()
-
 		e.RawStr("\"videotype\"" + ":")
 		s.Videotype.Encode(e)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"created_at\"" + ":")
-		json.EncodeDateTime(e, s.CreatedAt)
 	}
 	{
 		if s.Group.Set {
@@ -1067,17 +915,14 @@ func (s CreateVideoReq) Encode(e *jx.Writer) {
 	e.ObjEnd()
 }
 
-var jsonFieldsNameOfCreateVideoReq = [10]string{
-	0: "uuid",
-	1: "title",
-	2: "description",
-	3: "videotype",
-	4: "created_at",
-	5: "group",
-	6: "streamers",
-	7: "moderaters",
-	8: "likes",
-	9: "viewers",
+var jsonFieldsNameOfCreateVideoReq = [7]string{
+	0: "title",
+	1: "videotype",
+	2: "group",
+	3: "streamers",
+	4: "moderaters",
+	5: "likes",
+	6: "viewers",
 }
 
 // Decode decodes CreateVideoReq from json.
@@ -1085,24 +930,12 @@ func (s *CreateVideoReq) Decode(d *jx.Decoder) error {
 	if s == nil {
 		return errors.New("invalid: unable to decode CreateVideoReq to nil")
 	}
-	var requiredBitSet [2]uint8
+	var requiredBitSet [1]uint8
 
 	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
 		switch string(k) {
-		case "uuid":
-			requiredBitSet[0] |= 1 << 0
-			if err := func() error {
-				v, err := json.DecodeUUID(d)
-				s.UUID = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"uuid\"")
-			}
 		case "title":
-			requiredBitSet[0] |= 1 << 1
+			requiredBitSet[0] |= 1 << 0
 			if err := func() error {
 				v, err := d.Str()
 				s.Title = string(v)
@@ -1113,20 +946,8 @@ func (s *CreateVideoReq) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"title\"")
 			}
-		case "description":
-			requiredBitSet[0] |= 1 << 2
-			if err := func() error {
-				v, err := d.Str()
-				s.Description = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"description\"")
-			}
 		case "videotype":
-			requiredBitSet[0] |= 1 << 3
+			requiredBitSet[0] |= 1 << 1
 			if err := func() error {
 				if err := s.Videotype.Decode(d); err != nil {
 					return err
@@ -1134,18 +955,6 @@ func (s *CreateVideoReq) Decode(d *jx.Decoder) error {
 				return nil
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"videotype\"")
-			}
-		case "created_at":
-			requiredBitSet[0] |= 1 << 4
-			if err := func() error {
-				v, err := json.DecodeDateTime(d)
-				s.CreatedAt = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"created_at\"")
 			}
 		case "group":
 			if err := func() error {
@@ -1242,9 +1051,8 @@ func (s *CreateVideoReq) Decode(d *jx.Decoder) error {
 	}
 	// Validate required fields.
 	var failures []validate.FieldError
-	for i, mask := range [2]uint8{
-		0b00011111,
-		0b00000000,
+	for i, mask := range [1]uint8{
+		0b00000011,
 	} {
 		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
 			// Mask only required fields and check equality to mask using XOR.
@@ -1331,23 +1139,16 @@ func (s GroupAdminsList) Encode(e *jx.Writer) {
 	{
 		e.Comma()
 
-		e.RawStr("\"uuid\"" + ":")
-		json.EncodeUUID(e, s.UUID)
-	}
-	{
-		e.Comma()
-
 		e.RawStr("\"password\"" + ":")
 		e.Str(s.Password)
 	}
 	e.ObjEnd()
 }
 
-var jsonFieldsNameOfGroupAdminsList = [4]string{
+var jsonFieldsNameOfGroupAdminsList = [3]string{
 	0: "id",
 	1: "name",
-	2: "uuid",
-	3: "password",
+	2: "password",
 }
 
 // Decode decodes GroupAdminsList from json.
@@ -1383,20 +1184,8 @@ func (s *GroupAdminsList) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"name\"")
 			}
-		case "uuid":
-			requiredBitSet[0] |= 1 << 2
-			if err := func() error {
-				v, err := json.DecodeUUID(d)
-				s.UUID = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"uuid\"")
-			}
 		case "password":
-			requiredBitSet[0] |= 1 << 3
+			requiredBitSet[0] |= 1 << 2
 			if err := func() error {
 				v, err := d.Str()
 				s.Password = string(v)
@@ -1417,7 +1206,7 @@ func (s *GroupAdminsList) Decode(d *jx.Decoder) error {
 	// Validate required fields.
 	var failures []validate.FieldError
 	for i, mask := range [1]uint8{
-		0b00001111,
+		0b00000111,
 	} {
 		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
 			// Mask only required fields and check equality to mask using XOR.
@@ -1472,54 +1261,12 @@ func (s GroupCreate) Encode(e *jx.Writer) {
 		e.RawStr("\"name\"" + ":")
 		e.Str(s.Name)
 	}
-	{
-		e.Comma()
-
-		e.RawStr("\"description\"" + ":")
-		e.Str(s.Description)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"url\"" + ":")
-		e.Str(s.URL)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"thumbnail\"" + ":")
-		e.Str(s.Thumbnail)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"views\"" + ":")
-		e.Int(s.Views)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"subscribers\"" + ":")
-		e.Int(s.Subscribers)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"created_at\"" + ":")
-		json.EncodeDateTime(e, s.CreatedAt)
-	}
 	e.ObjEnd()
 }
 
-var jsonFieldsNameOfGroupCreate = [8]string{
+var jsonFieldsNameOfGroupCreate = [2]string{
 	0: "id",
 	1: "name",
-	2: "description",
-	3: "url",
-	4: "thumbnail",
-	5: "views",
-	6: "subscribers",
-	7: "created_at",
 }
 
 // Decode decodes GroupCreate from json.
@@ -1555,78 +1302,6 @@ func (s *GroupCreate) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"name\"")
 			}
-		case "description":
-			requiredBitSet[0] |= 1 << 2
-			if err := func() error {
-				v, err := d.Str()
-				s.Description = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"description\"")
-			}
-		case "url":
-			requiredBitSet[0] |= 1 << 3
-			if err := func() error {
-				v, err := d.Str()
-				s.URL = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"url\"")
-			}
-		case "thumbnail":
-			requiredBitSet[0] |= 1 << 4
-			if err := func() error {
-				v, err := d.Str()
-				s.Thumbnail = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"thumbnail\"")
-			}
-		case "views":
-			requiredBitSet[0] |= 1 << 5
-			if err := func() error {
-				v, err := d.Int()
-				s.Views = int(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"views\"")
-			}
-		case "subscribers":
-			requiredBitSet[0] |= 1 << 6
-			if err := func() error {
-				v, err := d.Int()
-				s.Subscribers = int(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"subscribers\"")
-			}
-		case "created_at":
-			requiredBitSet[0] |= 1 << 7
-			if err := func() error {
-				v, err := json.DecodeDateTime(d)
-				s.CreatedAt = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"created_at\"")
-			}
 		default:
 			return d.Skip()
 		}
@@ -1637,7 +1312,7 @@ func (s *GroupCreate) Decode(d *jx.Decoder) error {
 	// Validate required fields.
 	var failures []validate.FieldError
 	for i, mask := range [1]uint8{
-		0b11111111,
+		0b00000011,
 	} {
 		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
 			// Mask only required fields and check equality to mask using XOR.
@@ -1692,54 +1367,12 @@ func (s GroupList) Encode(e *jx.Writer) {
 		e.RawStr("\"name\"" + ":")
 		e.Str(s.Name)
 	}
-	{
-		e.Comma()
-
-		e.RawStr("\"description\"" + ":")
-		e.Str(s.Description)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"url\"" + ":")
-		e.Str(s.URL)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"thumbnail\"" + ":")
-		e.Str(s.Thumbnail)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"views\"" + ":")
-		e.Int(s.Views)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"subscribers\"" + ":")
-		e.Int(s.Subscribers)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"created_at\"" + ":")
-		json.EncodeDateTime(e, s.CreatedAt)
-	}
 	e.ObjEnd()
 }
 
-var jsonFieldsNameOfGroupList = [8]string{
+var jsonFieldsNameOfGroupList = [2]string{
 	0: "id",
 	1: "name",
-	2: "description",
-	3: "url",
-	4: "thumbnail",
-	5: "views",
-	6: "subscribers",
-	7: "created_at",
 }
 
 // Decode decodes GroupList from json.
@@ -1775,78 +1408,6 @@ func (s *GroupList) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"name\"")
 			}
-		case "description":
-			requiredBitSet[0] |= 1 << 2
-			if err := func() error {
-				v, err := d.Str()
-				s.Description = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"description\"")
-			}
-		case "url":
-			requiredBitSet[0] |= 1 << 3
-			if err := func() error {
-				v, err := d.Str()
-				s.URL = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"url\"")
-			}
-		case "thumbnail":
-			requiredBitSet[0] |= 1 << 4
-			if err := func() error {
-				v, err := d.Str()
-				s.Thumbnail = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"thumbnail\"")
-			}
-		case "views":
-			requiredBitSet[0] |= 1 << 5
-			if err := func() error {
-				v, err := d.Int()
-				s.Views = int(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"views\"")
-			}
-		case "subscribers":
-			requiredBitSet[0] |= 1 << 6
-			if err := func() error {
-				v, err := d.Int()
-				s.Subscribers = int(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"subscribers\"")
-			}
-		case "created_at":
-			requiredBitSet[0] |= 1 << 7
-			if err := func() error {
-				v, err := json.DecodeDateTime(d)
-				s.CreatedAt = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"created_at\"")
-			}
 		default:
 			return d.Skip()
 		}
@@ -1857,7 +1418,7 @@ func (s *GroupList) Decode(d *jx.Decoder) error {
 	// Validate required fields.
 	var failures []validate.FieldError
 	for i, mask := range [1]uint8{
-		0b11111111,
+		0b00000011,
 	} {
 		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
 			// Mask only required fields and check equality to mask using XOR.
@@ -1915,23 +1476,16 @@ func (s GroupMembersList) Encode(e *jx.Writer) {
 	{
 		e.Comma()
 
-		e.RawStr("\"uuid\"" + ":")
-		json.EncodeUUID(e, s.UUID)
-	}
-	{
-		e.Comma()
-
 		e.RawStr("\"password\"" + ":")
 		e.Str(s.Password)
 	}
 	e.ObjEnd()
 }
 
-var jsonFieldsNameOfGroupMembersList = [4]string{
+var jsonFieldsNameOfGroupMembersList = [3]string{
 	0: "id",
 	1: "name",
-	2: "uuid",
-	3: "password",
+	2: "password",
 }
 
 // Decode decodes GroupMembersList from json.
@@ -1967,20 +1521,8 @@ func (s *GroupMembersList) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"name\"")
 			}
-		case "uuid":
-			requiredBitSet[0] |= 1 << 2
-			if err := func() error {
-				v, err := json.DecodeUUID(d)
-				s.UUID = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"uuid\"")
-			}
 		case "password":
-			requiredBitSet[0] |= 1 << 3
+			requiredBitSet[0] |= 1 << 2
 			if err := func() error {
 				v, err := d.Str()
 				s.Password = string(v)
@@ -2001,7 +1543,7 @@ func (s *GroupMembersList) Decode(d *jx.Decoder) error {
 	// Validate required fields.
 	var failures []validate.FieldError
 	for i, mask := range [1]uint8{
-		0b00001111,
+		0b00000111,
 	} {
 		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
 			// Mask only required fields and check equality to mask using XOR.
@@ -2059,23 +1601,16 @@ func (s GroupModeratorsList) Encode(e *jx.Writer) {
 	{
 		e.Comma()
 
-		e.RawStr("\"uuid\"" + ":")
-		json.EncodeUUID(e, s.UUID)
-	}
-	{
-		e.Comma()
-
 		e.RawStr("\"password\"" + ":")
 		e.Str(s.Password)
 	}
 	e.ObjEnd()
 }
 
-var jsonFieldsNameOfGroupModeratorsList = [4]string{
+var jsonFieldsNameOfGroupModeratorsList = [3]string{
 	0: "id",
 	1: "name",
-	2: "uuid",
-	3: "password",
+	2: "password",
 }
 
 // Decode decodes GroupModeratorsList from json.
@@ -2111,20 +1646,8 @@ func (s *GroupModeratorsList) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"name\"")
 			}
-		case "uuid":
-			requiredBitSet[0] |= 1 << 2
-			if err := func() error {
-				v, err := json.DecodeUUID(d)
-				s.UUID = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"uuid\"")
-			}
 		case "password":
-			requiredBitSet[0] |= 1 << 3
+			requiredBitSet[0] |= 1 << 2
 			if err := func() error {
 				v, err := d.Str()
 				s.Password = string(v)
@@ -2145,7 +1668,7 @@ func (s *GroupModeratorsList) Decode(d *jx.Decoder) error {
 	// Validate required fields.
 	var failures []validate.FieldError
 	for i, mask := range [1]uint8{
-		0b00001111,
+		0b00000111,
 	} {
 		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
 			// Mask only required fields and check equality to mask using XOR.
@@ -2200,54 +1723,12 @@ func (s GroupRead) Encode(e *jx.Writer) {
 		e.RawStr("\"name\"" + ":")
 		e.Str(s.Name)
 	}
-	{
-		e.Comma()
-
-		e.RawStr("\"description\"" + ":")
-		e.Str(s.Description)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"url\"" + ":")
-		e.Str(s.URL)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"thumbnail\"" + ":")
-		e.Str(s.Thumbnail)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"views\"" + ":")
-		e.Int(s.Views)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"subscribers\"" + ":")
-		e.Int(s.Subscribers)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"created_at\"" + ":")
-		json.EncodeDateTime(e, s.CreatedAt)
-	}
 	e.ObjEnd()
 }
 
-var jsonFieldsNameOfGroupRead = [8]string{
+var jsonFieldsNameOfGroupRead = [2]string{
 	0: "id",
 	1: "name",
-	2: "description",
-	3: "url",
-	4: "thumbnail",
-	5: "views",
-	6: "subscribers",
-	7: "created_at",
 }
 
 // Decode decodes GroupRead from json.
@@ -2283,78 +1764,6 @@ func (s *GroupRead) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"name\"")
 			}
-		case "description":
-			requiredBitSet[0] |= 1 << 2
-			if err := func() error {
-				v, err := d.Str()
-				s.Description = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"description\"")
-			}
-		case "url":
-			requiredBitSet[0] |= 1 << 3
-			if err := func() error {
-				v, err := d.Str()
-				s.URL = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"url\"")
-			}
-		case "thumbnail":
-			requiredBitSet[0] |= 1 << 4
-			if err := func() error {
-				v, err := d.Str()
-				s.Thumbnail = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"thumbnail\"")
-			}
-		case "views":
-			requiredBitSet[0] |= 1 << 5
-			if err := func() error {
-				v, err := d.Int()
-				s.Views = int(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"views\"")
-			}
-		case "subscribers":
-			requiredBitSet[0] |= 1 << 6
-			if err := func() error {
-				v, err := d.Int()
-				s.Subscribers = int(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"subscribers\"")
-			}
-		case "created_at":
-			requiredBitSet[0] |= 1 << 7
-			if err := func() error {
-				v, err := json.DecodeDateTime(d)
-				s.CreatedAt = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"created_at\"")
-			}
 		default:
 			return d.Skip()
 		}
@@ -2365,7 +1774,7 @@ func (s *GroupRead) Decode(d *jx.Decoder) error {
 	// Validate required fields.
 	var failures []validate.FieldError
 	for i, mask := range [1]uint8{
-		0b11111111,
+		0b00000011,
 	} {
 		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
 			// Mask only required fields and check equality to mask using XOR.
@@ -2423,23 +1832,16 @@ func (s GroupStreamersList) Encode(e *jx.Writer) {
 	{
 		e.Comma()
 
-		e.RawStr("\"uuid\"" + ":")
-		json.EncodeUUID(e, s.UUID)
-	}
-	{
-		e.Comma()
-
 		e.RawStr("\"password\"" + ":")
 		e.Str(s.Password)
 	}
 	e.ObjEnd()
 }
 
-var jsonFieldsNameOfGroupStreamersList = [4]string{
+var jsonFieldsNameOfGroupStreamersList = [3]string{
 	0: "id",
 	1: "name",
-	2: "uuid",
-	3: "password",
+	2: "password",
 }
 
 // Decode decodes GroupStreamersList from json.
@@ -2475,20 +1877,8 @@ func (s *GroupStreamersList) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"name\"")
 			}
-		case "uuid":
-			requiredBitSet[0] |= 1 << 2
-			if err := func() error {
-				v, err := json.DecodeUUID(d)
-				s.UUID = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"uuid\"")
-			}
 		case "password":
-			requiredBitSet[0] |= 1 << 3
+			requiredBitSet[0] |= 1 << 2
 			if err := func() error {
 				v, err := d.Str()
 				s.Password = string(v)
@@ -2509,7 +1899,7 @@ func (s *GroupStreamersList) Decode(d *jx.Decoder) error {
 	// Validate required fields.
 	var failures []validate.FieldError
 	for i, mask := range [1]uint8{
-		0b00001111,
+		0b00000111,
 	} {
 		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
 			// Mask only required fields and check equality to mask using XOR.
@@ -2564,54 +1954,12 @@ func (s GroupUpdate) Encode(e *jx.Writer) {
 		e.RawStr("\"name\"" + ":")
 		e.Str(s.Name)
 	}
-	{
-		e.Comma()
-
-		e.RawStr("\"description\"" + ":")
-		e.Str(s.Description)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"url\"" + ":")
-		e.Str(s.URL)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"thumbnail\"" + ":")
-		e.Str(s.Thumbnail)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"views\"" + ":")
-		e.Int(s.Views)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"subscribers\"" + ":")
-		e.Int(s.Subscribers)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"created_at\"" + ":")
-		json.EncodeDateTime(e, s.CreatedAt)
-	}
 	e.ObjEnd()
 }
 
-var jsonFieldsNameOfGroupUpdate = [8]string{
+var jsonFieldsNameOfGroupUpdate = [2]string{
 	0: "id",
 	1: "name",
-	2: "description",
-	3: "url",
-	4: "thumbnail",
-	5: "views",
-	6: "subscribers",
-	7: "created_at",
 }
 
 // Decode decodes GroupUpdate from json.
@@ -2647,78 +1995,6 @@ func (s *GroupUpdate) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"name\"")
 			}
-		case "description":
-			requiredBitSet[0] |= 1 << 2
-			if err := func() error {
-				v, err := d.Str()
-				s.Description = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"description\"")
-			}
-		case "url":
-			requiredBitSet[0] |= 1 << 3
-			if err := func() error {
-				v, err := d.Str()
-				s.URL = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"url\"")
-			}
-		case "thumbnail":
-			requiredBitSet[0] |= 1 << 4
-			if err := func() error {
-				v, err := d.Str()
-				s.Thumbnail = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"thumbnail\"")
-			}
-		case "views":
-			requiredBitSet[0] |= 1 << 5
-			if err := func() error {
-				v, err := d.Int()
-				s.Views = int(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"views\"")
-			}
-		case "subscribers":
-			requiredBitSet[0] |= 1 << 6
-			if err := func() error {
-				v, err := d.Int()
-				s.Subscribers = int(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"subscribers\"")
-			}
-		case "created_at":
-			requiredBitSet[0] |= 1 << 7
-			if err := func() error {
-				v, err := json.DecodeDateTime(d)
-				s.CreatedAt = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"created_at\"")
-			}
 		default:
 			return d.Skip()
 		}
@@ -2729,7 +2005,7 @@ func (s *GroupUpdate) Decode(d *jx.Decoder) error {
 	// Validate required fields.
 	var failures []validate.FieldError
 	for i, mask := range [1]uint8{
-		0b11111111,
+		0b00000011,
 	} {
 		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
 			// Mask only required fields and check equality to mask using XOR.
@@ -2781,20 +2057,8 @@ func (s GroupVideosList) Encode(e *jx.Writer) {
 	{
 		e.Comma()
 
-		e.RawStr("\"uuid\"" + ":")
-		json.EncodeUUID(e, s.UUID)
-	}
-	{
-		e.Comma()
-
 		e.RawStr("\"title\"" + ":")
 		e.Str(s.Title)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"description\"" + ":")
-		e.Str(s.Description)
 	}
 	{
 		e.Comma()
@@ -2802,22 +2066,13 @@ func (s GroupVideosList) Encode(e *jx.Writer) {
 		e.RawStr("\"videotype\"" + ":")
 		s.Videotype.Encode(e)
 	}
-	{
-		e.Comma()
-
-		e.RawStr("\"created_at\"" + ":")
-		json.EncodeDateTime(e, s.CreatedAt)
-	}
 	e.ObjEnd()
 }
 
-var jsonFieldsNameOfGroupVideosList = [6]string{
+var jsonFieldsNameOfGroupVideosList = [3]string{
 	0: "id",
-	1: "uuid",
-	2: "title",
-	3: "description",
-	4: "videotype",
-	5: "created_at",
+	1: "title",
+	2: "videotype",
 }
 
 // Decode decodes GroupVideosList from json.
@@ -2841,20 +2096,8 @@ func (s *GroupVideosList) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"id\"")
 			}
-		case "uuid":
-			requiredBitSet[0] |= 1 << 1
-			if err := func() error {
-				v, err := json.DecodeUUID(d)
-				s.UUID = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"uuid\"")
-			}
 		case "title":
-			requiredBitSet[0] |= 1 << 2
+			requiredBitSet[0] |= 1 << 1
 			if err := func() error {
 				v, err := d.Str()
 				s.Title = string(v)
@@ -2865,20 +2108,8 @@ func (s *GroupVideosList) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"title\"")
 			}
-		case "description":
-			requiredBitSet[0] |= 1 << 3
-			if err := func() error {
-				v, err := d.Str()
-				s.Description = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"description\"")
-			}
 		case "videotype":
-			requiredBitSet[0] |= 1 << 4
+			requiredBitSet[0] |= 1 << 2
 			if err := func() error {
 				if err := s.Videotype.Decode(d); err != nil {
 					return err
@@ -2886,18 +2117,6 @@ func (s *GroupVideosList) Decode(d *jx.Decoder) error {
 				return nil
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"videotype\"")
-			}
-		case "created_at":
-			requiredBitSet[0] |= 1 << 5
-			if err := func() error {
-				v, err := json.DecodeDateTime(d)
-				s.CreatedAt = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"created_at\"")
 			}
 		default:
 			return d.Skip()
@@ -2909,7 +2128,7 @@ func (s *GroupVideosList) Decode(d *jx.Decoder) error {
 	// Validate required fields.
 	var failures []validate.FieldError
 	for i, mask := range [1]uint8{
-		0b00111111,
+		0b00000111,
 	} {
 		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
 			// Mask only required fields and check equality to mask using XOR.
@@ -3851,28 +3070,6 @@ func (s *ListVideoViewersOKApplicationJSON) Decode(d *jx.Decoder) error {
 	return nil
 }
 
-// Encode encodes time.Time as json.
-func (o OptDateTime) Encode(e *jx.Writer, format func(*jx.Writer, time.Time)) {
-	if !o.Set {
-		return
-	}
-	format(e, o.Value)
-}
-
-// Decode decodes time.Time from json.
-func (o *OptDateTime) Decode(d *jx.Decoder, format func(*jx.Decoder) (time.Time, error)) error {
-	if o == nil {
-		return errors.New("invalid: unable to decode OptDateTime to nil")
-	}
-	o.Set = true
-	v, err := format(d)
-	if err != nil {
-		return err
-	}
-	o.Value = v
-	return nil
-}
-
 // Encode encodes int as json.
 func (o OptInt) Encode(e *jx.Writer) {
 	if !o.Set {
@@ -3914,28 +3111,6 @@ func (o *OptString) Decode(d *jx.Decoder) error {
 		return err
 	}
 	o.Value = string(v)
-	return nil
-}
-
-// Encode encodes uuid.UUID as json.
-func (o OptUUID) Encode(e *jx.Writer) {
-	if !o.Set {
-		return
-	}
-	json.EncodeUUID(e, o.Value)
-}
-
-// Decode decodes uuid.UUID from json.
-func (o *OptUUID) Decode(d *jx.Decoder) error {
-	if o == nil {
-		return errors.New("invalid: unable to decode OptUUID to nil")
-	}
-	o.Set = true
-	v, err := json.DecodeUUID(d)
-	if err != nil {
-		return err
-	}
-	o.Value = v
 	return nil
 }
 
@@ -4491,78 +3666,6 @@ func (s UpdateGroupReq) Encode(e *jx.Writer) {
 		}
 	}
 	{
-		if s.Description.Set {
-			if !first {
-				e.Comma()
-			}
-			first = false
-		}
-		if s.Description.Set {
-			e.RawStr("\"description\"" + ":")
-			s.Description.Encode(e)
-		}
-	}
-	{
-		if s.URL.Set {
-			if !first {
-				e.Comma()
-			}
-			first = false
-		}
-		if s.URL.Set {
-			e.RawStr("\"url\"" + ":")
-			s.URL.Encode(e)
-		}
-	}
-	{
-		if s.Thumbnail.Set {
-			if !first {
-				e.Comma()
-			}
-			first = false
-		}
-		if s.Thumbnail.Set {
-			e.RawStr("\"thumbnail\"" + ":")
-			s.Thumbnail.Encode(e)
-		}
-	}
-	{
-		if s.Views.Set {
-			if !first {
-				e.Comma()
-			}
-			first = false
-		}
-		if s.Views.Set {
-			e.RawStr("\"views\"" + ":")
-			s.Views.Encode(e)
-		}
-	}
-	{
-		if s.Subscribers.Set {
-			if !first {
-				e.Comma()
-			}
-			first = false
-		}
-		if s.Subscribers.Set {
-			e.RawStr("\"subscribers\"" + ":")
-			s.Subscribers.Encode(e)
-		}
-	}
-	{
-		if s.CreatedAt.Set {
-			if !first {
-				e.Comma()
-			}
-			first = false
-		}
-		if s.CreatedAt.Set {
-			e.RawStr("\"created_at\"" + ":")
-			s.CreatedAt.Encode(e, json.EncodeDateTime)
-		}
-	}
-	{
 		if s.Admins != nil {
 			if !first {
 				e.Comma()
@@ -4685,19 +3788,13 @@ func (s UpdateGroupReq) Encode(e *jx.Writer) {
 	e.ObjEnd()
 }
 
-var jsonFieldsNameOfUpdateGroupReq = [12]string{
-	0:  "name",
-	1:  "description",
-	2:  "url",
-	3:  "thumbnail",
-	4:  "views",
-	5:  "subscribers",
-	6:  "created_at",
-	7:  "admins",
-	8:  "members",
-	9:  "videos",
-	10: "moderators",
-	11: "streamers",
+var jsonFieldsNameOfUpdateGroupReq = [6]string{
+	0: "name",
+	1: "admins",
+	2: "members",
+	3: "videos",
+	4: "moderators",
+	5: "streamers",
 }
 
 // Decode decodes UpdateGroupReq from json.
@@ -4717,66 +3814,6 @@ func (s *UpdateGroupReq) Decode(d *jx.Decoder) error {
 				return nil
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"name\"")
-			}
-		case "description":
-			if err := func() error {
-				s.Description.Reset()
-				if err := s.Description.Decode(d); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"description\"")
-			}
-		case "url":
-			if err := func() error {
-				s.URL.Reset()
-				if err := s.URL.Decode(d); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"url\"")
-			}
-		case "thumbnail":
-			if err := func() error {
-				s.Thumbnail.Reset()
-				if err := s.Thumbnail.Decode(d); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"thumbnail\"")
-			}
-		case "views":
-			if err := func() error {
-				s.Views.Reset()
-				if err := s.Views.Decode(d); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"views\"")
-			}
-		case "subscribers":
-			if err := func() error {
-				s.Subscribers.Reset()
-				if err := s.Subscribers.Decode(d); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"subscribers\"")
-			}
-		case "created_at":
-			if err := func() error {
-				s.CreatedAt.Reset()
-				if err := s.CreatedAt.Decode(d, json.DecodeDateTime); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"created_at\"")
 			}
 		case "admins":
 			if err := func() error {
@@ -4901,18 +3938,6 @@ func (s UpdateUserReq) Encode(e *jx.Writer) {
 		if s.Name.Set {
 			e.RawStr("\"name\"" + ":")
 			s.Name.Encode(e)
-		}
-	}
-	{
-		if s.UUID.Set {
-			if !first {
-				e.Comma()
-			}
-			first = false
-		}
-		if s.UUID.Set {
-			e.RawStr("\"uuid\"" + ":")
-			s.UUID.Encode(e)
 		}
 	}
 	{
@@ -5122,18 +4147,17 @@ func (s UpdateUserReq) Encode(e *jx.Writer) {
 	e.ObjEnd()
 }
 
-var jsonFieldsNameOfUpdateUserReq = [11]string{
-	0:  "name",
-	1:  "uuid",
-	2:  "password",
-	3:  "joined_groups",
-	4:  "moderating_groups",
-	5:  "streaming_groups",
-	6:  "admin_groups",
-	7:  "stream_videos",
-	8:  "liked_videos",
-	9:  "viewed_videos",
-	10: "moderated_videos",
+var jsonFieldsNameOfUpdateUserReq = [10]string{
+	0: "name",
+	1: "password",
+	2: "joined_groups",
+	3: "moderating_groups",
+	4: "streaming_groups",
+	5: "admin_groups",
+	6: "stream_videos",
+	7: "liked_videos",
+	8: "viewed_videos",
+	9: "moderated_videos",
 }
 
 // Decode decodes UpdateUserReq from json.
@@ -5153,16 +4177,6 @@ func (s *UpdateUserReq) Decode(d *jx.Decoder) error {
 				return nil
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"name\"")
-			}
-		case "uuid":
-			if err := func() error {
-				s.UUID.Reset()
-				if err := s.UUID.Decode(d); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"uuid\"")
 			}
 		case "password":
 			if err := func() error {
@@ -5345,18 +4359,6 @@ func (s UpdateVideoReq) Encode(e *jx.Writer) {
 		_     = first
 	)
 	{
-		if s.UUID.Set {
-			if !first {
-				e.Comma()
-			}
-			first = false
-		}
-		if s.UUID.Set {
-			e.RawStr("\"uuid\"" + ":")
-			s.UUID.Encode(e)
-		}
-	}
-	{
 		if s.Title.Set {
 			if !first {
 				e.Comma()
@@ -5369,18 +4371,6 @@ func (s UpdateVideoReq) Encode(e *jx.Writer) {
 		}
 	}
 	{
-		if s.Description.Set {
-			if !first {
-				e.Comma()
-			}
-			first = false
-		}
-		if s.Description.Set {
-			e.RawStr("\"description\"" + ":")
-			s.Description.Encode(e)
-		}
-	}
-	{
 		if s.Videotype.Set {
 			if !first {
 				e.Comma()
@@ -5390,18 +4380,6 @@ func (s UpdateVideoReq) Encode(e *jx.Writer) {
 		if s.Videotype.Set {
 			e.RawStr("\"videotype\"" + ":")
 			s.Videotype.Encode(e)
-		}
-	}
-	{
-		if s.CreatedAt.Set {
-			if !first {
-				e.Comma()
-			}
-			first = false
-		}
-		if s.CreatedAt.Set {
-			e.RawStr("\"created_at\"" + ":")
-			s.CreatedAt.Encode(e, json.EncodeDateTime)
 		}
 	}
 	{
@@ -5515,17 +4493,14 @@ func (s UpdateVideoReq) Encode(e *jx.Writer) {
 	e.ObjEnd()
 }
 
-var jsonFieldsNameOfUpdateVideoReq = [10]string{
-	0: "uuid",
-	1: "title",
-	2: "description",
-	3: "videotype",
-	4: "created_at",
-	5: "group",
-	6: "streamers",
-	7: "moderaters",
-	8: "likes",
-	9: "viewers",
+var jsonFieldsNameOfUpdateVideoReq = [7]string{
+	0: "title",
+	1: "videotype",
+	2: "group",
+	3: "streamers",
+	4: "moderaters",
+	5: "likes",
+	6: "viewers",
 }
 
 // Decode decodes UpdateVideoReq from json.
@@ -5536,16 +4511,6 @@ func (s *UpdateVideoReq) Decode(d *jx.Decoder) error {
 
 	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
 		switch string(k) {
-		case "uuid":
-			if err := func() error {
-				s.UUID.Reset()
-				if err := s.UUID.Decode(d); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"uuid\"")
-			}
 		case "title":
 			if err := func() error {
 				s.Title.Reset()
@@ -5556,16 +4521,6 @@ func (s *UpdateVideoReq) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"title\"")
 			}
-		case "description":
-			if err := func() error {
-				s.Description.Reset()
-				if err := s.Description.Decode(d); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"description\"")
-			}
 		case "videotype":
 			if err := func() error {
 				s.Videotype.Reset()
@@ -5575,16 +4530,6 @@ func (s *UpdateVideoReq) Decode(d *jx.Decoder) error {
 				return nil
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"videotype\"")
-			}
-		case "created_at":
-			if err := func() error {
-				s.CreatedAt.Reset()
-				if err := s.CreatedAt.Decode(d, json.DecodeDateTime); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"created_at\"")
 			}
 		case "group":
 			if err := func() error {
@@ -5734,54 +4679,12 @@ func (s UserAdminGroupsList) Encode(e *jx.Writer) {
 		e.RawStr("\"name\"" + ":")
 		e.Str(s.Name)
 	}
-	{
-		e.Comma()
-
-		e.RawStr("\"description\"" + ":")
-		e.Str(s.Description)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"url\"" + ":")
-		e.Str(s.URL)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"thumbnail\"" + ":")
-		e.Str(s.Thumbnail)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"views\"" + ":")
-		e.Int(s.Views)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"subscribers\"" + ":")
-		e.Int(s.Subscribers)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"created_at\"" + ":")
-		json.EncodeDateTime(e, s.CreatedAt)
-	}
 	e.ObjEnd()
 }
 
-var jsonFieldsNameOfUserAdminGroupsList = [8]string{
+var jsonFieldsNameOfUserAdminGroupsList = [2]string{
 	0: "id",
 	1: "name",
-	2: "description",
-	3: "url",
-	4: "thumbnail",
-	5: "views",
-	6: "subscribers",
-	7: "created_at",
 }
 
 // Decode decodes UserAdminGroupsList from json.
@@ -5817,78 +4720,6 @@ func (s *UserAdminGroupsList) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"name\"")
 			}
-		case "description":
-			requiredBitSet[0] |= 1 << 2
-			if err := func() error {
-				v, err := d.Str()
-				s.Description = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"description\"")
-			}
-		case "url":
-			requiredBitSet[0] |= 1 << 3
-			if err := func() error {
-				v, err := d.Str()
-				s.URL = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"url\"")
-			}
-		case "thumbnail":
-			requiredBitSet[0] |= 1 << 4
-			if err := func() error {
-				v, err := d.Str()
-				s.Thumbnail = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"thumbnail\"")
-			}
-		case "views":
-			requiredBitSet[0] |= 1 << 5
-			if err := func() error {
-				v, err := d.Int()
-				s.Views = int(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"views\"")
-			}
-		case "subscribers":
-			requiredBitSet[0] |= 1 << 6
-			if err := func() error {
-				v, err := d.Int()
-				s.Subscribers = int(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"subscribers\"")
-			}
-		case "created_at":
-			requiredBitSet[0] |= 1 << 7
-			if err := func() error {
-				v, err := json.DecodeDateTime(d)
-				s.CreatedAt = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"created_at\"")
-			}
 		default:
 			return d.Skip()
 		}
@@ -5899,7 +4730,7 @@ func (s *UserAdminGroupsList) Decode(d *jx.Decoder) error {
 	// Validate required fields.
 	var failures []validate.FieldError
 	for i, mask := range [1]uint8{
-		0b11111111,
+		0b00000011,
 	} {
 		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
 			// Mask only required fields and check equality to mask using XOR.
@@ -5957,23 +4788,16 @@ func (s UserCreate) Encode(e *jx.Writer) {
 	{
 		e.Comma()
 
-		e.RawStr("\"uuid\"" + ":")
-		json.EncodeUUID(e, s.UUID)
-	}
-	{
-		e.Comma()
-
 		e.RawStr("\"password\"" + ":")
 		e.Str(s.Password)
 	}
 	e.ObjEnd()
 }
 
-var jsonFieldsNameOfUserCreate = [4]string{
+var jsonFieldsNameOfUserCreate = [3]string{
 	0: "id",
 	1: "name",
-	2: "uuid",
-	3: "password",
+	2: "password",
 }
 
 // Decode decodes UserCreate from json.
@@ -6009,20 +4833,8 @@ func (s *UserCreate) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"name\"")
 			}
-		case "uuid":
-			requiredBitSet[0] |= 1 << 2
-			if err := func() error {
-				v, err := json.DecodeUUID(d)
-				s.UUID = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"uuid\"")
-			}
 		case "password":
-			requiredBitSet[0] |= 1 << 3
+			requiredBitSet[0] |= 1 << 2
 			if err := func() error {
 				v, err := d.Str()
 				s.Password = string(v)
@@ -6043,7 +4855,7 @@ func (s *UserCreate) Decode(d *jx.Decoder) error {
 	// Validate required fields.
 	var failures []validate.FieldError
 	for i, mask := range [1]uint8{
-		0b00001111,
+		0b00000111,
 	} {
 		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
 			// Mask only required fields and check equality to mask using XOR.
@@ -6098,54 +4910,12 @@ func (s UserJoinedGroupsList) Encode(e *jx.Writer) {
 		e.RawStr("\"name\"" + ":")
 		e.Str(s.Name)
 	}
-	{
-		e.Comma()
-
-		e.RawStr("\"description\"" + ":")
-		e.Str(s.Description)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"url\"" + ":")
-		e.Str(s.URL)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"thumbnail\"" + ":")
-		e.Str(s.Thumbnail)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"views\"" + ":")
-		e.Int(s.Views)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"subscribers\"" + ":")
-		e.Int(s.Subscribers)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"created_at\"" + ":")
-		json.EncodeDateTime(e, s.CreatedAt)
-	}
 	e.ObjEnd()
 }
 
-var jsonFieldsNameOfUserJoinedGroupsList = [8]string{
+var jsonFieldsNameOfUserJoinedGroupsList = [2]string{
 	0: "id",
 	1: "name",
-	2: "description",
-	3: "url",
-	4: "thumbnail",
-	5: "views",
-	6: "subscribers",
-	7: "created_at",
 }
 
 // Decode decodes UserJoinedGroupsList from json.
@@ -6181,78 +4951,6 @@ func (s *UserJoinedGroupsList) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"name\"")
 			}
-		case "description":
-			requiredBitSet[0] |= 1 << 2
-			if err := func() error {
-				v, err := d.Str()
-				s.Description = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"description\"")
-			}
-		case "url":
-			requiredBitSet[0] |= 1 << 3
-			if err := func() error {
-				v, err := d.Str()
-				s.URL = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"url\"")
-			}
-		case "thumbnail":
-			requiredBitSet[0] |= 1 << 4
-			if err := func() error {
-				v, err := d.Str()
-				s.Thumbnail = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"thumbnail\"")
-			}
-		case "views":
-			requiredBitSet[0] |= 1 << 5
-			if err := func() error {
-				v, err := d.Int()
-				s.Views = int(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"views\"")
-			}
-		case "subscribers":
-			requiredBitSet[0] |= 1 << 6
-			if err := func() error {
-				v, err := d.Int()
-				s.Subscribers = int(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"subscribers\"")
-			}
-		case "created_at":
-			requiredBitSet[0] |= 1 << 7
-			if err := func() error {
-				v, err := json.DecodeDateTime(d)
-				s.CreatedAt = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"created_at\"")
-			}
 		default:
 			return d.Skip()
 		}
@@ -6263,7 +4961,7 @@ func (s *UserJoinedGroupsList) Decode(d *jx.Decoder) error {
 	// Validate required fields.
 	var failures []validate.FieldError
 	for i, mask := range [1]uint8{
-		0b11111111,
+		0b00000011,
 	} {
 		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
 			// Mask only required fields and check equality to mask using XOR.
@@ -6315,20 +5013,8 @@ func (s UserLikedVideosList) Encode(e *jx.Writer) {
 	{
 		e.Comma()
 
-		e.RawStr("\"uuid\"" + ":")
-		json.EncodeUUID(e, s.UUID)
-	}
-	{
-		e.Comma()
-
 		e.RawStr("\"title\"" + ":")
 		e.Str(s.Title)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"description\"" + ":")
-		e.Str(s.Description)
 	}
 	{
 		e.Comma()
@@ -6336,22 +5022,13 @@ func (s UserLikedVideosList) Encode(e *jx.Writer) {
 		e.RawStr("\"videotype\"" + ":")
 		s.Videotype.Encode(e)
 	}
-	{
-		e.Comma()
-
-		e.RawStr("\"created_at\"" + ":")
-		json.EncodeDateTime(e, s.CreatedAt)
-	}
 	e.ObjEnd()
 }
 
-var jsonFieldsNameOfUserLikedVideosList = [6]string{
+var jsonFieldsNameOfUserLikedVideosList = [3]string{
 	0: "id",
-	1: "uuid",
-	2: "title",
-	3: "description",
-	4: "videotype",
-	5: "created_at",
+	1: "title",
+	2: "videotype",
 }
 
 // Decode decodes UserLikedVideosList from json.
@@ -6375,20 +5052,8 @@ func (s *UserLikedVideosList) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"id\"")
 			}
-		case "uuid":
-			requiredBitSet[0] |= 1 << 1
-			if err := func() error {
-				v, err := json.DecodeUUID(d)
-				s.UUID = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"uuid\"")
-			}
 		case "title":
-			requiredBitSet[0] |= 1 << 2
+			requiredBitSet[0] |= 1 << 1
 			if err := func() error {
 				v, err := d.Str()
 				s.Title = string(v)
@@ -6399,20 +5064,8 @@ func (s *UserLikedVideosList) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"title\"")
 			}
-		case "description":
-			requiredBitSet[0] |= 1 << 3
-			if err := func() error {
-				v, err := d.Str()
-				s.Description = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"description\"")
-			}
 		case "videotype":
-			requiredBitSet[0] |= 1 << 4
+			requiredBitSet[0] |= 1 << 2
 			if err := func() error {
 				if err := s.Videotype.Decode(d); err != nil {
 					return err
@@ -6420,18 +5073,6 @@ func (s *UserLikedVideosList) Decode(d *jx.Decoder) error {
 				return nil
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"videotype\"")
-			}
-		case "created_at":
-			requiredBitSet[0] |= 1 << 5
-			if err := func() error {
-				v, err := json.DecodeDateTime(d)
-				s.CreatedAt = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"created_at\"")
 			}
 		default:
 			return d.Skip()
@@ -6443,7 +5084,7 @@ func (s *UserLikedVideosList) Decode(d *jx.Decoder) error {
 	// Validate required fields.
 	var failures []validate.FieldError
 	for i, mask := range [1]uint8{
-		0b00111111,
+		0b00000111,
 	} {
 		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
 			// Mask only required fields and check equality to mask using XOR.
@@ -6530,23 +5171,16 @@ func (s UserList) Encode(e *jx.Writer) {
 	{
 		e.Comma()
 
-		e.RawStr("\"uuid\"" + ":")
-		json.EncodeUUID(e, s.UUID)
-	}
-	{
-		e.Comma()
-
 		e.RawStr("\"password\"" + ":")
 		e.Str(s.Password)
 	}
 	e.ObjEnd()
 }
 
-var jsonFieldsNameOfUserList = [4]string{
+var jsonFieldsNameOfUserList = [3]string{
 	0: "id",
 	1: "name",
-	2: "uuid",
-	3: "password",
+	2: "password",
 }
 
 // Decode decodes UserList from json.
@@ -6582,20 +5216,8 @@ func (s *UserList) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"name\"")
 			}
-		case "uuid":
-			requiredBitSet[0] |= 1 << 2
-			if err := func() error {
-				v, err := json.DecodeUUID(d)
-				s.UUID = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"uuid\"")
-			}
 		case "password":
-			requiredBitSet[0] |= 1 << 3
+			requiredBitSet[0] |= 1 << 2
 			if err := func() error {
 				v, err := d.Str()
 				s.Password = string(v)
@@ -6616,7 +5238,7 @@ func (s *UserList) Decode(d *jx.Decoder) error {
 	// Validate required fields.
 	var failures []validate.FieldError
 	for i, mask := range [1]uint8{
-		0b00001111,
+		0b00000111,
 	} {
 		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
 			// Mask only required fields and check equality to mask using XOR.
@@ -6668,20 +5290,8 @@ func (s UserModeratedVideosList) Encode(e *jx.Writer) {
 	{
 		e.Comma()
 
-		e.RawStr("\"uuid\"" + ":")
-		json.EncodeUUID(e, s.UUID)
-	}
-	{
-		e.Comma()
-
 		e.RawStr("\"title\"" + ":")
 		e.Str(s.Title)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"description\"" + ":")
-		e.Str(s.Description)
 	}
 	{
 		e.Comma()
@@ -6689,22 +5299,13 @@ func (s UserModeratedVideosList) Encode(e *jx.Writer) {
 		e.RawStr("\"videotype\"" + ":")
 		s.Videotype.Encode(e)
 	}
-	{
-		e.Comma()
-
-		e.RawStr("\"created_at\"" + ":")
-		json.EncodeDateTime(e, s.CreatedAt)
-	}
 	e.ObjEnd()
 }
 
-var jsonFieldsNameOfUserModeratedVideosList = [6]string{
+var jsonFieldsNameOfUserModeratedVideosList = [3]string{
 	0: "id",
-	1: "uuid",
-	2: "title",
-	3: "description",
-	4: "videotype",
-	5: "created_at",
+	1: "title",
+	2: "videotype",
 }
 
 // Decode decodes UserModeratedVideosList from json.
@@ -6728,20 +5329,8 @@ func (s *UserModeratedVideosList) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"id\"")
 			}
-		case "uuid":
-			requiredBitSet[0] |= 1 << 1
-			if err := func() error {
-				v, err := json.DecodeUUID(d)
-				s.UUID = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"uuid\"")
-			}
 		case "title":
-			requiredBitSet[0] |= 1 << 2
+			requiredBitSet[0] |= 1 << 1
 			if err := func() error {
 				v, err := d.Str()
 				s.Title = string(v)
@@ -6752,20 +5341,8 @@ func (s *UserModeratedVideosList) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"title\"")
 			}
-		case "description":
-			requiredBitSet[0] |= 1 << 3
-			if err := func() error {
-				v, err := d.Str()
-				s.Description = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"description\"")
-			}
 		case "videotype":
-			requiredBitSet[0] |= 1 << 4
+			requiredBitSet[0] |= 1 << 2
 			if err := func() error {
 				if err := s.Videotype.Decode(d); err != nil {
 					return err
@@ -6773,18 +5350,6 @@ func (s *UserModeratedVideosList) Decode(d *jx.Decoder) error {
 				return nil
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"videotype\"")
-			}
-		case "created_at":
-			requiredBitSet[0] |= 1 << 5
-			if err := func() error {
-				v, err := json.DecodeDateTime(d)
-				s.CreatedAt = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"created_at\"")
 			}
 		default:
 			return d.Skip()
@@ -6796,7 +5361,7 @@ func (s *UserModeratedVideosList) Decode(d *jx.Decoder) error {
 	// Validate required fields.
 	var failures []validate.FieldError
 	for i, mask := range [1]uint8{
-		0b00111111,
+		0b00000111,
 	} {
 		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
 			// Mask only required fields and check equality to mask using XOR.
@@ -6880,54 +5445,12 @@ func (s UserModeratingGroupsList) Encode(e *jx.Writer) {
 		e.RawStr("\"name\"" + ":")
 		e.Str(s.Name)
 	}
-	{
-		e.Comma()
-
-		e.RawStr("\"description\"" + ":")
-		e.Str(s.Description)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"url\"" + ":")
-		e.Str(s.URL)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"thumbnail\"" + ":")
-		e.Str(s.Thumbnail)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"views\"" + ":")
-		e.Int(s.Views)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"subscribers\"" + ":")
-		e.Int(s.Subscribers)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"created_at\"" + ":")
-		json.EncodeDateTime(e, s.CreatedAt)
-	}
 	e.ObjEnd()
 }
 
-var jsonFieldsNameOfUserModeratingGroupsList = [8]string{
+var jsonFieldsNameOfUserModeratingGroupsList = [2]string{
 	0: "id",
 	1: "name",
-	2: "description",
-	3: "url",
-	4: "thumbnail",
-	5: "views",
-	6: "subscribers",
-	7: "created_at",
 }
 
 // Decode decodes UserModeratingGroupsList from json.
@@ -6963,78 +5486,6 @@ func (s *UserModeratingGroupsList) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"name\"")
 			}
-		case "description":
-			requiredBitSet[0] |= 1 << 2
-			if err := func() error {
-				v, err := d.Str()
-				s.Description = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"description\"")
-			}
-		case "url":
-			requiredBitSet[0] |= 1 << 3
-			if err := func() error {
-				v, err := d.Str()
-				s.URL = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"url\"")
-			}
-		case "thumbnail":
-			requiredBitSet[0] |= 1 << 4
-			if err := func() error {
-				v, err := d.Str()
-				s.Thumbnail = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"thumbnail\"")
-			}
-		case "views":
-			requiredBitSet[0] |= 1 << 5
-			if err := func() error {
-				v, err := d.Int()
-				s.Views = int(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"views\"")
-			}
-		case "subscribers":
-			requiredBitSet[0] |= 1 << 6
-			if err := func() error {
-				v, err := d.Int()
-				s.Subscribers = int(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"subscribers\"")
-			}
-		case "created_at":
-			requiredBitSet[0] |= 1 << 7
-			if err := func() error {
-				v, err := json.DecodeDateTime(d)
-				s.CreatedAt = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"created_at\"")
-			}
 		default:
 			return d.Skip()
 		}
@@ -7045,7 +5496,7 @@ func (s *UserModeratingGroupsList) Decode(d *jx.Decoder) error {
 	// Validate required fields.
 	var failures []validate.FieldError
 	for i, mask := range [1]uint8{
-		0b11111111,
+		0b00000011,
 	} {
 		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
 			// Mask only required fields and check equality to mask using XOR.
@@ -7103,23 +5554,16 @@ func (s UserRead) Encode(e *jx.Writer) {
 	{
 		e.Comma()
 
-		e.RawStr("\"uuid\"" + ":")
-		json.EncodeUUID(e, s.UUID)
-	}
-	{
-		e.Comma()
-
 		e.RawStr("\"password\"" + ":")
 		e.Str(s.Password)
 	}
 	e.ObjEnd()
 }
 
-var jsonFieldsNameOfUserRead = [4]string{
+var jsonFieldsNameOfUserRead = [3]string{
 	0: "id",
 	1: "name",
-	2: "uuid",
-	3: "password",
+	2: "password",
 }
 
 // Decode decodes UserRead from json.
@@ -7155,20 +5599,8 @@ func (s *UserRead) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"name\"")
 			}
-		case "uuid":
-			requiredBitSet[0] |= 1 << 2
-			if err := func() error {
-				v, err := json.DecodeUUID(d)
-				s.UUID = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"uuid\"")
-			}
 		case "password":
-			requiredBitSet[0] |= 1 << 3
+			requiredBitSet[0] |= 1 << 2
 			if err := func() error {
 				v, err := d.Str()
 				s.Password = string(v)
@@ -7189,7 +5621,7 @@ func (s *UserRead) Decode(d *jx.Decoder) error {
 	// Validate required fields.
 	var failures []validate.FieldError
 	for i, mask := range [1]uint8{
-		0b00001111,
+		0b00000111,
 	} {
 		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
 			// Mask only required fields and check equality to mask using XOR.
@@ -7241,20 +5673,8 @@ func (s UserStreamVideosList) Encode(e *jx.Writer) {
 	{
 		e.Comma()
 
-		e.RawStr("\"uuid\"" + ":")
-		json.EncodeUUID(e, s.UUID)
-	}
-	{
-		e.Comma()
-
 		e.RawStr("\"title\"" + ":")
 		e.Str(s.Title)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"description\"" + ":")
-		e.Str(s.Description)
 	}
 	{
 		e.Comma()
@@ -7262,22 +5682,13 @@ func (s UserStreamVideosList) Encode(e *jx.Writer) {
 		e.RawStr("\"videotype\"" + ":")
 		s.Videotype.Encode(e)
 	}
-	{
-		e.Comma()
-
-		e.RawStr("\"created_at\"" + ":")
-		json.EncodeDateTime(e, s.CreatedAt)
-	}
 	e.ObjEnd()
 }
 
-var jsonFieldsNameOfUserStreamVideosList = [6]string{
+var jsonFieldsNameOfUserStreamVideosList = [3]string{
 	0: "id",
-	1: "uuid",
-	2: "title",
-	3: "description",
-	4: "videotype",
-	5: "created_at",
+	1: "title",
+	2: "videotype",
 }
 
 // Decode decodes UserStreamVideosList from json.
@@ -7301,20 +5712,8 @@ func (s *UserStreamVideosList) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"id\"")
 			}
-		case "uuid":
-			requiredBitSet[0] |= 1 << 1
-			if err := func() error {
-				v, err := json.DecodeUUID(d)
-				s.UUID = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"uuid\"")
-			}
 		case "title":
-			requiredBitSet[0] |= 1 << 2
+			requiredBitSet[0] |= 1 << 1
 			if err := func() error {
 				v, err := d.Str()
 				s.Title = string(v)
@@ -7325,20 +5724,8 @@ func (s *UserStreamVideosList) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"title\"")
 			}
-		case "description":
-			requiredBitSet[0] |= 1 << 3
-			if err := func() error {
-				v, err := d.Str()
-				s.Description = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"description\"")
-			}
 		case "videotype":
-			requiredBitSet[0] |= 1 << 4
+			requiredBitSet[0] |= 1 << 2
 			if err := func() error {
 				if err := s.Videotype.Decode(d); err != nil {
 					return err
@@ -7346,18 +5733,6 @@ func (s *UserStreamVideosList) Decode(d *jx.Decoder) error {
 				return nil
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"videotype\"")
-			}
-		case "created_at":
-			requiredBitSet[0] |= 1 << 5
-			if err := func() error {
-				v, err := json.DecodeDateTime(d)
-				s.CreatedAt = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"created_at\"")
 			}
 		default:
 			return d.Skip()
@@ -7369,7 +5744,7 @@ func (s *UserStreamVideosList) Decode(d *jx.Decoder) error {
 	// Validate required fields.
 	var failures []validate.FieldError
 	for i, mask := range [1]uint8{
-		0b00111111,
+		0b00000111,
 	} {
 		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
 			// Mask only required fields and check equality to mask using XOR.
@@ -7453,54 +5828,12 @@ func (s UserStreamingGroupsList) Encode(e *jx.Writer) {
 		e.RawStr("\"name\"" + ":")
 		e.Str(s.Name)
 	}
-	{
-		e.Comma()
-
-		e.RawStr("\"description\"" + ":")
-		e.Str(s.Description)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"url\"" + ":")
-		e.Str(s.URL)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"thumbnail\"" + ":")
-		e.Str(s.Thumbnail)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"views\"" + ":")
-		e.Int(s.Views)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"subscribers\"" + ":")
-		e.Int(s.Subscribers)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"created_at\"" + ":")
-		json.EncodeDateTime(e, s.CreatedAt)
-	}
 	e.ObjEnd()
 }
 
-var jsonFieldsNameOfUserStreamingGroupsList = [8]string{
+var jsonFieldsNameOfUserStreamingGroupsList = [2]string{
 	0: "id",
 	1: "name",
-	2: "description",
-	3: "url",
-	4: "thumbnail",
-	5: "views",
-	6: "subscribers",
-	7: "created_at",
 }
 
 // Decode decodes UserStreamingGroupsList from json.
@@ -7536,78 +5869,6 @@ func (s *UserStreamingGroupsList) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"name\"")
 			}
-		case "description":
-			requiredBitSet[0] |= 1 << 2
-			if err := func() error {
-				v, err := d.Str()
-				s.Description = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"description\"")
-			}
-		case "url":
-			requiredBitSet[0] |= 1 << 3
-			if err := func() error {
-				v, err := d.Str()
-				s.URL = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"url\"")
-			}
-		case "thumbnail":
-			requiredBitSet[0] |= 1 << 4
-			if err := func() error {
-				v, err := d.Str()
-				s.Thumbnail = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"thumbnail\"")
-			}
-		case "views":
-			requiredBitSet[0] |= 1 << 5
-			if err := func() error {
-				v, err := d.Int()
-				s.Views = int(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"views\"")
-			}
-		case "subscribers":
-			requiredBitSet[0] |= 1 << 6
-			if err := func() error {
-				v, err := d.Int()
-				s.Subscribers = int(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"subscribers\"")
-			}
-		case "created_at":
-			requiredBitSet[0] |= 1 << 7
-			if err := func() error {
-				v, err := json.DecodeDateTime(d)
-				s.CreatedAt = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"created_at\"")
-			}
 		default:
 			return d.Skip()
 		}
@@ -7618,7 +5879,7 @@ func (s *UserStreamingGroupsList) Decode(d *jx.Decoder) error {
 	// Validate required fields.
 	var failures []validate.FieldError
 	for i, mask := range [1]uint8{
-		0b11111111,
+		0b00000011,
 	} {
 		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
 			// Mask only required fields and check equality to mask using XOR.
@@ -7676,23 +5937,16 @@ func (s UserUpdate) Encode(e *jx.Writer) {
 	{
 		e.Comma()
 
-		e.RawStr("\"uuid\"" + ":")
-		json.EncodeUUID(e, s.UUID)
-	}
-	{
-		e.Comma()
-
 		e.RawStr("\"password\"" + ":")
 		e.Str(s.Password)
 	}
 	e.ObjEnd()
 }
 
-var jsonFieldsNameOfUserUpdate = [4]string{
+var jsonFieldsNameOfUserUpdate = [3]string{
 	0: "id",
 	1: "name",
-	2: "uuid",
-	3: "password",
+	2: "password",
 }
 
 // Decode decodes UserUpdate from json.
@@ -7728,20 +5982,8 @@ func (s *UserUpdate) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"name\"")
 			}
-		case "uuid":
-			requiredBitSet[0] |= 1 << 2
-			if err := func() error {
-				v, err := json.DecodeUUID(d)
-				s.UUID = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"uuid\"")
-			}
 		case "password":
-			requiredBitSet[0] |= 1 << 3
+			requiredBitSet[0] |= 1 << 2
 			if err := func() error {
 				v, err := d.Str()
 				s.Password = string(v)
@@ -7762,7 +6004,7 @@ func (s *UserUpdate) Decode(d *jx.Decoder) error {
 	// Validate required fields.
 	var failures []validate.FieldError
 	for i, mask := range [1]uint8{
-		0b00001111,
+		0b00000111,
 	} {
 		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
 			// Mask only required fields and check equality to mask using XOR.
@@ -7814,20 +6056,8 @@ func (s UserViewedVideosList) Encode(e *jx.Writer) {
 	{
 		e.Comma()
 
-		e.RawStr("\"uuid\"" + ":")
-		json.EncodeUUID(e, s.UUID)
-	}
-	{
-		e.Comma()
-
 		e.RawStr("\"title\"" + ":")
 		e.Str(s.Title)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"description\"" + ":")
-		e.Str(s.Description)
 	}
 	{
 		e.Comma()
@@ -7835,22 +6065,13 @@ func (s UserViewedVideosList) Encode(e *jx.Writer) {
 		e.RawStr("\"videotype\"" + ":")
 		s.Videotype.Encode(e)
 	}
-	{
-		e.Comma()
-
-		e.RawStr("\"created_at\"" + ":")
-		json.EncodeDateTime(e, s.CreatedAt)
-	}
 	e.ObjEnd()
 }
 
-var jsonFieldsNameOfUserViewedVideosList = [6]string{
+var jsonFieldsNameOfUserViewedVideosList = [3]string{
 	0: "id",
-	1: "uuid",
-	2: "title",
-	3: "description",
-	4: "videotype",
-	5: "created_at",
+	1: "title",
+	2: "videotype",
 }
 
 // Decode decodes UserViewedVideosList from json.
@@ -7874,20 +6095,8 @@ func (s *UserViewedVideosList) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"id\"")
 			}
-		case "uuid":
-			requiredBitSet[0] |= 1 << 1
-			if err := func() error {
-				v, err := json.DecodeUUID(d)
-				s.UUID = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"uuid\"")
-			}
 		case "title":
-			requiredBitSet[0] |= 1 << 2
+			requiredBitSet[0] |= 1 << 1
 			if err := func() error {
 				v, err := d.Str()
 				s.Title = string(v)
@@ -7898,20 +6107,8 @@ func (s *UserViewedVideosList) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"title\"")
 			}
-		case "description":
-			requiredBitSet[0] |= 1 << 3
-			if err := func() error {
-				v, err := d.Str()
-				s.Description = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"description\"")
-			}
 		case "videotype":
-			requiredBitSet[0] |= 1 << 4
+			requiredBitSet[0] |= 1 << 2
 			if err := func() error {
 				if err := s.Videotype.Decode(d); err != nil {
 					return err
@@ -7919,18 +6116,6 @@ func (s *UserViewedVideosList) Decode(d *jx.Decoder) error {
 				return nil
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"videotype\"")
-			}
-		case "created_at":
-			requiredBitSet[0] |= 1 << 5
-			if err := func() error {
-				v, err := json.DecodeDateTime(d)
-				s.CreatedAt = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"created_at\"")
 			}
 		default:
 			return d.Skip()
@@ -7942,7 +6127,7 @@ func (s *UserViewedVideosList) Decode(d *jx.Decoder) error {
 	// Validate required fields.
 	var failures []validate.FieldError
 	for i, mask := range [1]uint8{
-		0b00111111,
+		0b00000111,
 	} {
 		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
 			// Mask only required fields and check equality to mask using XOR.
@@ -8023,20 +6208,8 @@ func (s VideoCreate) Encode(e *jx.Writer) {
 	{
 		e.Comma()
 
-		e.RawStr("\"uuid\"" + ":")
-		json.EncodeUUID(e, s.UUID)
-	}
-	{
-		e.Comma()
-
 		e.RawStr("\"title\"" + ":")
 		e.Str(s.Title)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"description\"" + ":")
-		e.Str(s.Description)
 	}
 	{
 		e.Comma()
@@ -8044,22 +6217,13 @@ func (s VideoCreate) Encode(e *jx.Writer) {
 		e.RawStr("\"videotype\"" + ":")
 		s.Videotype.Encode(e)
 	}
-	{
-		e.Comma()
-
-		e.RawStr("\"created_at\"" + ":")
-		json.EncodeDateTime(e, s.CreatedAt)
-	}
 	e.ObjEnd()
 }
 
-var jsonFieldsNameOfVideoCreate = [6]string{
+var jsonFieldsNameOfVideoCreate = [3]string{
 	0: "id",
-	1: "uuid",
-	2: "title",
-	3: "description",
-	4: "videotype",
-	5: "created_at",
+	1: "title",
+	2: "videotype",
 }
 
 // Decode decodes VideoCreate from json.
@@ -8083,20 +6247,8 @@ func (s *VideoCreate) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"id\"")
 			}
-		case "uuid":
-			requiredBitSet[0] |= 1 << 1
-			if err := func() error {
-				v, err := json.DecodeUUID(d)
-				s.UUID = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"uuid\"")
-			}
 		case "title":
-			requiredBitSet[0] |= 1 << 2
+			requiredBitSet[0] |= 1 << 1
 			if err := func() error {
 				v, err := d.Str()
 				s.Title = string(v)
@@ -8107,20 +6259,8 @@ func (s *VideoCreate) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"title\"")
 			}
-		case "description":
-			requiredBitSet[0] |= 1 << 3
-			if err := func() error {
-				v, err := d.Str()
-				s.Description = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"description\"")
-			}
 		case "videotype":
-			requiredBitSet[0] |= 1 << 4
+			requiredBitSet[0] |= 1 << 2
 			if err := func() error {
 				if err := s.Videotype.Decode(d); err != nil {
 					return err
@@ -8128,18 +6268,6 @@ func (s *VideoCreate) Decode(d *jx.Decoder) error {
 				return nil
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"videotype\"")
-			}
-		case "created_at":
-			requiredBitSet[0] |= 1 << 5
-			if err := func() error {
-				v, err := json.DecodeDateTime(d)
-				s.CreatedAt = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"created_at\"")
 			}
 		default:
 			return d.Skip()
@@ -8151,7 +6279,7 @@ func (s *VideoCreate) Decode(d *jx.Decoder) error {
 	// Validate required fields.
 	var failures []validate.FieldError
 	for i, mask := range [1]uint8{
-		0b00111111,
+		0b00000111,
 	} {
 		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
 			// Mask only required fields and check equality to mask using XOR.
@@ -8235,54 +6363,12 @@ func (s VideoGroupRead) Encode(e *jx.Writer) {
 		e.RawStr("\"name\"" + ":")
 		e.Str(s.Name)
 	}
-	{
-		e.Comma()
-
-		e.RawStr("\"description\"" + ":")
-		e.Str(s.Description)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"url\"" + ":")
-		e.Str(s.URL)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"thumbnail\"" + ":")
-		e.Str(s.Thumbnail)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"views\"" + ":")
-		e.Int(s.Views)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"subscribers\"" + ":")
-		e.Int(s.Subscribers)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"created_at\"" + ":")
-		json.EncodeDateTime(e, s.CreatedAt)
-	}
 	e.ObjEnd()
 }
 
-var jsonFieldsNameOfVideoGroupRead = [8]string{
+var jsonFieldsNameOfVideoGroupRead = [2]string{
 	0: "id",
 	1: "name",
-	2: "description",
-	3: "url",
-	4: "thumbnail",
-	5: "views",
-	6: "subscribers",
-	7: "created_at",
 }
 
 // Decode decodes VideoGroupRead from json.
@@ -8318,78 +6404,6 @@ func (s *VideoGroupRead) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"name\"")
 			}
-		case "description":
-			requiredBitSet[0] |= 1 << 2
-			if err := func() error {
-				v, err := d.Str()
-				s.Description = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"description\"")
-			}
-		case "url":
-			requiredBitSet[0] |= 1 << 3
-			if err := func() error {
-				v, err := d.Str()
-				s.URL = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"url\"")
-			}
-		case "thumbnail":
-			requiredBitSet[0] |= 1 << 4
-			if err := func() error {
-				v, err := d.Str()
-				s.Thumbnail = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"thumbnail\"")
-			}
-		case "views":
-			requiredBitSet[0] |= 1 << 5
-			if err := func() error {
-				v, err := d.Int()
-				s.Views = int(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"views\"")
-			}
-		case "subscribers":
-			requiredBitSet[0] |= 1 << 6
-			if err := func() error {
-				v, err := d.Int()
-				s.Subscribers = int(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"subscribers\"")
-			}
-		case "created_at":
-			requiredBitSet[0] |= 1 << 7
-			if err := func() error {
-				v, err := json.DecodeDateTime(d)
-				s.CreatedAt = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"created_at\"")
-			}
 		default:
 			return d.Skip()
 		}
@@ -8400,7 +6414,7 @@ func (s *VideoGroupRead) Decode(d *jx.Decoder) error {
 	// Validate required fields.
 	var failures []validate.FieldError
 	for i, mask := range [1]uint8{
-		0b11111111,
+		0b00000011,
 	} {
 		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
 			// Mask only required fields and check equality to mask using XOR.
@@ -8458,23 +6472,16 @@ func (s VideoLikesList) Encode(e *jx.Writer) {
 	{
 		e.Comma()
 
-		e.RawStr("\"uuid\"" + ":")
-		json.EncodeUUID(e, s.UUID)
-	}
-	{
-		e.Comma()
-
 		e.RawStr("\"password\"" + ":")
 		e.Str(s.Password)
 	}
 	e.ObjEnd()
 }
 
-var jsonFieldsNameOfVideoLikesList = [4]string{
+var jsonFieldsNameOfVideoLikesList = [3]string{
 	0: "id",
 	1: "name",
-	2: "uuid",
-	3: "password",
+	2: "password",
 }
 
 // Decode decodes VideoLikesList from json.
@@ -8510,20 +6517,8 @@ func (s *VideoLikesList) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"name\"")
 			}
-		case "uuid":
-			requiredBitSet[0] |= 1 << 2
-			if err := func() error {
-				v, err := json.DecodeUUID(d)
-				s.UUID = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"uuid\"")
-			}
 		case "password":
-			requiredBitSet[0] |= 1 << 3
+			requiredBitSet[0] |= 1 << 2
 			if err := func() error {
 				v, err := d.Str()
 				s.Password = string(v)
@@ -8544,7 +6539,7 @@ func (s *VideoLikesList) Decode(d *jx.Decoder) error {
 	// Validate required fields.
 	var failures []validate.FieldError
 	for i, mask := range [1]uint8{
-		0b00001111,
+		0b00000111,
 	} {
 		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
 			// Mask only required fields and check equality to mask using XOR.
@@ -8596,20 +6591,8 @@ func (s VideoList) Encode(e *jx.Writer) {
 	{
 		e.Comma()
 
-		e.RawStr("\"uuid\"" + ":")
-		json.EncodeUUID(e, s.UUID)
-	}
-	{
-		e.Comma()
-
 		e.RawStr("\"title\"" + ":")
 		e.Str(s.Title)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"description\"" + ":")
-		e.Str(s.Description)
 	}
 	{
 		e.Comma()
@@ -8617,22 +6600,13 @@ func (s VideoList) Encode(e *jx.Writer) {
 		e.RawStr("\"videotype\"" + ":")
 		s.Videotype.Encode(e)
 	}
-	{
-		e.Comma()
-
-		e.RawStr("\"created_at\"" + ":")
-		json.EncodeDateTime(e, s.CreatedAt)
-	}
 	e.ObjEnd()
 }
 
-var jsonFieldsNameOfVideoList = [6]string{
+var jsonFieldsNameOfVideoList = [3]string{
 	0: "id",
-	1: "uuid",
-	2: "title",
-	3: "description",
-	4: "videotype",
-	5: "created_at",
+	1: "title",
+	2: "videotype",
 }
 
 // Decode decodes VideoList from json.
@@ -8656,20 +6630,8 @@ func (s *VideoList) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"id\"")
 			}
-		case "uuid":
-			requiredBitSet[0] |= 1 << 1
-			if err := func() error {
-				v, err := json.DecodeUUID(d)
-				s.UUID = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"uuid\"")
-			}
 		case "title":
-			requiredBitSet[0] |= 1 << 2
+			requiredBitSet[0] |= 1 << 1
 			if err := func() error {
 				v, err := d.Str()
 				s.Title = string(v)
@@ -8680,20 +6642,8 @@ func (s *VideoList) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"title\"")
 			}
-		case "description":
-			requiredBitSet[0] |= 1 << 3
-			if err := func() error {
-				v, err := d.Str()
-				s.Description = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"description\"")
-			}
 		case "videotype":
-			requiredBitSet[0] |= 1 << 4
+			requiredBitSet[0] |= 1 << 2
 			if err := func() error {
 				if err := s.Videotype.Decode(d); err != nil {
 					return err
@@ -8701,18 +6651,6 @@ func (s *VideoList) Decode(d *jx.Decoder) error {
 				return nil
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"videotype\"")
-			}
-		case "created_at":
-			requiredBitSet[0] |= 1 << 5
-			if err := func() error {
-				v, err := json.DecodeDateTime(d)
-				s.CreatedAt = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"created_at\"")
 			}
 		default:
 			return d.Skip()
@@ -8724,7 +6662,7 @@ func (s *VideoList) Decode(d *jx.Decoder) error {
 	// Validate required fields.
 	var failures []validate.FieldError
 	for i, mask := range [1]uint8{
-		0b00111111,
+		0b00000111,
 	} {
 		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
 			// Mask only required fields and check equality to mask using XOR.
@@ -8811,23 +6749,16 @@ func (s VideoModeratersList) Encode(e *jx.Writer) {
 	{
 		e.Comma()
 
-		e.RawStr("\"uuid\"" + ":")
-		json.EncodeUUID(e, s.UUID)
-	}
-	{
-		e.Comma()
-
 		e.RawStr("\"password\"" + ":")
 		e.Str(s.Password)
 	}
 	e.ObjEnd()
 }
 
-var jsonFieldsNameOfVideoModeratersList = [4]string{
+var jsonFieldsNameOfVideoModeratersList = [3]string{
 	0: "id",
 	1: "name",
-	2: "uuid",
-	3: "password",
+	2: "password",
 }
 
 // Decode decodes VideoModeratersList from json.
@@ -8863,20 +6794,8 @@ func (s *VideoModeratersList) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"name\"")
 			}
-		case "uuid":
-			requiredBitSet[0] |= 1 << 2
-			if err := func() error {
-				v, err := json.DecodeUUID(d)
-				s.UUID = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"uuid\"")
-			}
 		case "password":
-			requiredBitSet[0] |= 1 << 3
+			requiredBitSet[0] |= 1 << 2
 			if err := func() error {
 				v, err := d.Str()
 				s.Password = string(v)
@@ -8897,7 +6816,7 @@ func (s *VideoModeratersList) Decode(d *jx.Decoder) error {
 	// Validate required fields.
 	var failures []validate.FieldError
 	for i, mask := range [1]uint8{
-		0b00001111,
+		0b00000111,
 	} {
 		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
 			// Mask only required fields and check equality to mask using XOR.
@@ -8949,20 +6868,8 @@ func (s VideoRead) Encode(e *jx.Writer) {
 	{
 		e.Comma()
 
-		e.RawStr("\"uuid\"" + ":")
-		json.EncodeUUID(e, s.UUID)
-	}
-	{
-		e.Comma()
-
 		e.RawStr("\"title\"" + ":")
 		e.Str(s.Title)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"description\"" + ":")
-		e.Str(s.Description)
 	}
 	{
 		e.Comma()
@@ -8970,22 +6877,13 @@ func (s VideoRead) Encode(e *jx.Writer) {
 		e.RawStr("\"videotype\"" + ":")
 		s.Videotype.Encode(e)
 	}
-	{
-		e.Comma()
-
-		e.RawStr("\"created_at\"" + ":")
-		json.EncodeDateTime(e, s.CreatedAt)
-	}
 	e.ObjEnd()
 }
 
-var jsonFieldsNameOfVideoRead = [6]string{
+var jsonFieldsNameOfVideoRead = [3]string{
 	0: "id",
-	1: "uuid",
-	2: "title",
-	3: "description",
-	4: "videotype",
-	5: "created_at",
+	1: "title",
+	2: "videotype",
 }
 
 // Decode decodes VideoRead from json.
@@ -9009,20 +6907,8 @@ func (s *VideoRead) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"id\"")
 			}
-		case "uuid":
-			requiredBitSet[0] |= 1 << 1
-			if err := func() error {
-				v, err := json.DecodeUUID(d)
-				s.UUID = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"uuid\"")
-			}
 		case "title":
-			requiredBitSet[0] |= 1 << 2
+			requiredBitSet[0] |= 1 << 1
 			if err := func() error {
 				v, err := d.Str()
 				s.Title = string(v)
@@ -9033,20 +6919,8 @@ func (s *VideoRead) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"title\"")
 			}
-		case "description":
-			requiredBitSet[0] |= 1 << 3
-			if err := func() error {
-				v, err := d.Str()
-				s.Description = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"description\"")
-			}
 		case "videotype":
-			requiredBitSet[0] |= 1 << 4
+			requiredBitSet[0] |= 1 << 2
 			if err := func() error {
 				if err := s.Videotype.Decode(d); err != nil {
 					return err
@@ -9054,18 +6928,6 @@ func (s *VideoRead) Decode(d *jx.Decoder) error {
 				return nil
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"videotype\"")
-			}
-		case "created_at":
-			requiredBitSet[0] |= 1 << 5
-			if err := func() error {
-				v, err := json.DecodeDateTime(d)
-				s.CreatedAt = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"created_at\"")
 			}
 		default:
 			return d.Skip()
@@ -9077,7 +6939,7 @@ func (s *VideoRead) Decode(d *jx.Decoder) error {
 	// Validate required fields.
 	var failures []validate.FieldError
 	for i, mask := range [1]uint8{
-		0b00111111,
+		0b00000111,
 	} {
 		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
 			// Mask only required fields and check equality to mask using XOR.
@@ -9164,23 +7026,16 @@ func (s VideoStreamersList) Encode(e *jx.Writer) {
 	{
 		e.Comma()
 
-		e.RawStr("\"uuid\"" + ":")
-		json.EncodeUUID(e, s.UUID)
-	}
-	{
-		e.Comma()
-
 		e.RawStr("\"password\"" + ":")
 		e.Str(s.Password)
 	}
 	e.ObjEnd()
 }
 
-var jsonFieldsNameOfVideoStreamersList = [4]string{
+var jsonFieldsNameOfVideoStreamersList = [3]string{
 	0: "id",
 	1: "name",
-	2: "uuid",
-	3: "password",
+	2: "password",
 }
 
 // Decode decodes VideoStreamersList from json.
@@ -9216,20 +7071,8 @@ func (s *VideoStreamersList) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"name\"")
 			}
-		case "uuid":
-			requiredBitSet[0] |= 1 << 2
-			if err := func() error {
-				v, err := json.DecodeUUID(d)
-				s.UUID = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"uuid\"")
-			}
 		case "password":
-			requiredBitSet[0] |= 1 << 3
+			requiredBitSet[0] |= 1 << 2
 			if err := func() error {
 				v, err := d.Str()
 				s.Password = string(v)
@@ -9250,7 +7093,7 @@ func (s *VideoStreamersList) Decode(d *jx.Decoder) error {
 	// Validate required fields.
 	var failures []validate.FieldError
 	for i, mask := range [1]uint8{
-		0b00001111,
+		0b00000111,
 	} {
 		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
 			// Mask only required fields and check equality to mask using XOR.
@@ -9302,20 +7145,8 @@ func (s VideoUpdate) Encode(e *jx.Writer) {
 	{
 		e.Comma()
 
-		e.RawStr("\"uuid\"" + ":")
-		json.EncodeUUID(e, s.UUID)
-	}
-	{
-		e.Comma()
-
 		e.RawStr("\"title\"" + ":")
 		e.Str(s.Title)
-	}
-	{
-		e.Comma()
-
-		e.RawStr("\"description\"" + ":")
-		e.Str(s.Description)
 	}
 	{
 		e.Comma()
@@ -9323,22 +7154,13 @@ func (s VideoUpdate) Encode(e *jx.Writer) {
 		e.RawStr("\"videotype\"" + ":")
 		s.Videotype.Encode(e)
 	}
-	{
-		e.Comma()
-
-		e.RawStr("\"created_at\"" + ":")
-		json.EncodeDateTime(e, s.CreatedAt)
-	}
 	e.ObjEnd()
 }
 
-var jsonFieldsNameOfVideoUpdate = [6]string{
+var jsonFieldsNameOfVideoUpdate = [3]string{
 	0: "id",
-	1: "uuid",
-	2: "title",
-	3: "description",
-	4: "videotype",
-	5: "created_at",
+	1: "title",
+	2: "videotype",
 }
 
 // Decode decodes VideoUpdate from json.
@@ -9362,20 +7184,8 @@ func (s *VideoUpdate) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"id\"")
 			}
-		case "uuid":
-			requiredBitSet[0] |= 1 << 1
-			if err := func() error {
-				v, err := json.DecodeUUID(d)
-				s.UUID = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"uuid\"")
-			}
 		case "title":
-			requiredBitSet[0] |= 1 << 2
+			requiredBitSet[0] |= 1 << 1
 			if err := func() error {
 				v, err := d.Str()
 				s.Title = string(v)
@@ -9386,20 +7196,8 @@ func (s *VideoUpdate) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"title\"")
 			}
-		case "description":
-			requiredBitSet[0] |= 1 << 3
-			if err := func() error {
-				v, err := d.Str()
-				s.Description = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"description\"")
-			}
 		case "videotype":
-			requiredBitSet[0] |= 1 << 4
+			requiredBitSet[0] |= 1 << 2
 			if err := func() error {
 				if err := s.Videotype.Decode(d); err != nil {
 					return err
@@ -9407,18 +7205,6 @@ func (s *VideoUpdate) Decode(d *jx.Decoder) error {
 				return nil
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"videotype\"")
-			}
-		case "created_at":
-			requiredBitSet[0] |= 1 << 5
-			if err := func() error {
-				v, err := json.DecodeDateTime(d)
-				s.CreatedAt = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"created_at\"")
 			}
 		default:
 			return d.Skip()
@@ -9430,7 +7216,7 @@ func (s *VideoUpdate) Decode(d *jx.Decoder) error {
 	// Validate required fields.
 	var failures []validate.FieldError
 	for i, mask := range [1]uint8{
-		0b00111111,
+		0b00000111,
 	} {
 		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
 			// Mask only required fields and check equality to mask using XOR.
@@ -9517,23 +7303,16 @@ func (s VideoViewersList) Encode(e *jx.Writer) {
 	{
 		e.Comma()
 
-		e.RawStr("\"uuid\"" + ":")
-		json.EncodeUUID(e, s.UUID)
-	}
-	{
-		e.Comma()
-
 		e.RawStr("\"password\"" + ":")
 		e.Str(s.Password)
 	}
 	e.ObjEnd()
 }
 
-var jsonFieldsNameOfVideoViewersList = [4]string{
+var jsonFieldsNameOfVideoViewersList = [3]string{
 	0: "id",
 	1: "name",
-	2: "uuid",
-	3: "password",
+	2: "password",
 }
 
 // Decode decodes VideoViewersList from json.
@@ -9569,20 +7348,8 @@ func (s *VideoViewersList) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"name\"")
 			}
-		case "uuid":
-			requiredBitSet[0] |= 1 << 2
-			if err := func() error {
-				v, err := json.DecodeUUID(d)
-				s.UUID = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"uuid\"")
-			}
 		case "password":
-			requiredBitSet[0] |= 1 << 3
+			requiredBitSet[0] |= 1 << 2
 			if err := func() error {
 				v, err := d.Str()
 				s.Password = string(v)
@@ -9603,7 +7370,7 @@ func (s *VideoViewersList) Decode(d *jx.Decoder) error {
 	// Validate required fields.
 	var failures []validate.FieldError
 	for i, mask := range [1]uint8{
-		0b00001111,
+		0b00000111,
 	} {
 		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
 			// Mask only required fields and check equality to mask using XOR.

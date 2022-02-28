@@ -6,14 +6,12 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"time"
 
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
 	"example.com/enumeg/ent/group"
 	"example.com/enumeg/ent/user"
 	"example.com/enumeg/ent/video"
-	"github.com/google/uuid"
 )
 
 // VideoCreate is the builder for creating a Video entity.
@@ -23,49 +21,15 @@ type VideoCreate struct {
 	hooks    []Hook
 }
 
-// SetUUID sets the "uuid" field.
-func (vc *VideoCreate) SetUUID(u uuid.UUID) *VideoCreate {
-	vc.mutation.SetUUID(u)
-	return vc
-}
-
-// SetNillableUUID sets the "uuid" field if the given value is not nil.
-func (vc *VideoCreate) SetNillableUUID(u *uuid.UUID) *VideoCreate {
-	if u != nil {
-		vc.SetUUID(*u)
-	}
-	return vc
-}
-
 // SetTitle sets the "title" field.
 func (vc *VideoCreate) SetTitle(s string) *VideoCreate {
 	vc.mutation.SetTitle(s)
 	return vc
 }
 
-// SetDescription sets the "description" field.
-func (vc *VideoCreate) SetDescription(s string) *VideoCreate {
-	vc.mutation.SetDescription(s)
-	return vc
-}
-
 // SetVideotype sets the "videotype" field.
 func (vc *VideoCreate) SetVideotype(v video.Videotype) *VideoCreate {
 	vc.mutation.SetVideotype(v)
-	return vc
-}
-
-// SetCreatedAt sets the "created_at" field.
-func (vc *VideoCreate) SetCreatedAt(t time.Time) *VideoCreate {
-	vc.mutation.SetCreatedAt(t)
-	return vc
-}
-
-// SetNillableCreatedAt sets the "created_at" field if the given value is not nil.
-func (vc *VideoCreate) SetNillableCreatedAt(t *time.Time) *VideoCreate {
-	if t != nil {
-		vc.SetCreatedAt(*t)
-	}
 	return vc
 }
 
@@ -159,7 +123,6 @@ func (vc *VideoCreate) Save(ctx context.Context) (*Video, error) {
 		err  error
 		node *Video
 	)
-	vc.defaults()
 	if len(vc.hooks) == 0 {
 		if err = vc.check(); err != nil {
 			return nil, err
@@ -217,28 +180,10 @@ func (vc *VideoCreate) ExecX(ctx context.Context) {
 	}
 }
 
-// defaults sets the default values of the builder before save.
-func (vc *VideoCreate) defaults() {
-	if _, ok := vc.mutation.UUID(); !ok {
-		v := video.DefaultUUID()
-		vc.mutation.SetUUID(v)
-	}
-	if _, ok := vc.mutation.CreatedAt(); !ok {
-		v := video.DefaultCreatedAt()
-		vc.mutation.SetCreatedAt(v)
-	}
-}
-
 // check runs all checks and user-defined validators on the builder.
 func (vc *VideoCreate) check() error {
-	if _, ok := vc.mutation.UUID(); !ok {
-		return &ValidationError{Name: "uuid", err: errors.New(`ent: missing required field "Video.uuid"`)}
-	}
 	if _, ok := vc.mutation.Title(); !ok {
 		return &ValidationError{Name: "title", err: errors.New(`ent: missing required field "Video.title"`)}
-	}
-	if _, ok := vc.mutation.Description(); !ok {
-		return &ValidationError{Name: "description", err: errors.New(`ent: missing required field "Video.description"`)}
 	}
 	if _, ok := vc.mutation.Videotype(); !ok {
 		return &ValidationError{Name: "videotype", err: errors.New(`ent: missing required field "Video.videotype"`)}
@@ -247,9 +192,6 @@ func (vc *VideoCreate) check() error {
 		if err := video.VideotypeValidator(v); err != nil {
 			return &ValidationError{Name: "videotype", err: fmt.Errorf(`ent: validator failed for field "Video.videotype": %w`, err)}
 		}
-	}
-	if _, ok := vc.mutation.CreatedAt(); !ok {
-		return &ValidationError{Name: "created_at", err: errors.New(`ent: missing required field "Video.created_at"`)}
 	}
 	return nil
 }
@@ -278,14 +220,6 @@ func (vc *VideoCreate) createSpec() (*Video, *sqlgraph.CreateSpec) {
 			},
 		}
 	)
-	if value, ok := vc.mutation.UUID(); ok {
-		_spec.Fields = append(_spec.Fields, &sqlgraph.FieldSpec{
-			Type:   field.TypeUUID,
-			Value:  value,
-			Column: video.FieldUUID,
-		})
-		_node.UUID = value
-	}
 	if value, ok := vc.mutation.Title(); ok {
 		_spec.Fields = append(_spec.Fields, &sqlgraph.FieldSpec{
 			Type:   field.TypeString,
@@ -294,14 +228,6 @@ func (vc *VideoCreate) createSpec() (*Video, *sqlgraph.CreateSpec) {
 		})
 		_node.Title = value
 	}
-	if value, ok := vc.mutation.Description(); ok {
-		_spec.Fields = append(_spec.Fields, &sqlgraph.FieldSpec{
-			Type:   field.TypeString,
-			Value:  value,
-			Column: video.FieldDescription,
-		})
-		_node.Description = value
-	}
 	if value, ok := vc.mutation.Videotype(); ok {
 		_spec.Fields = append(_spec.Fields, &sqlgraph.FieldSpec{
 			Type:   field.TypeEnum,
@@ -309,14 +235,6 @@ func (vc *VideoCreate) createSpec() (*Video, *sqlgraph.CreateSpec) {
 			Column: video.FieldVideotype,
 		})
 		_node.Videotype = value
-	}
-	if value, ok := vc.mutation.CreatedAt(); ok {
-		_spec.Fields = append(_spec.Fields, &sqlgraph.FieldSpec{
-			Type:   field.TypeTime,
-			Value:  value,
-			Column: video.FieldCreatedAt,
-		})
-		_node.CreatedAt = value
 	}
 	if nodes := vc.mutation.GroupIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
@@ -431,7 +349,6 @@ func (vcb *VideoCreateBulk) Save(ctx context.Context) ([]*Video, error) {
 	for i := range vcb.builders {
 		func(i int, root context.Context) {
 			builder := vcb.builders[i]
-			builder.defaults()
 			var mut Mutator = MutateFunc(func(ctx context.Context, m Mutation) (Value, error) {
 				mutation, ok := m.(*VideoMutation)
 				if !ok {

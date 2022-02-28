@@ -4,9 +4,6 @@ package video
 
 import (
 	"fmt"
-	"time"
-
-	"github.com/google/uuid"
 )
 
 const (
@@ -14,16 +11,10 @@ const (
 	Label = "video"
 	// FieldID holds the string denoting the id field in the database.
 	FieldID = "id"
-	// FieldUUID holds the string denoting the uuid field in the database.
-	FieldUUID = "uuid"
 	// FieldTitle holds the string denoting the title field in the database.
 	FieldTitle = "title"
-	// FieldDescription holds the string denoting the description field in the database.
-	FieldDescription = "description"
 	// FieldVideotype holds the string denoting the videotype field in the database.
 	FieldVideotype = "videotype"
-	// FieldCreatedAt holds the string denoting the created_at field in the database.
-	FieldCreatedAt = "created_at"
 	// EdgeGroup holds the string denoting the group edge name in mutations.
 	EdgeGroup = "group"
 	// EdgeStreamers holds the string denoting the streamers edge name in mutations.
@@ -68,11 +59,8 @@ const (
 // Columns holds all SQL columns for video fields.
 var Columns = []string{
 	FieldID,
-	FieldUUID,
 	FieldTitle,
-	FieldDescription,
 	FieldVideotype,
-	FieldCreatedAt,
 }
 
 // ForeignKeys holds the SQL foreign-keys that are owned by the "videos"
@@ -110,13 +98,6 @@ func ValidColumn(column string) bool {
 	}
 	return false
 }
-
-var (
-	// DefaultUUID holds the default value on creation for the "uuid" field.
-	DefaultUUID func() uuid.UUID
-	// DefaultCreatedAt holds the default value on creation for the "created_at" field.
-	DefaultCreatedAt func() time.Time
-)
 
 // Videotype defines the type for the "videotype" enum field.
 type Videotype string

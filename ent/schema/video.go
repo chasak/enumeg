@@ -1,12 +1,9 @@
 package schema
 
 import (
-	"time"
-
 	"entgo.io/ent"
 	"entgo.io/ent/schema/edge"
 	"entgo.io/ent/schema/field"
-	"github.com/google/uuid"
 )
 
 // Video holds the schema definition for the Video entity.
@@ -17,12 +14,8 @@ type Video struct {
 // Fields of the Video.
 func (Video) Fields() []ent.Field {
 	return []ent.Field{
-		field.UUID("uuid", uuid.UUID{}).Default(uuid.New),
 		field.String("title"),
-		field.String("description"),
 		field.Enum("videotype").Values("live", "video", "playlist"),
-		field.Time("created_at").
-			Default(time.Now),
 	}
 }
 

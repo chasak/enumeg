@@ -6,7 +6,6 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"time"
 
 	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/dialect/sql/sqlgraph"
@@ -33,64 +32,6 @@ func (gu *GroupUpdate) Where(ps ...predicate.Group) *GroupUpdate {
 // SetName sets the "name" field.
 func (gu *GroupUpdate) SetName(s string) *GroupUpdate {
 	gu.mutation.SetName(s)
-	return gu
-}
-
-// SetDescription sets the "description" field.
-func (gu *GroupUpdate) SetDescription(s string) *GroupUpdate {
-	gu.mutation.SetDescription(s)
-	return gu
-}
-
-// SetURL sets the "url" field.
-func (gu *GroupUpdate) SetURL(s string) *GroupUpdate {
-	gu.mutation.SetURL(s)
-	return gu
-}
-
-// SetThumbnail sets the "thumbnail" field.
-func (gu *GroupUpdate) SetThumbnail(s string) *GroupUpdate {
-	gu.mutation.SetThumbnail(s)
-	return gu
-}
-
-// SetViews sets the "views" field.
-func (gu *GroupUpdate) SetViews(i int) *GroupUpdate {
-	gu.mutation.ResetViews()
-	gu.mutation.SetViews(i)
-	return gu
-}
-
-// AddViews adds i to the "views" field.
-func (gu *GroupUpdate) AddViews(i int) *GroupUpdate {
-	gu.mutation.AddViews(i)
-	return gu
-}
-
-// SetSubscribers sets the "subscribers" field.
-func (gu *GroupUpdate) SetSubscribers(i int) *GroupUpdate {
-	gu.mutation.ResetSubscribers()
-	gu.mutation.SetSubscribers(i)
-	return gu
-}
-
-// AddSubscribers adds i to the "subscribers" field.
-func (gu *GroupUpdate) AddSubscribers(i int) *GroupUpdate {
-	gu.mutation.AddSubscribers(i)
-	return gu
-}
-
-// SetCreatedAt sets the "created_at" field.
-func (gu *GroupUpdate) SetCreatedAt(t time.Time) *GroupUpdate {
-	gu.mutation.SetCreatedAt(t)
-	return gu
-}
-
-// SetNillableCreatedAt sets the "created_at" field if the given value is not nil.
-func (gu *GroupUpdate) SetNillableCreatedAt(t *time.Time) *GroupUpdate {
-	if t != nil {
-		gu.SetCreatedAt(*t)
-	}
 	return gu
 }
 
@@ -356,62 +297,6 @@ func (gu *GroupUpdate) sqlSave(ctx context.Context) (n int, err error) {
 			Type:   field.TypeString,
 			Value:  value,
 			Column: group.FieldName,
-		})
-	}
-	if value, ok := gu.mutation.Description(); ok {
-		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
-			Type:   field.TypeString,
-			Value:  value,
-			Column: group.FieldDescription,
-		})
-	}
-	if value, ok := gu.mutation.URL(); ok {
-		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
-			Type:   field.TypeString,
-			Value:  value,
-			Column: group.FieldURL,
-		})
-	}
-	if value, ok := gu.mutation.Thumbnail(); ok {
-		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
-			Type:   field.TypeString,
-			Value:  value,
-			Column: group.FieldThumbnail,
-		})
-	}
-	if value, ok := gu.mutation.Views(); ok {
-		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
-			Type:   field.TypeInt,
-			Value:  value,
-			Column: group.FieldViews,
-		})
-	}
-	if value, ok := gu.mutation.AddedViews(); ok {
-		_spec.Fields.Add = append(_spec.Fields.Add, &sqlgraph.FieldSpec{
-			Type:   field.TypeInt,
-			Value:  value,
-			Column: group.FieldViews,
-		})
-	}
-	if value, ok := gu.mutation.Subscribers(); ok {
-		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
-			Type:   field.TypeInt,
-			Value:  value,
-			Column: group.FieldSubscribers,
-		})
-	}
-	if value, ok := gu.mutation.AddedSubscribers(); ok {
-		_spec.Fields.Add = append(_spec.Fields.Add, &sqlgraph.FieldSpec{
-			Type:   field.TypeInt,
-			Value:  value,
-			Column: group.FieldSubscribers,
-		})
-	}
-	if value, ok := gu.mutation.CreatedAt(); ok {
-		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
-			Type:   field.TypeTime,
-			Value:  value,
-			Column: group.FieldCreatedAt,
 		})
 	}
 	if gu.mutation.AdminsCleared() {
@@ -709,64 +594,6 @@ func (guo *GroupUpdateOne) SetName(s string) *GroupUpdateOne {
 	return guo
 }
 
-// SetDescription sets the "description" field.
-func (guo *GroupUpdateOne) SetDescription(s string) *GroupUpdateOne {
-	guo.mutation.SetDescription(s)
-	return guo
-}
-
-// SetURL sets the "url" field.
-func (guo *GroupUpdateOne) SetURL(s string) *GroupUpdateOne {
-	guo.mutation.SetURL(s)
-	return guo
-}
-
-// SetThumbnail sets the "thumbnail" field.
-func (guo *GroupUpdateOne) SetThumbnail(s string) *GroupUpdateOne {
-	guo.mutation.SetThumbnail(s)
-	return guo
-}
-
-// SetViews sets the "views" field.
-func (guo *GroupUpdateOne) SetViews(i int) *GroupUpdateOne {
-	guo.mutation.ResetViews()
-	guo.mutation.SetViews(i)
-	return guo
-}
-
-// AddViews adds i to the "views" field.
-func (guo *GroupUpdateOne) AddViews(i int) *GroupUpdateOne {
-	guo.mutation.AddViews(i)
-	return guo
-}
-
-// SetSubscribers sets the "subscribers" field.
-func (guo *GroupUpdateOne) SetSubscribers(i int) *GroupUpdateOne {
-	guo.mutation.ResetSubscribers()
-	guo.mutation.SetSubscribers(i)
-	return guo
-}
-
-// AddSubscribers adds i to the "subscribers" field.
-func (guo *GroupUpdateOne) AddSubscribers(i int) *GroupUpdateOne {
-	guo.mutation.AddSubscribers(i)
-	return guo
-}
-
-// SetCreatedAt sets the "created_at" field.
-func (guo *GroupUpdateOne) SetCreatedAt(t time.Time) *GroupUpdateOne {
-	guo.mutation.SetCreatedAt(t)
-	return guo
-}
-
-// SetNillableCreatedAt sets the "created_at" field if the given value is not nil.
-func (guo *GroupUpdateOne) SetNillableCreatedAt(t *time.Time) *GroupUpdateOne {
-	if t != nil {
-		guo.SetCreatedAt(*t)
-	}
-	return guo
-}
-
 // AddAdminIDs adds the "admins" edge to the User entity by IDs.
 func (guo *GroupUpdateOne) AddAdminIDs(ids ...int) *GroupUpdateOne {
 	guo.mutation.AddAdminIDs(ids...)
@@ -1053,62 +880,6 @@ func (guo *GroupUpdateOne) sqlSave(ctx context.Context) (_node *Group, err error
 			Type:   field.TypeString,
 			Value:  value,
 			Column: group.FieldName,
-		})
-	}
-	if value, ok := guo.mutation.Description(); ok {
-		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
-			Type:   field.TypeString,
-			Value:  value,
-			Column: group.FieldDescription,
-		})
-	}
-	if value, ok := guo.mutation.URL(); ok {
-		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
-			Type:   field.TypeString,
-			Value:  value,
-			Column: group.FieldURL,
-		})
-	}
-	if value, ok := guo.mutation.Thumbnail(); ok {
-		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
-			Type:   field.TypeString,
-			Value:  value,
-			Column: group.FieldThumbnail,
-		})
-	}
-	if value, ok := guo.mutation.Views(); ok {
-		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
-			Type:   field.TypeInt,
-			Value:  value,
-			Column: group.FieldViews,
-		})
-	}
-	if value, ok := guo.mutation.AddedViews(); ok {
-		_spec.Fields.Add = append(_spec.Fields.Add, &sqlgraph.FieldSpec{
-			Type:   field.TypeInt,
-			Value:  value,
-			Column: group.FieldViews,
-		})
-	}
-	if value, ok := guo.mutation.Subscribers(); ok {
-		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
-			Type:   field.TypeInt,
-			Value:  value,
-			Column: group.FieldSubscribers,
-		})
-	}
-	if value, ok := guo.mutation.AddedSubscribers(); ok {
-		_spec.Fields.Add = append(_spec.Fields.Add, &sqlgraph.FieldSpec{
-			Type:   field.TypeInt,
-			Value:  value,
-			Column: group.FieldSubscribers,
-		})
-	}
-	if value, ok := guo.mutation.CreatedAt(); ok {
-		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
-			Type:   field.TypeTime,
-			Value:  value,
-			Column: group.FieldCreatedAt,
 		})
 	}
 	if guo.mutation.AdminsCleared() {

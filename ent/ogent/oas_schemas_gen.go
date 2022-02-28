@@ -71,45 +71,35 @@ var (
 )
 
 type CreateGroupReq struct {
-	Name        string    "json:\"name\""
-	Description string    "json:\"description\""
-	URL         string    "json:\"url\""
-	Thumbnail   string    "json:\"thumbnail\""
-	Views       int       "json:\"views\""
-	Subscribers int       "json:\"subscribers\""
-	CreatedAt   time.Time "json:\"created_at\""
-	Admins      []int     "json:\"admins\""
-	Members     []int     "json:\"members\""
-	Videos      []int     "json:\"videos\""
-	Moderators  []int     "json:\"moderators\""
-	Streamers   []int     "json:\"streamers\""
+	Name       string "json:\"name\""
+	Admins     []int  "json:\"admins\""
+	Members    []int  "json:\"members\""
+	Videos     []int  "json:\"videos\""
+	Moderators []int  "json:\"moderators\""
+	Streamers  []int  "json:\"streamers\""
 }
 
 type CreateUserReq struct {
-	Name             string    "json:\"name\""
-	UUID             uuid.UUID "json:\"uuid\""
-	Password         string    "json:\"password\""
-	JoinedGroups     []int     "json:\"joined_groups\""
-	ModeratingGroups []int     "json:\"moderating_groups\""
-	StreamingGroups  []int     "json:\"streaming_groups\""
-	AdminGroups      []int     "json:\"admin_groups\""
-	StreamVideos     []int     "json:\"stream_videos\""
-	LikedVideos      []int     "json:\"liked_videos\""
-	ViewedVideos     []int     "json:\"viewed_videos\""
-	ModeratedVideos  []int     "json:\"moderated_videos\""
+	Name             string "json:\"name\""
+	Password         string "json:\"password\""
+	JoinedGroups     []int  "json:\"joined_groups\""
+	ModeratingGroups []int  "json:\"moderating_groups\""
+	StreamingGroups  []int  "json:\"streaming_groups\""
+	AdminGroups      []int  "json:\"admin_groups\""
+	StreamVideos     []int  "json:\"stream_videos\""
+	LikedVideos      []int  "json:\"liked_videos\""
+	ViewedVideos     []int  "json:\"viewed_videos\""
+	ModeratedVideos  []int  "json:\"moderated_videos\""
 }
 
 type CreateVideoReq struct {
-	UUID        uuid.UUID               "json:\"uuid\""
-	Title       string                  "json:\"title\""
-	Description string                  "json:\"description\""
-	Videotype   CreateVideoReqVideotype "json:\"videotype\""
-	CreatedAt   time.Time               "json:\"created_at\""
-	Group       OptInt                  "json:\"group\""
-	Streamers   []int                   "json:\"streamers\""
-	Moderaters  []int                   "json:\"moderaters\""
-	Likes       []int                   "json:\"likes\""
-	Viewers     []int                   "json:\"viewers\""
+	Title      string                  "json:\"title\""
+	Videotype  CreateVideoReqVideotype "json:\"videotype\""
+	Group      OptInt                  "json:\"group\""
+	Streamers  []int                   "json:\"streamers\""
+	Moderaters []int                   "json:\"moderaters\""
+	Likes      []int                   "json:\"likes\""
+	Viewers    []int                   "json:\"viewers\""
 }
 
 type CreateVideoReqVideotype string
@@ -137,98 +127,67 @@ func (*DeleteVideoNoContent) deleteVideoRes() {}
 
 // Ref: #/components/schemas/Group_AdminsList
 type GroupAdminsList struct {
-	ID       int       "json:\"id\""
-	Name     string    "json:\"name\""
-	UUID     uuid.UUID "json:\"uuid\""
-	Password string    "json:\"password\""
+	ID       int    "json:\"id\""
+	Name     string "json:\"name\""
+	Password string "json:\"password\""
 }
 
 // Ref: #/components/schemas/GroupCreate
 type GroupCreate struct {
-	ID          int       "json:\"id\""
-	Name        string    "json:\"name\""
-	Description string    "json:\"description\""
-	URL         string    "json:\"url\""
-	Thumbnail   string    "json:\"thumbnail\""
-	Views       int       "json:\"views\""
-	Subscribers int       "json:\"subscribers\""
-	CreatedAt   time.Time "json:\"created_at\""
+	ID   int    "json:\"id\""
+	Name string "json:\"name\""
 }
 
 func (*GroupCreate) createGroupRes() {}
 
 // Ref: #/components/schemas/GroupList
 type GroupList struct {
-	ID          int       "json:\"id\""
-	Name        string    "json:\"name\""
-	Description string    "json:\"description\""
-	URL         string    "json:\"url\""
-	Thumbnail   string    "json:\"thumbnail\""
-	Views       int       "json:\"views\""
-	Subscribers int       "json:\"subscribers\""
-	CreatedAt   time.Time "json:\"created_at\""
+	ID   int    "json:\"id\""
+	Name string "json:\"name\""
 }
 
 // Ref: #/components/schemas/Group_MembersList
 type GroupMembersList struct {
-	ID       int       "json:\"id\""
-	Name     string    "json:\"name\""
-	UUID     uuid.UUID "json:\"uuid\""
-	Password string    "json:\"password\""
+	ID       int    "json:\"id\""
+	Name     string "json:\"name\""
+	Password string "json:\"password\""
 }
 
 // Ref: #/components/schemas/Group_ModeratorsList
 type GroupModeratorsList struct {
-	ID       int       "json:\"id\""
-	Name     string    "json:\"name\""
-	UUID     uuid.UUID "json:\"uuid\""
-	Password string    "json:\"password\""
+	ID       int    "json:\"id\""
+	Name     string "json:\"name\""
+	Password string "json:\"password\""
 }
 
 // Ref: #/components/schemas/GroupRead
 type GroupRead struct {
-	ID          int       "json:\"id\""
-	Name        string    "json:\"name\""
-	Description string    "json:\"description\""
-	URL         string    "json:\"url\""
-	Thumbnail   string    "json:\"thumbnail\""
-	Views       int       "json:\"views\""
-	Subscribers int       "json:\"subscribers\""
-	CreatedAt   time.Time "json:\"created_at\""
+	ID   int    "json:\"id\""
+	Name string "json:\"name\""
 }
 
 func (*GroupRead) readGroupRes() {}
 
 // Ref: #/components/schemas/Group_StreamersList
 type GroupStreamersList struct {
-	ID       int       "json:\"id\""
-	Name     string    "json:\"name\""
-	UUID     uuid.UUID "json:\"uuid\""
-	Password string    "json:\"password\""
+	ID       int    "json:\"id\""
+	Name     string "json:\"name\""
+	Password string "json:\"password\""
 }
 
 // Ref: #/components/schemas/GroupUpdate
 type GroupUpdate struct {
-	ID          int       "json:\"id\""
-	Name        string    "json:\"name\""
-	Description string    "json:\"description\""
-	URL         string    "json:\"url\""
-	Thumbnail   string    "json:\"thumbnail\""
-	Views       int       "json:\"views\""
-	Subscribers int       "json:\"subscribers\""
-	CreatedAt   time.Time "json:\"created_at\""
+	ID   int    "json:\"id\""
+	Name string "json:\"name\""
 }
 
 func (*GroupUpdate) updateGroupRes() {}
 
 // Ref: #/components/schemas/Group_VideosList
 type GroupVideosList struct {
-	ID          int                      "json:\"id\""
-	UUID        uuid.UUID                "json:\"uuid\""
-	Title       string                   "json:\"title\""
-	Description string                   "json:\"description\""
-	Videotype   GroupVideosListVideotype "json:\"videotype\""
-	CreatedAt   time.Time                "json:\"created_at\""
+	ID        int                      "json:\"id\""
+	Title     string                   "json:\"title\""
+	Videotype GroupVideosListVideotype "json:\"videotype\""
 }
 
 type GroupVideosListVideotype string
@@ -319,52 +278,6 @@ type ListVideoViewersOKApplicationJSON []VideoViewersList
 
 func (ListVideoViewersOKApplicationJSON) listVideoViewersRes() {}
 
-// NewOptDateTime returns new OptDateTime with value set to v.
-func NewOptDateTime(v time.Time) OptDateTime {
-	return OptDateTime{
-		Value: v,
-		Set:   true,
-	}
-}
-
-// OptDateTime is optional time.Time.
-type OptDateTime struct {
-	Value time.Time
-	Set   bool
-}
-
-// IsSet returns true if OptDateTime was set.
-func (o OptDateTime) IsSet() bool { return o.Set }
-
-// Reset unsets value.
-func (o *OptDateTime) Reset() {
-	var v time.Time
-	o.Value = v
-	o.Set = false
-}
-
-// SetTo sets value to v.
-func (o *OptDateTime) SetTo(v time.Time) {
-	o.Set = true
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o OptDateTime) Get() (v time.Time, ok bool) {
-	if !o.Set {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o OptDateTime) Or(d time.Time) time.Time {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
 // NewOptInt returns new OptInt with value set to v.
 func NewOptInt(v int) OptInt {
 	return OptInt{
@@ -451,52 +364,6 @@ func (o OptString) Get() (v string, ok bool) {
 
 // Or returns value if set, or given parameter if does not.
 func (o OptString) Or(d string) string {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
-// NewOptUUID returns new OptUUID with value set to v.
-func NewOptUUID(v uuid.UUID) OptUUID {
-	return OptUUID{
-		Value: v,
-		Set:   true,
-	}
-}
-
-// OptUUID is optional uuid.UUID.
-type OptUUID struct {
-	Value uuid.UUID
-	Set   bool
-}
-
-// IsSet returns true if OptUUID was set.
-func (o OptUUID) IsSet() bool { return o.Set }
-
-// Reset unsets value.
-func (o *OptUUID) Reset() {
-	var v uuid.UUID
-	o.Value = v
-	o.Set = false
-}
-
-// SetTo sets value to v.
-func (o *OptUUID) SetTo(v uuid.UUID) {
-	o.Set = true
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o OptUUID) Get() (v uuid.UUID, ok bool) {
-	if !o.Set {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o OptUUID) Or(d uuid.UUID) uuid.UUID {
 	if v, ok := o.Get(); ok {
 		return v
 	}
@@ -707,23 +574,16 @@ func (*R500) updateUserRes()               {}
 func (*R500) updateVideoRes()              {}
 
 type UpdateGroupReq struct {
-	Name        OptString   "json:\"name\""
-	Description OptString   "json:\"description\""
-	URL         OptString   "json:\"url\""
-	Thumbnail   OptString   "json:\"thumbnail\""
-	Views       OptInt      "json:\"views\""
-	Subscribers OptInt      "json:\"subscribers\""
-	CreatedAt   OptDateTime "json:\"created_at\""
-	Admins      []int       "json:\"admins\""
-	Members     []int       "json:\"members\""
-	Videos      []int       "json:\"videos\""
-	Moderators  []int       "json:\"moderators\""
-	Streamers   []int       "json:\"streamers\""
+	Name       OptString "json:\"name\""
+	Admins     []int     "json:\"admins\""
+	Members    []int     "json:\"members\""
+	Videos     []int     "json:\"videos\""
+	Moderators []int     "json:\"moderators\""
+	Streamers  []int     "json:\"streamers\""
 }
 
 type UpdateUserReq struct {
 	Name             OptString "json:\"name\""
-	UUID             OptUUID   "json:\"uuid\""
 	Password         OptString "json:\"password\""
 	JoinedGroups     []int     "json:\"joined_groups\""
 	ModeratingGroups []int     "json:\"moderating_groups\""
@@ -736,16 +596,13 @@ type UpdateUserReq struct {
 }
 
 type UpdateVideoReq struct {
-	UUID        OptUUID                    "json:\"uuid\""
-	Title       OptString                  "json:\"title\""
-	Description OptString                  "json:\"description\""
-	Videotype   OptUpdateVideoReqVideotype "json:\"videotype\""
-	CreatedAt   OptDateTime                "json:\"created_at\""
-	Group       OptInt                     "json:\"group\""
-	Streamers   []int                      "json:\"streamers\""
-	Moderaters  []int                      "json:\"moderaters\""
-	Likes       []int                      "json:\"likes\""
-	Viewers     []int                      "json:\"viewers\""
+	Title      OptString                  "json:\"title\""
+	Videotype  OptUpdateVideoReqVideotype "json:\"videotype\""
+	Group      OptInt                     "json:\"group\""
+	Streamers  []int                      "json:\"streamers\""
+	Moderaters []int                      "json:\"moderaters\""
+	Likes      []int                      "json:\"likes\""
+	Viewers    []int                      "json:\"viewers\""
 }
 
 type UpdateVideoReqVideotype string
@@ -758,46 +615,30 @@ const (
 
 // Ref: #/components/schemas/User_AdminGroupsList
 type UserAdminGroupsList struct {
-	ID          int       "json:\"id\""
-	Name        string    "json:\"name\""
-	Description string    "json:\"description\""
-	URL         string    "json:\"url\""
-	Thumbnail   string    "json:\"thumbnail\""
-	Views       int       "json:\"views\""
-	Subscribers int       "json:\"subscribers\""
-	CreatedAt   time.Time "json:\"created_at\""
+	ID   int    "json:\"id\""
+	Name string "json:\"name\""
 }
 
 // Ref: #/components/schemas/UserCreate
 type UserCreate struct {
-	ID       int       "json:\"id\""
-	Name     string    "json:\"name\""
-	UUID     uuid.UUID "json:\"uuid\""
-	Password string    "json:\"password\""
+	ID       int    "json:\"id\""
+	Name     string "json:\"name\""
+	Password string "json:\"password\""
 }
 
 func (*UserCreate) createUserRes() {}
 
 // Ref: #/components/schemas/User_JoinedGroupsList
 type UserJoinedGroupsList struct {
-	ID          int       "json:\"id\""
-	Name        string    "json:\"name\""
-	Description string    "json:\"description\""
-	URL         string    "json:\"url\""
-	Thumbnail   string    "json:\"thumbnail\""
-	Views       int       "json:\"views\""
-	Subscribers int       "json:\"subscribers\""
-	CreatedAt   time.Time "json:\"created_at\""
+	ID   int    "json:\"id\""
+	Name string "json:\"name\""
 }
 
 // Ref: #/components/schemas/User_LikedVideosList
 type UserLikedVideosList struct {
-	ID          int                          "json:\"id\""
-	UUID        uuid.UUID                    "json:\"uuid\""
-	Title       string                       "json:\"title\""
-	Description string                       "json:\"description\""
-	Videotype   UserLikedVideosListVideotype "json:\"videotype\""
-	CreatedAt   time.Time                    "json:\"created_at\""
+	ID        int                          "json:\"id\""
+	Title     string                       "json:\"title\""
+	Videotype UserLikedVideosListVideotype "json:\"videotype\""
 }
 
 type UserLikedVideosListVideotype string
@@ -810,20 +651,16 @@ const (
 
 // Ref: #/components/schemas/UserList
 type UserList struct {
-	ID       int       "json:\"id\""
-	Name     string    "json:\"name\""
-	UUID     uuid.UUID "json:\"uuid\""
-	Password string    "json:\"password\""
+	ID       int    "json:\"id\""
+	Name     string "json:\"name\""
+	Password string "json:\"password\""
 }
 
 // Ref: #/components/schemas/User_ModeratedVideosList
 type UserModeratedVideosList struct {
-	ID          int                              "json:\"id\""
-	UUID        uuid.UUID                        "json:\"uuid\""
-	Title       string                           "json:\"title\""
-	Description string                           "json:\"description\""
-	Videotype   UserModeratedVideosListVideotype "json:\"videotype\""
-	CreatedAt   time.Time                        "json:\"created_at\""
+	ID        int                              "json:\"id\""
+	Title     string                           "json:\"title\""
+	Videotype UserModeratedVideosListVideotype "json:\"videotype\""
 }
 
 type UserModeratedVideosListVideotype string
@@ -836,34 +673,24 @@ const (
 
 // Ref: #/components/schemas/User_ModeratingGroupsList
 type UserModeratingGroupsList struct {
-	ID          int       "json:\"id\""
-	Name        string    "json:\"name\""
-	Description string    "json:\"description\""
-	URL         string    "json:\"url\""
-	Thumbnail   string    "json:\"thumbnail\""
-	Views       int       "json:\"views\""
-	Subscribers int       "json:\"subscribers\""
-	CreatedAt   time.Time "json:\"created_at\""
+	ID   int    "json:\"id\""
+	Name string "json:\"name\""
 }
 
 // Ref: #/components/schemas/UserRead
 type UserRead struct {
-	ID       int       "json:\"id\""
-	Name     string    "json:\"name\""
-	UUID     uuid.UUID "json:\"uuid\""
-	Password string    "json:\"password\""
+	ID       int    "json:\"id\""
+	Name     string "json:\"name\""
+	Password string "json:\"password\""
 }
 
 func (*UserRead) readUserRes() {}
 
 // Ref: #/components/schemas/User_StreamVideosList
 type UserStreamVideosList struct {
-	ID          int                           "json:\"id\""
-	UUID        uuid.UUID                     "json:\"uuid\""
-	Title       string                        "json:\"title\""
-	Description string                        "json:\"description\""
-	Videotype   UserStreamVideosListVideotype "json:\"videotype\""
-	CreatedAt   time.Time                     "json:\"created_at\""
+	ID        int                           "json:\"id\""
+	Title     string                        "json:\"title\""
+	Videotype UserStreamVideosListVideotype "json:\"videotype\""
 }
 
 type UserStreamVideosListVideotype string
@@ -876,34 +703,24 @@ const (
 
 // Ref: #/components/schemas/User_StreamingGroupsList
 type UserStreamingGroupsList struct {
-	ID          int       "json:\"id\""
-	Name        string    "json:\"name\""
-	Description string    "json:\"description\""
-	URL         string    "json:\"url\""
-	Thumbnail   string    "json:\"thumbnail\""
-	Views       int       "json:\"views\""
-	Subscribers int       "json:\"subscribers\""
-	CreatedAt   time.Time "json:\"created_at\""
+	ID   int    "json:\"id\""
+	Name string "json:\"name\""
 }
 
 // Ref: #/components/schemas/UserUpdate
 type UserUpdate struct {
-	ID       int       "json:\"id\""
-	Name     string    "json:\"name\""
-	UUID     uuid.UUID "json:\"uuid\""
-	Password string    "json:\"password\""
+	ID       int    "json:\"id\""
+	Name     string "json:\"name\""
+	Password string "json:\"password\""
 }
 
 func (*UserUpdate) updateUserRes() {}
 
 // Ref: #/components/schemas/User_ViewedVideosList
 type UserViewedVideosList struct {
-	ID          int                           "json:\"id\""
-	UUID        uuid.UUID                     "json:\"uuid\""
-	Title       string                        "json:\"title\""
-	Description string                        "json:\"description\""
-	Videotype   UserViewedVideosListVideotype "json:\"videotype\""
-	CreatedAt   time.Time                     "json:\"created_at\""
+	ID        int                           "json:\"id\""
+	Title     string                        "json:\"title\""
+	Videotype UserViewedVideosListVideotype "json:\"videotype\""
 }
 
 type UserViewedVideosListVideotype string
@@ -916,12 +733,9 @@ const (
 
 // Ref: #/components/schemas/VideoCreate
 type VideoCreate struct {
-	ID          int                  "json:\"id\""
-	UUID        uuid.UUID            "json:\"uuid\""
-	Title       string               "json:\"title\""
-	Description string               "json:\"description\""
-	Videotype   VideoCreateVideotype "json:\"videotype\""
-	CreatedAt   time.Time            "json:\"created_at\""
+	ID        int                  "json:\"id\""
+	Title     string               "json:\"title\""
+	Videotype VideoCreateVideotype "json:\"videotype\""
 }
 
 func (*VideoCreate) createVideoRes() {}
@@ -936,34 +750,24 @@ const (
 
 // Ref: #/components/schemas/Video_GroupRead
 type VideoGroupRead struct {
-	ID          int       "json:\"id\""
-	Name        string    "json:\"name\""
-	Description string    "json:\"description\""
-	URL         string    "json:\"url\""
-	Thumbnail   string    "json:\"thumbnail\""
-	Views       int       "json:\"views\""
-	Subscribers int       "json:\"subscribers\""
-	CreatedAt   time.Time "json:\"created_at\""
+	ID   int    "json:\"id\""
+	Name string "json:\"name\""
 }
 
 func (*VideoGroupRead) readVideoGroupRes() {}
 
 // Ref: #/components/schemas/Video_LikesList
 type VideoLikesList struct {
-	ID       int       "json:\"id\""
-	Name     string    "json:\"name\""
-	UUID     uuid.UUID "json:\"uuid\""
-	Password string    "json:\"password\""
+	ID       int    "json:\"id\""
+	Name     string "json:\"name\""
+	Password string "json:\"password\""
 }
 
 // Ref: #/components/schemas/VideoList
 type VideoList struct {
-	ID          int                "json:\"id\""
-	UUID        uuid.UUID          "json:\"uuid\""
-	Title       string             "json:\"title\""
-	Description string             "json:\"description\""
-	Videotype   VideoListVideotype "json:\"videotype\""
-	CreatedAt   time.Time          "json:\"created_at\""
+	ID        int                "json:\"id\""
+	Title     string             "json:\"title\""
+	Videotype VideoListVideotype "json:\"videotype\""
 }
 
 type VideoListVideotype string
@@ -976,20 +780,16 @@ const (
 
 // Ref: #/components/schemas/Video_ModeratersList
 type VideoModeratersList struct {
-	ID       int       "json:\"id\""
-	Name     string    "json:\"name\""
-	UUID     uuid.UUID "json:\"uuid\""
-	Password string    "json:\"password\""
+	ID       int    "json:\"id\""
+	Name     string "json:\"name\""
+	Password string "json:\"password\""
 }
 
 // Ref: #/components/schemas/VideoRead
 type VideoRead struct {
-	ID          int                "json:\"id\""
-	UUID        uuid.UUID          "json:\"uuid\""
-	Title       string             "json:\"title\""
-	Description string             "json:\"description\""
-	Videotype   VideoReadVideotype "json:\"videotype\""
-	CreatedAt   time.Time          "json:\"created_at\""
+	ID        int                "json:\"id\""
+	Title     string             "json:\"title\""
+	Videotype VideoReadVideotype "json:\"videotype\""
 }
 
 func (*VideoRead) readVideoRes() {}
@@ -1004,20 +804,16 @@ const (
 
 // Ref: #/components/schemas/Video_StreamersList
 type VideoStreamersList struct {
-	ID       int       "json:\"id\""
-	Name     string    "json:\"name\""
-	UUID     uuid.UUID "json:\"uuid\""
-	Password string    "json:\"password\""
+	ID       int    "json:\"id\""
+	Name     string "json:\"name\""
+	Password string "json:\"password\""
 }
 
 // Ref: #/components/schemas/VideoUpdate
 type VideoUpdate struct {
-	ID          int                  "json:\"id\""
-	UUID        uuid.UUID            "json:\"uuid\""
-	Title       string               "json:\"title\""
-	Description string               "json:\"description\""
-	Videotype   VideoUpdateVideotype "json:\"videotype\""
-	CreatedAt   time.Time            "json:\"created_at\""
+	ID        int                  "json:\"id\""
+	Title     string               "json:\"title\""
+	Videotype VideoUpdateVideotype "json:\"videotype\""
 }
 
 func (*VideoUpdate) updateVideoRes() {}
@@ -1032,8 +828,7 @@ const (
 
 // Ref: #/components/schemas/Video_ViewersList
 type VideoViewersList struct {
-	ID       int       "json:\"id\""
-	Name     string    "json:\"name\""
-	UUID     uuid.UUID "json:\"uuid\""
-	Password string    "json:\"password\""
+	ID       int    "json:\"id\""
+	Name     string "json:\"name\""
+	Password string "json:\"password\""
 }

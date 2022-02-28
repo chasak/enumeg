@@ -77,25 +77,6 @@
                   "name": {
                     "type": "string"
                   },
-                  "description": {
-                    "type": "string"
-                  },
-                  "url": {
-                    "type": "string"
-                  },
-                  "thumbnail": {
-                    "type": "string"
-                  },
-                  "views": {
-                    "type": "integer"
-                  },
-                  "subscribers": {
-                    "type": "integer"
-                  },
-                  "created_at": {
-                    "type": "string",
-                    "format": "date-time"
-                  },
                   "admins": {
                     "type": "array",
                     "items": {
@@ -128,13 +109,7 @@
                   }
                 },
                 "required": [
-                  "name",
-                  "description",
-                  "url",
-                  "thumbnail",
-                  "views",
-                  "subscribers",
-                  "created_at"
+                  "name"
                 ]
               }
             }
@@ -271,25 +246,6 @@
                 "properties": {
                   "name": {
                     "type": "string"
-                  },
-                  "description": {
-                    "type": "string"
-                  },
-                  "url": {
-                    "type": "string"
-                  },
-                  "thumbnail": {
-                    "type": "string"
-                  },
-                  "views": {
-                    "type": "integer"
-                  },
-                  "subscribers": {
-                    "type": "integer"
-                  },
-                  "created_at": {
-                    "type": "string",
-                    "format": "date-time"
                   },
                   "admins": {
                     "type": "array",
@@ -744,10 +700,6 @@
                   "name": {
                     "type": "string"
                   },
-                  "uuid": {
-                    "type": "string",
-                    "format": "uuid"
-                  },
                   "password": {
                     "type": "string"
                   },
@@ -802,7 +754,6 @@
                 },
                 "required": [
                   "name",
-                  "uuid",
                   "password"
                 ]
               }
@@ -940,10 +891,6 @@
                 "properties": {
                   "name": {
                     "type": "string"
-                  },
-                  "uuid": {
-                    "type": "string",
-                    "format": "uuid"
                   },
                   "password": {
                     "type": "string"
@@ -1608,14 +1555,7 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "uuid": {
-                    "type": "string",
-                    "format": "uuid"
-                  },
                   "title": {
-                    "type": "string"
-                  },
-                  "description": {
                     "type": "string"
                   },
                   "videotype": {
@@ -1625,10 +1565,6 @@
                       "video",
                       "playlist"
                     ]
-                  },
-                  "created_at": {
-                    "type": "string",
-                    "format": "date-time"
                   },
                   "group": {
                     "type": "integer"
@@ -1659,11 +1595,8 @@
                   }
                 },
                 "required": [
-                  "uuid",
                   "title",
-                  "description",
-                  "videotype",
-                  "created_at"
+                  "videotype"
                 ]
               }
             }
@@ -1798,14 +1731,7 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "uuid": {
-                    "type": "string",
-                    "format": "uuid"
-                  },
                   "title": {
-                    "type": "string"
-                  },
-                  "description": {
                     "type": "string"
                   },
                   "videotype": {
@@ -1815,10 +1741,6 @@
                       "video",
                       "playlist"
                     ]
-                  },
-                  "created_at": {
-                    "type": "string",
-                    "format": "date-time"
                   },
                   "group": {
                     "type": "integer"
@@ -2192,25 +2114,6 @@
           "name": {
             "type": "string"
           },
-          "description": {
-            "type": "string"
-          },
-          "url": {
-            "type": "string"
-          },
-          "thumbnail": {
-            "type": "string"
-          },
-          "views": {
-            "type": "integer"
-          },
-          "subscribers": {
-            "type": "integer"
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time"
-          },
           "admins": {
             "type": "array",
             "items": {
@@ -2244,13 +2147,7 @@
         },
         "required": [
           "id",
-          "name",
-          "description",
-          "url",
-          "thumbnail",
-          "views",
-          "subscribers",
-          "created_at"
+          "name"
         ]
       },
       "GroupCreate": {
@@ -2261,36 +2158,11 @@
           },
           "name": {
             "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "url": {
-            "type": "string"
-          },
-          "thumbnail": {
-            "type": "string"
-          },
-          "views": {
-            "type": "integer"
-          },
-          "subscribers": {
-            "type": "integer"
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time"
           }
         },
         "required": [
           "id",
-          "name",
-          "description",
-          "url",
-          "thumbnail",
-          "views",
-          "subscribers",
-          "created_at"
+          "name"
         ]
       },
       "GroupList": {
@@ -2301,36 +2173,11 @@
           },
           "name": {
             "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "url": {
-            "type": "string"
-          },
-          "thumbnail": {
-            "type": "string"
-          },
-          "views": {
-            "type": "integer"
-          },
-          "subscribers": {
-            "type": "integer"
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time"
           }
         },
         "required": [
           "id",
-          "name",
-          "description",
-          "url",
-          "thumbnail",
-          "views",
-          "subscribers",
-          "created_at"
+          "name"
         ]
       },
       "GroupRead": {
@@ -2341,36 +2188,11 @@
           },
           "name": {
             "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "url": {
-            "type": "string"
-          },
-          "thumbnail": {
-            "type": "string"
-          },
-          "views": {
-            "type": "integer"
-          },
-          "subscribers": {
-            "type": "integer"
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time"
           }
         },
         "required": [
           "id",
-          "name",
-          "description",
-          "url",
-          "thumbnail",
-          "views",
-          "subscribers",
-          "created_at"
+          "name"
         ]
       },
       "GroupUpdate": {
@@ -2381,36 +2203,11 @@
           },
           "name": {
             "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "url": {
-            "type": "string"
-          },
-          "thumbnail": {
-            "type": "string"
-          },
-          "views": {
-            "type": "integer"
-          },
-          "subscribers": {
-            "type": "integer"
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time"
           }
         },
         "required": [
           "id",
-          "name",
-          "description",
-          "url",
-          "thumbnail",
-          "views",
-          "subscribers",
-          "created_at"
+          "name"
         ]
       },
       "Group_AdminsList": {
@@ -2422,10 +2219,6 @@
           "name": {
             "type": "string"
           },
-          "uuid": {
-            "type": "string",
-            "format": "uuid"
-          },
           "password": {
             "type": "string"
           }
@@ -2433,7 +2226,6 @@
         "required": [
           "id",
           "name",
-          "uuid",
           "password"
         ]
       },
@@ -2446,10 +2238,6 @@
           "name": {
             "type": "string"
           },
-          "uuid": {
-            "type": "string",
-            "format": "uuid"
-          },
           "password": {
             "type": "string"
           }
@@ -2457,7 +2245,6 @@
         "required": [
           "id",
           "name",
-          "uuid",
           "password"
         ]
       },
@@ -2470,10 +2257,6 @@
           "name": {
             "type": "string"
           },
-          "uuid": {
-            "type": "string",
-            "format": "uuid"
-          },
           "password": {
             "type": "string"
           }
@@ -2481,7 +2264,6 @@
         "required": [
           "id",
           "name",
-          "uuid",
           "password"
         ]
       },
@@ -2494,10 +2276,6 @@
           "name": {
             "type": "string"
           },
-          "uuid": {
-            "type": "string",
-            "format": "uuid"
-          },
           "password": {
             "type": "string"
           }
@@ -2505,7 +2283,6 @@
         "required": [
           "id",
           "name",
-          "uuid",
           "password"
         ]
       },
@@ -2515,14 +2292,7 @@
           "id": {
             "type": "integer"
           },
-          "uuid": {
-            "type": "string",
-            "format": "uuid"
-          },
           "title": {
-            "type": "string"
-          },
-          "description": {
             "type": "string"
           },
           "videotype": {
@@ -2532,19 +2302,12 @@
               "video",
               "playlist"
             ]
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time"
           }
         },
         "required": [
           "id",
-          "uuid",
           "title",
-          "description",
-          "videotype",
-          "created_at"
+          "videotype"
         ]
       },
       "User": {
@@ -2555,10 +2318,6 @@
           },
           "name": {
             "type": "string"
-          },
-          "uuid": {
-            "type": "string",
-            "format": "uuid"
           },
           "password": {
             "type": "string"
@@ -2615,7 +2374,6 @@
         "required": [
           "id",
           "name",
-          "uuid",
           "password"
         ]
       },
@@ -2628,10 +2386,6 @@
           "name": {
             "type": "string"
           },
-          "uuid": {
-            "type": "string",
-            "format": "uuid"
-          },
           "password": {
             "type": "string"
           }
@@ -2639,7 +2393,6 @@
         "required": [
           "id",
           "name",
-          "uuid",
           "password"
         ]
       },
@@ -2652,10 +2405,6 @@
           "name": {
             "type": "string"
           },
-          "uuid": {
-            "type": "string",
-            "format": "uuid"
-          },
           "password": {
             "type": "string"
           }
@@ -2663,7 +2412,6 @@
         "required": [
           "id",
           "name",
-          "uuid",
           "password"
         ]
       },
@@ -2676,10 +2424,6 @@
           "name": {
             "type": "string"
           },
-          "uuid": {
-            "type": "string",
-            "format": "uuid"
-          },
           "password": {
             "type": "string"
           }
@@ -2687,7 +2431,6 @@
         "required": [
           "id",
           "name",
-          "uuid",
           "password"
         ]
       },
@@ -2700,10 +2443,6 @@
           "name": {
             "type": "string"
           },
-          "uuid": {
-            "type": "string",
-            "format": "uuid"
-          },
           "password": {
             "type": "string"
           }
@@ -2711,7 +2450,6 @@
         "required": [
           "id",
           "name",
-          "uuid",
           "password"
         ]
       },
@@ -2723,36 +2461,11 @@
           },
           "name": {
             "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "url": {
-            "type": "string"
-          },
-          "thumbnail": {
-            "type": "string"
-          },
-          "views": {
-            "type": "integer"
-          },
-          "subscribers": {
-            "type": "integer"
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time"
           }
         },
         "required": [
           "id",
-          "name",
-          "description",
-          "url",
-          "thumbnail",
-          "views",
-          "subscribers",
-          "created_at"
+          "name"
         ]
       },
       "User_JoinedGroupsList": {
@@ -2763,36 +2476,11 @@
           },
           "name": {
             "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "url": {
-            "type": "string"
-          },
-          "thumbnail": {
-            "type": "string"
-          },
-          "views": {
-            "type": "integer"
-          },
-          "subscribers": {
-            "type": "integer"
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time"
           }
         },
         "required": [
           "id",
-          "name",
-          "description",
-          "url",
-          "thumbnail",
-          "views",
-          "subscribers",
-          "created_at"
+          "name"
         ]
       },
       "User_LikedVideosList": {
@@ -2801,14 +2489,7 @@
           "id": {
             "type": "integer"
           },
-          "uuid": {
-            "type": "string",
-            "format": "uuid"
-          },
           "title": {
-            "type": "string"
-          },
-          "description": {
             "type": "string"
           },
           "videotype": {
@@ -2818,19 +2499,12 @@
               "video",
               "playlist"
             ]
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time"
           }
         },
         "required": [
           "id",
-          "uuid",
           "title",
-          "description",
-          "videotype",
-          "created_at"
+          "videotype"
         ]
       },
       "User_ModeratedVideosList": {
@@ -2839,14 +2513,7 @@
           "id": {
             "type": "integer"
           },
-          "uuid": {
-            "type": "string",
-            "format": "uuid"
-          },
           "title": {
-            "type": "string"
-          },
-          "description": {
             "type": "string"
           },
           "videotype": {
@@ -2856,19 +2523,12 @@
               "video",
               "playlist"
             ]
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time"
           }
         },
         "required": [
           "id",
-          "uuid",
           "title",
-          "description",
-          "videotype",
-          "created_at"
+          "videotype"
         ]
       },
       "User_ModeratingGroupsList": {
@@ -2879,36 +2539,11 @@
           },
           "name": {
             "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "url": {
-            "type": "string"
-          },
-          "thumbnail": {
-            "type": "string"
-          },
-          "views": {
-            "type": "integer"
-          },
-          "subscribers": {
-            "type": "integer"
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time"
           }
         },
         "required": [
           "id",
-          "name",
-          "description",
-          "url",
-          "thumbnail",
-          "views",
-          "subscribers",
-          "created_at"
+          "name"
         ]
       },
       "User_StreamVideosList": {
@@ -2917,14 +2552,7 @@
           "id": {
             "type": "integer"
           },
-          "uuid": {
-            "type": "string",
-            "format": "uuid"
-          },
           "title": {
-            "type": "string"
-          },
-          "description": {
             "type": "string"
           },
           "videotype": {
@@ -2934,19 +2562,12 @@
               "video",
               "playlist"
             ]
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time"
           }
         },
         "required": [
           "id",
-          "uuid",
           "title",
-          "description",
-          "videotype",
-          "created_at"
+          "videotype"
         ]
       },
       "User_StreamingGroupsList": {
@@ -2957,36 +2578,11 @@
           },
           "name": {
             "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "url": {
-            "type": "string"
-          },
-          "thumbnail": {
-            "type": "string"
-          },
-          "views": {
-            "type": "integer"
-          },
-          "subscribers": {
-            "type": "integer"
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time"
           }
         },
         "required": [
           "id",
-          "name",
-          "description",
-          "url",
-          "thumbnail",
-          "views",
-          "subscribers",
-          "created_at"
+          "name"
         ]
       },
       "User_ViewedVideosList": {
@@ -2995,14 +2591,7 @@
           "id": {
             "type": "integer"
           },
-          "uuid": {
-            "type": "string",
-            "format": "uuid"
-          },
           "title": {
-            "type": "string"
-          },
-          "description": {
             "type": "string"
           },
           "videotype": {
@@ -3012,19 +2601,12 @@
               "video",
               "playlist"
             ]
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time"
           }
         },
         "required": [
           "id",
-          "uuid",
           "title",
-          "description",
-          "videotype",
-          "created_at"
+          "videotype"
         ]
       },
       "Video": {
@@ -3033,14 +2615,7 @@
           "id": {
             "type": "integer"
           },
-          "uuid": {
-            "type": "string",
-            "format": "uuid"
-          },
           "title": {
-            "type": "string"
-          },
-          "description": {
             "type": "string"
           },
           "videotype": {
@@ -3050,10 +2625,6 @@
               "video",
               "playlist"
             ]
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time"
           },
           "group": {
             "$ref": "#/components/schemas/Group"
@@ -3085,11 +2656,8 @@
         },
         "required": [
           "id",
-          "uuid",
           "title",
-          "description",
-          "videotype",
-          "created_at"
+          "videotype"
         ]
       },
       "VideoCreate": {
@@ -3098,14 +2666,7 @@
           "id": {
             "type": "integer"
           },
-          "uuid": {
-            "type": "string",
-            "format": "uuid"
-          },
           "title": {
-            "type": "string"
-          },
-          "description": {
             "type": "string"
           },
           "videotype": {
@@ -3115,19 +2676,12 @@
               "video",
               "playlist"
             ]
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time"
           }
         },
         "required": [
           "id",
-          "uuid",
           "title",
-          "description",
-          "videotype",
-          "created_at"
+          "videotype"
         ]
       },
       "VideoList": {
@@ -3136,14 +2690,7 @@
           "id": {
             "type": "integer"
           },
-          "uuid": {
-            "type": "string",
-            "format": "uuid"
-          },
           "title": {
-            "type": "string"
-          },
-          "description": {
             "type": "string"
           },
           "videotype": {
@@ -3153,19 +2700,12 @@
               "video",
               "playlist"
             ]
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time"
           }
         },
         "required": [
           "id",
-          "uuid",
           "title",
-          "description",
-          "videotype",
-          "created_at"
+          "videotype"
         ]
       },
       "VideoRead": {
@@ -3174,14 +2714,7 @@
           "id": {
             "type": "integer"
           },
-          "uuid": {
-            "type": "string",
-            "format": "uuid"
-          },
           "title": {
-            "type": "string"
-          },
-          "description": {
             "type": "string"
           },
           "videotype": {
@@ -3191,19 +2724,12 @@
               "video",
               "playlist"
             ]
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time"
           }
         },
         "required": [
           "id",
-          "uuid",
           "title",
-          "description",
-          "videotype",
-          "created_at"
+          "videotype"
         ]
       },
       "VideoUpdate": {
@@ -3212,14 +2738,7 @@
           "id": {
             "type": "integer"
           },
-          "uuid": {
-            "type": "string",
-            "format": "uuid"
-          },
           "title": {
-            "type": "string"
-          },
-          "description": {
             "type": "string"
           },
           "videotype": {
@@ -3229,19 +2748,12 @@
               "video",
               "playlist"
             ]
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time"
           }
         },
         "required": [
           "id",
-          "uuid",
           "title",
-          "description",
-          "videotype",
-          "created_at"
+          "videotype"
         ]
       },
       "Video_GroupRead": {
@@ -3252,36 +2764,11 @@
           },
           "name": {
             "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "url": {
-            "type": "string"
-          },
-          "thumbnail": {
-            "type": "string"
-          },
-          "views": {
-            "type": "integer"
-          },
-          "subscribers": {
-            "type": "integer"
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time"
           }
         },
         "required": [
           "id",
-          "name",
-          "description",
-          "url",
-          "thumbnail",
-          "views",
-          "subscribers",
-          "created_at"
+          "name"
         ]
       },
       "Video_LikesList": {
@@ -3293,10 +2780,6 @@
           "name": {
             "type": "string"
           },
-          "uuid": {
-            "type": "string",
-            "format": "uuid"
-          },
           "password": {
             "type": "string"
           }
@@ -3304,7 +2787,6 @@
         "required": [
           "id",
           "name",
-          "uuid",
           "password"
         ]
       },
@@ -3317,10 +2799,6 @@
           "name": {
             "type": "string"
           },
-          "uuid": {
-            "type": "string",
-            "format": "uuid"
-          },
           "password": {
             "type": "string"
           }
@@ -3328,7 +2806,6 @@
         "required": [
           "id",
           "name",
-          "uuid",
           "password"
         ]
       },
@@ -3341,10 +2818,6 @@
           "name": {
             "type": "string"
           },
-          "uuid": {
-            "type": "string",
-            "format": "uuid"
-          },
           "password": {
             "type": "string"
           }
@@ -3352,7 +2825,6 @@
         "required": [
           "id",
           "name",
-          "uuid",
           "password"
         ]
       },
@@ -3365,10 +2837,6 @@
           "name": {
             "type": "string"
           },
-          "uuid": {
-            "type": "string",
-            "format": "uuid"
-          },
           "password": {
             "type": "string"
           }
@@ -3376,7 +2844,6 @@
         "required": [
           "id",
           "name",
-          "uuid",
           "password"
         ]
       }

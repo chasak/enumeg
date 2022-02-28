@@ -5,7 +5,6 @@ package ent
 import (
 	"fmt"
 	"strings"
-	"time"
 
 	"entgo.io/ent/dialect/sql"
 	"example.com/enumeg/ent/group"
@@ -18,18 +17,6 @@ type Group struct {
 	ID int `json:"id,omitempty"`
 	// Name holds the value of the "name" field.
 	Name string `json:"name,omitempty"`
-	// Description holds the value of the "description" field.
-	Description string `json:"description,omitempty"`
-	// URL holds the value of the "url" field.
-	URL string `json:"url,omitempty"`
-	// Thumbnail holds the value of the "thumbnail" field.
-	Thumbnail string `json:"thumbnail,omitempty"`
-	// Views holds the value of the "views" field.
-	Views int `json:"views,omitempty"`
-	// Subscribers holds the value of the "subscribers" field.
-	Subscribers int `json:"subscribers,omitempty"`
-	// CreatedAt holds the value of the "created_at" field.
-	CreatedAt time.Time `json:"created_at,omitempty"`
 	// Edges holds the relations/edges for other nodes in the graph.
 	// The values are being populated by the GroupQuery when eager-loading is set.
 	Edges GroupEdges `json:"edges"`
@@ -102,12 +89,10 @@ func (*Group) scanValues(columns []string) ([]interface{}, error) {
 	values := make([]interface{}, len(columns))
 	for i := range columns {
 		switch columns[i] {
-		case group.FieldID, group.FieldViews, group.FieldSubscribers:
+		case group.FieldID:
 			values[i] = new(sql.NullInt64)
-		case group.FieldName, group.FieldDescription, group.FieldURL, group.FieldThumbnail:
+		case group.FieldName:
 			values[i] = new(sql.NullString)
-		case group.FieldCreatedAt:
-			values[i] = new(sql.NullTime)
 		default:
 			return nil, fmt.Errorf("unexpected column %q for type Group", columns[i])
 		}
@@ -134,42 +119,6 @@ func (gr *Group) assignValues(columns []string, values []interface{}) error {
 				return fmt.Errorf("unexpected type %T for field name", values[i])
 			} else if value.Valid {
 				gr.Name = value.String
-			}
-		case group.FieldDescription:
-			if value, ok := values[i].(*sql.NullString); !ok {
-				return fmt.Errorf("unexpected type %T for field description", values[i])
-			} else if value.Valid {
-				gr.Description = value.String
-			}
-		case group.FieldURL:
-			if value, ok := values[i].(*sql.NullString); !ok {
-				return fmt.Errorf("unexpected type %T for field url", values[i])
-			} else if value.Valid {
-				gr.URL = value.String
-			}
-		case group.FieldThumbnail:
-			if value, ok := values[i].(*sql.NullString); !ok {
-				return fmt.Errorf("unexpected type %T for field thumbnail", values[i])
-			} else if value.Valid {
-				gr.Thumbnail = value.String
-			}
-		case group.FieldViews:
-			if value, ok := values[i].(*sql.NullInt64); !ok {
-				return fmt.Errorf("unexpected type %T for field views", values[i])
-			} else if value.Valid {
-				gr.Views = int(value.Int64)
-			}
-		case group.FieldSubscribers:
-			if value, ok := values[i].(*sql.NullInt64); !ok {
-				return fmt.Errorf("unexpected type %T for field subscribers", values[i])
-			} else if value.Valid {
-				gr.Subscribers = int(value.Int64)
-			}
-		case group.FieldCreatedAt:
-			if value, ok := values[i].(*sql.NullTime); !ok {
-				return fmt.Errorf("unexpected type %T for field created_at", values[i])
-			} else if value.Valid {
-				gr.CreatedAt = value.Time
 			}
 		}
 	}
@@ -226,18 +175,6 @@ func (gr *Group) String() string {
 	builder.WriteString(fmt.Sprintf("id=%v", gr.ID))
 	builder.WriteString(", name=")
 	builder.WriteString(gr.Name)
-	builder.WriteString(", description=")
-	builder.WriteString(gr.Description)
-	builder.WriteString(", url=")
-	builder.WriteString(gr.URL)
-	builder.WriteString(", thumbnail=")
-	builder.WriteString(gr.Thumbnail)
-	builder.WriteString(", views=")
-	builder.WriteString(fmt.Sprintf("%v", gr.Views))
-	builder.WriteString(", subscribers=")
-	builder.WriteString(fmt.Sprintf("%v", gr.Subscribers))
-	builder.WriteString(", created_at=")
-	builder.WriteString(gr.CreatedAt.Format(time.ANSIC))
 	builder.WriteByte(')')
 	return builder.String()
 }

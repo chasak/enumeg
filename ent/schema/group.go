@@ -1,8 +1,6 @@
 package schema
 
 import (
-	"time"
-
 	"entgo.io/ent"
 	"entgo.io/ent/schema/edge"
 	"entgo.io/ent/schema/field"
@@ -17,13 +15,6 @@ type Group struct {
 func (Group) Fields() []ent.Field {
 	return []ent.Field{
 		field.String("name"),
-		field.String("description"),
-		field.String("url"),
-		field.String("thumbnail"),
-		field.Int("views"),
-		field.Int("subscribers"),
-		field.Time("created_at").
-			Default(time.Now),
 	}
 }
 
