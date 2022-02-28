@@ -5,8 +5,8 @@ import (
 	"log"
 	"net/http"
 
-	"example.com/enumeg/entgen"
-	"example.com/enumeg/entgen/ogent"
+	"example.com/enumeg/ent"
+	"example.com/enumeg/ent/ogent"
 
 	"entgo.io/ent/dialect"
 	"entgo.io/ent/dialect/sql/schema"
@@ -15,7 +15,7 @@ import (
 
 func main() {
 	// Create ent client.
-	client, err := entgen.Open(dialect.SQLite, "file:ent?mode=memory&cache=shared&_fk=1")
+	client, err := ent.Open(dialect.SQLite, "file:ent?mode=memory&cache=shared&_fk=1")
 	if err != nil {
 		log.Fatal(err)
 	}

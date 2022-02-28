@@ -15,7 +15,6 @@ import (
 func main() {
 	spec := new(ogen.Spec)
 	oas, err := entoas.NewExtension(entoas.Spec(spec))
-	// oas, err := entoas.NewExtension()
 	if err != nil {
 		log.Fatalf("creating entoas extension: %v", err)
 	}
@@ -24,13 +23,9 @@ func main() {
 		log.Fatalf("creating ogent extension: %v", err)
 	}
 
-	if err := entc.Generate("../schema",
-		&gen.Config{
-			Target:  "../entgen",
-			Package: "example.com/enumeg/entgen",
-		},
+	if err := entc.Generate("./schema",
+		&gen.Config{},
 		entc.Extensions(ogent, oas)); err != nil {
-		// entc.Extensions(oas)); err != nil {
 		log.Fatal("running ent codegen:", err)
 	}
 }
